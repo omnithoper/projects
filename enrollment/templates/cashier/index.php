@@ -1,1 +1,1 @@
-<?php require '..\..\logic\cashier.php' ?>
+<?php require '../../logic/cashier.php' ?>

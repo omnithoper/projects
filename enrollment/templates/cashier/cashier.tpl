@@ -1,18 +1,18 @@
 <html>
 	<head>
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/mystyles.css" />
-		<script type='text/javascript' src='/enrollment/js/cashier.js'></script>
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
+		<script type='text/javascript' src='/js/cashier.js'></script>
 
 	</head>
 
 	<body>
 		<nav id="searchStudent">
 			<div id="container">
-				<form  action="/enrollment/templates/payment/" method="post">		
+				<form  action="/templates/payment/" method="post">		
 					<h1>Student Name: {$studentName}</h1>	
-				<a href="/enrollment/templates/studentSubject/">(return)</a></br>	
-				<a href="/enrollment/">(Main Menu)</a></br>	
+				<a href="/templates/studentSubject/">(return)</a></br>	
+				<a href="/">(Main Menu)</a></br>	
 					<table class="table table-bordered table-condensed table-striped"> 
 						<tr>
 							<th>Subject ID</th>

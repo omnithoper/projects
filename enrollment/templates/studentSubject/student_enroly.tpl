@@ -1,25 +1,25 @@
 <html>
 	<head>
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/mystyles.css" />
-		<script type='text/javascript' src='/enrollment/js/student_enroly.js'></script>
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
+		<script type='text/javascript' src='/js/student_enroly.js'></script>
 
 	</head>
 
 	<body>
 		<nav id="searchStudent">
 			<div id="container">
-				<form action="/enrollment/templates/studentSubject/" Method="POST">
+				<form action="/templates/studentSubject/" Method="POST">
 					<h1>Student Name</h1>
 					Name:<input type="text" name="studentName">
 					<input type="submit" name="search" value="search"/>
-					<a  class="pull-right" href="/enrollment/">(return)</a></br>	
+					<a  class="pull-right" href="/">(return)</a></br>	
 					{if (!empty($students[1]) && empty($selectedStudent))}
 						<ul>
 							{foreach from=$students item=student}
 								<li>
 									{$student.last_name} {$student.first_name}
-									(<a type="submit" href="/enrollment/templates/studentSubject/?studentID={$student.student_id}&test=test">select</a>)
+									(<a type="submit" href="/templates/studentSubject/?studentID={$student.student_id}&test=test">select</a>)
 								</li>
 							{/foreach}
 						</ul>
@@ -63,7 +63,7 @@
 										<td>{$subject.subject}</td>
 										<td>{$subject.subject_unit}</td>
 										<td style="width: 1px; wrap: nowrap;">
-											<a href="/enrollment/templates/studentSubject/?subjectID={$subject.subject_id}
+											<a href="/templates/studentSubject/?subjectID={$subject.subject_id}
 										&studentID={$subject.student_id}&action=delete" class="btn btn-danger" title="Delete Subject"><i class="icon icon-remove"></i></a>
 										</td>
 									</tr>
@@ -75,7 +75,7 @@
 									</td>
 								</tr>
 							</table>
-							<a href="/enrollment/templates/cashier/?studentID={$studentID}&
+							<a href="/templates/cashier/?studentID={$studentID}&
 							studentName={$selectedStudent.full_name}" class="btn btn-success pull-right"  title="payment">pay</a>
 							<div class="clearfix"></div>
 						{/if}

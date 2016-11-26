@@ -5,30 +5,38 @@ class Student {
 	function __construct() {
 		$this->_db = new DatabaseConnect();
 	}
+	
 	function getViewStudents() {
-	$payment = $this->getViewStudentPayed();		
+		$payment = $this->getViewStudentPayed();		
 		$select = "SELECT * FROM student";
 		$student = $this->_db->connection->query($select);
 		$student = $student->fetch_all(MYSQLI_ASSOC);
 		$result = [];
 		$payed = NULL;
+
 		foreach ($student as $students){
-			foreach ($payment as $payments) {
-				if (($students['student_id'] == $payments['student_id']) &&($payments['payment'] == 1)) {	
-					$students['payed'] ='payed';	
-					$payed = $students;
-					break;
-					 $result[] = $payed;
-					} else   { 
-					$students['payed'] ='not yet payed';	
-					 $payed = $students;	
-				}	
-			} 
-			$result[] = $payed;
+			if (!empty($payment)) {
+				foreach ($payment as $payments) {
+					if (($students['student_id'] == $payments['student_id']) &&($payments['payment'] == 1)) {	
+						$students['payed'] ='payed';	
+						$payed = $students;
+						break;
+					 	$result[] = $payed;
+					} else { 
+						$students['payed'] ='not yet payed';	
+						$payed = $students;	
+					}	
+				} 
+				$result[] = $payed;
+			} else {
+				$students['payed'] ='not yet payed';	
+				$result[] = $students;
+			}
 
 		}	
 		return $result;
 	}	
+	
 	function getViewStudentPayed() {
 
 	$select="
@@ -154,7 +162,7 @@ class Student {
 		$prepared->execute();	
 		$db->connection->close();
 		
-		header("Location: /enrollment/templates/student/");			
+		header("Location: /templates/student/");			
 	}
 	function getViewStudent($studentID = null){
 		

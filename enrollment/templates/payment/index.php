@@ -1,1 +1,1 @@
-<?php require '..\..\logic\payment.php' ?>
+<?php require '../../logic/payment.php' ?>

@@ -1,1 +1,1 @@
-<?php require '..\..\logic\setting.php' ?>
+<?php require '../../logic/setting.php' ?>

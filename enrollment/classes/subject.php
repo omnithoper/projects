@@ -69,7 +69,7 @@ class Subject {
 		$prepared->bind_param('si', $subject, $subjectUnit);
 
 		$prepared->execute();	
-		header("Location: /enrollment/templates/subject/");
+		header("Location: /templates/subject/");
 		$db->connection->close();
 	}
 		

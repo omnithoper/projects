@@ -1,8 +1,8 @@
 <html>
 	<head>
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/mystyles.css" />
-		<script type='text/javascript' src='/enrollment/js/studentAdd.js'></script>
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
+		<script type='text/javascript' src='/js/studentAdd.js'></script>
 	</head>
 	<body> 
 	<form id="add-student-form" method ="POST">

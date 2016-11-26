@@ -1,13 +1,13 @@
 <html>
 	<head>	
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/mystyles.css" />
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
 	</head>
 	<body>
 		<nav id ="searchStudent">
 			<div id="container">
 			<form>
-				<a style="float:left" href="/enrollment">(Return)</a>
+				<a style="float:left" href="/">(Return)</a>
 				<a class="pull-right btn btn-success"  type="submit"href="subjectAdd.php"><i class="icon icon-plus"></i></a>
 			</form>
 				<table class="table table-bordered table-condensed table-striped">
