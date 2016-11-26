@@ -1,1 +1,1 @@
-<?php require  '..\..\logic\subjectDelete.php'; ?>
+<?php require  '../../logic/subjectDelete.php'; ?>

@@ -1,7 +1,7 @@
 <html>
 	<head>
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/mystyles.css" />
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
 	</head>
 	<body>
 		<nav id="searchStudent">

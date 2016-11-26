@@ -1,1 +1,1 @@
-<?php require  '..\..\logic\subjectEdit.php'; ?>
+<?php require  '../../logic/subjectEdit.php'; ?>

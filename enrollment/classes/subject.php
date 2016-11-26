@@ -128,7 +128,7 @@ class Subject {
 
 		}	
 	
-			header("Location: /enrollment/templates/subject/");
+			header("Location: /templates/subject/");
 		
 		
 		$db->connection->close();
@@ -148,7 +148,7 @@ class Subject {
 		}
 
 		$db->connection->close();
-		header("Location: /enrollment/templates/subject/");
+		header("Location: /templates/subject/");
 	}
 	public function getCurrentUnits($studentID = null)
 	{	

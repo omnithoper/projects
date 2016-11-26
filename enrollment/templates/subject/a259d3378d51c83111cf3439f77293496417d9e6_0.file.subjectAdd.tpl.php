@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2016-11-19 09:41:35
+/* Smarty version 3.1.30, created on 2016-11-26 20:02:12
   from "C:\Users\omnithopter\Documents\projects\enrollment\templates\subject\subjectAdd.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58301e4f190549_72695033',
+  'unifunc' => 'content_5839ea44c15fc7_76278393',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'a259d3378d51c83111cf3439f77293496417d9e6' => 
     array (
       0 => 'C:\\Users\\omnithopter\\Documents\\projects\\enrollment\\templates\\subject\\subjectAdd.tpl',
-      1 => 1479548426,
+      1 => 1480185330,
       2 => 'file',
     ),
   ),
@@ -20,13 +20,13 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58301e4f190549_72695033 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5839ea44c15fc7_76278393 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 	<body>
 		<head>
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/mystyles.css" />
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
 		</head>	
 		<form method="post">
 		<nav id ="searchStudent">

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2016-11-24 11:31:10
+/* Smarty version 3.1.30, created on 2016-11-26 20:02:52
   from "C:\Users\omnithopter\Documents\projects\enrollment\templates\studentSubject\student_enroly.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_5836cf7e53c3c9_77418596',
+  'unifunc' => 'content_5839ea6c042272_62236888',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0f1f9895d6e651a8abc2096f5dd8bac502245cf0' => 
     array (
       0 => 'C:\\Users\\omnithopter\\Documents\\projects\\enrollment\\templates\\studentSubject\\student_enroly.tpl',
-      1 => 1479986593,
+      1 => 1480185330,
       2 => 'file',
     ),
   ),
@@ -20,14 +20,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5836cf7e53c3c9_77418596 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5839ea6c042272_62236888 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 	<head>
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/mystyles.css" />
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
 		<?php echo '<script'; ?>
- type='text/javascript' src='/enrollment/js/student_enroly.js'><?php echo '</script'; ?>
+ type='text/javascript' src='/js/student_enroly.js'><?php echo '</script'; ?>
 >
 
 	</head>
@@ -35,11 +35,11 @@ function content_5836cf7e53c3c9_77418596 (Smarty_Internal_Template $_smarty_tpl)
 	<body>
 		<nav id="searchStudent">
 			<div id="container">
-				<form action="/enrollment/templates/studentSubject/" Method="POST">
+				<form action="/templates/studentSubject/" Method="POST">
 					<h1>Student Name</h1>
 					Name:<input type="text" name="studentName">
 					<input type="submit" name="search" value="search"/>
-					<a  class="pull-right" href="/enrollment/">(return)</a></br>	
+					<a  class="pull-right" href="/">(return)</a></br>	
 					<?php if ((!empty($_smarty_tpl->tpl_vars['students']->value[1]) && empty($_smarty_tpl->tpl_vars['selectedStudent']->value))) {?>
 						<ul>
 							<?php
@@ -51,7 +51,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['student']->value) {
 									<?php echo $_smarty_tpl->tpl_vars['student']->value['last_name'];?>
  <?php echo $_smarty_tpl->tpl_vars['student']->value['first_name'];?>
 
-									(<a type="submit" href="/enrollment/templates/studentSubject/?studentID=<?php echo $_smarty_tpl->tpl_vars['student']->value['student_id'];?>
+									(<a type="submit" href="/templates/studentSubject/?studentID=<?php echo $_smarty_tpl->tpl_vars['student']->value['student_id'];?>
 &test=test">select</a>)
 								</li>
 							<?php
@@ -123,7 +123,7 @@ foreach ($_from as $_smarty_tpl->tpl_vars['subject']->value) {
 										<td><?php echo $_smarty_tpl->tpl_vars['subject']->value['subject_unit'];?>
 </td>
 										<td style="width: 1px; wrap: nowrap;">
-											<a href="/enrollment/templates/studentSubject/?subjectID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['subject_id'];?>
+											<a href="/templates/studentSubject/?subjectID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['subject_id'];?>
 
 										&studentID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['student_id'];?>
 &action=delete" class="btn btn-danger" title="Delete Subject"><i class="icon icon-remove"></i></a>
@@ -143,7 +143,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
 									</td>
 								</tr>
 							</table>
-							<a href="/enrollment/templates/cashier/?studentID=<?php echo $_smarty_tpl->tpl_vars['studentID']->value;?>
+							<a href="/templates/cashier/?studentID=<?php echo $_smarty_tpl->tpl_vars['studentID']->value;?>
 &
 							studentName=<?php echo $_smarty_tpl->tpl_vars['selectedStudent']->value['full_name'];?>
 " class="btn btn-success pull-right"  title="payment">pay</a>

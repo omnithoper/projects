@@ -231,7 +231,7 @@ class Student {
 			die();
 		}	
 
-			header("Location: /enrollment/templates/student/");
+			header("Location: /templates/student/");
 		
 		$db->connection->close();
 	}
@@ -249,7 +249,7 @@ class Student {
 			}
 
 			$db->connection->close();
-			header("Location: /enrollment/templates/student/");
+			header("Location: /templates/student/");
 	}
 }
 ?>

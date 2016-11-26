@@ -1,8 +1,8 @@
 <html>
 	<body>
 		<head>
-			<link type="text/css" rel="stylesheet" href="/enrollment/css/bootstrap.min.css" />
-			<link type="text/css" rel="stylesheet" href="/enrollment/css/mystyles.css" />
+			<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+			<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
 		</head>	
 	<form  method ="POST">
 		<nav id="searchStudent">
@@ -18,7 +18,7 @@
 				<input id="subject" type="text" name="subject" value="{$view.subject}" 
 				onchange="checkInput();">Subject<br>
 				<input id="subject_unit" type="text" name="subject_unit" value="{$view.subject_unit}"
-				onchange="checkInput();"> Subject Unit<br>
+				onchange="checkInput();">Subject Unit<br>
 				<input id="button_save" type="submit" name="edit" value="save" disabled>
 				<a style="float:right" href="index.php">(Return)</a>
 			</div>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.30, created on 2016-11-26 14:26:28
+/* Smarty version 3.1.30, created on 2016-11-26 20:03:17
   from "C:\Users\omnithopter\Documents\projects\enrollment\templates\cashier\cashier.tpl" */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.30',
-  'unifunc' => 'content_58399b94cdf315_01914383',
+  'unifunc' => 'content_5839ea85ed6004_06010946',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0b940a284a64ea53a0266bd6ec598f426853c8d8' => 
     array (
       0 => 'C:\\Users\\omnithopter\\Documents\\projects\\enrollment\\templates\\cashier\\cashier.tpl',
-      1 => 1480140293,
+      1 => 1480185328,
       2 => 'file',
     ),
   ),
@@ -20,14 +20,14 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_58399b94cdf315_01914383 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5839ea85ed6004_06010946 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <html>
 	<head>
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/mystyles.css" />
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
 		<?php echo '<script'; ?>
- type='text/javascript' src='/enrollment/js/cashier.js'><?php echo '</script'; ?>
+ type='text/javascript' src='/js/cashier.js'><?php echo '</script'; ?>
 >
 
 	</head>
@@ -35,11 +35,11 @@ function content_58399b94cdf315_01914383 (Smarty_Internal_Template $_smarty_tpl)
 	<body>
 		<nav id="searchStudent">
 			<div id="container">
-				<form  action="/enrollment/templates/payment/" method="post">		
+				<form  action="/templates/payment/" method="post">		
 					<h1>Student Name: <?php echo $_smarty_tpl->tpl_vars['studentName']->value;?>
 </h1>	
-				<a href="/enrollment/templates/studentSubject/">(return)</a></br>	
-				<a href="/enrollment/">(Main Menu)</a></br>	
+				<a href="/templates/studentSubject/">(return)</a></br>	
+				<a href="/">(Main Menu)</a></br>	
 					<table class="table table-bordered table-condensed table-striped"> 
 						<tr>
 							<th>Subject ID</th>
