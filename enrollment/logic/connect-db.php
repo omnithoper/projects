@@ -9,7 +9,8 @@ class DatabaseConnect {
 	
 	public function __construct()
 	{
-		$this->connection = new mysqli($this->_server, $this->_user, $this->_pass, $this->_database);
+		$config = parse_ini_file('../../configuration/application.ini');
+		$this->connection = new mysqli($config['host'], $config['username'], $config['password'], $config['database']);
 	}
 	
 	public function addStudentPlusDefaultSubject()

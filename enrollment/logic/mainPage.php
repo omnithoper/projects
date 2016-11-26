@@ -1,4 +1,5 @@
 <?php 
+	$config = parse_ini_file('configuration/application.ini');
 	require 'lib/smarty/Smarty.class.php'; 
 
 	$smarty = new Smarty();
