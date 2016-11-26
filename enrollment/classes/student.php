@@ -26,7 +26,8 @@ class Student {
 			} 
 			$result[] = $payed;
 
-		}	return $result;
+		}	
+		return $result;
 	}	
 	function getViewStudentPayed() {
 
