@@ -1,4 +1,6 @@
 <?php
+	$config = parse_ini_file('../../configuration/application.ini');
+	define('APPLICATION_PATH', $config['root']);
 
 	defined('DS')? NULL: define('DS', DIRECTORY_SEPARATOR);
 	
@@ -7,6 +9,6 @@
 		
 	defined('LIB_PATH')? NULL: define('LIB_PATH', SITE_ROOT.DS.'logic');
 	
-	require_once(LIB_PATH.DS."connect-db.php");
-	require_once(LIB_PATH.DS."method-post.php");
+	require_once(APPLICATION_PATH."/logic/connect-db.php");
+	require_once(APPLICATION_PATH."/logic/method-post.php");
 ?>

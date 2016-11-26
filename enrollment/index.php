@@ -1,3 +1,3 @@
 <?php
-	require  'logic\mainPage.php';
+	require  'logic/mainPage.php';
 ?>
