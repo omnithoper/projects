@@ -16,7 +16,7 @@ function checkPayment() {
 console.log(amount);
 
 
-	if (cash < amount) {
+	if (Number(cash) < Number(amount)) {
 		console.log('not enough cash');
 		return false;
 	} else {
