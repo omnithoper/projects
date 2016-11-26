@@ -1,0 +1,162 @@
+<?php
+/* Smarty version 3.1.30, created on 2016-11-20 15:42:27
+  from "C:\Users\omnithopter\Documents\projects\enrollment\templates\studentSubject\student_enroly.tpl" */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.30',
+  'unifunc' => 'content_5831c463e957b0_90936067',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '0f1f9895d6e651a8abc2096f5dd8bac502245cf0' => 
+    array (
+      0 => 'C:\\Users\\omnithopter\\Documents\\projects\\enrollment\\templates\\studentSubject\\student_enroly.tpl',
+      1 => 1479656544,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_5831c463e957b0_90936067 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/enrollment/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/enrollment/css/mystyles.css" />
+		<?php echo '<script'; ?>
+ type='text/javascript' src='/enrollment/js/student_enroly.js'><?php echo '</script'; ?>
+>
+
+	</head>
+
+	<body>
+		<nav id="searchStudent">
+			<div id="container">
+				<form action="/enrollment/templates/studentSubject/" Method="POST">
+					<h1>Student Name</h1>
+					Name:<input type="text" name="studentName">
+					<input type="submit" name="search" value="search"/>
+					<a class="btn" href="/enrollment/">Back</a></br>	
+					<?php if ((!empty($_smarty_tpl->tpl_vars['students']->value[1]) && empty($_smarty_tpl->tpl_vars['selectedStudent']->value))) {?>
+						<ul>
+							<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['students']->value, 'student');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['student']->value) {
+?>
+								<li>
+									<?php echo $_smarty_tpl->tpl_vars['student']->value['last_name'];?>
+ <?php echo $_smarty_tpl->tpl_vars['student']->value['first_name'];?>
+
+									(<a type="submit" href="/enrollment/templates/studentSubject/?studentID=<?php echo $_smarty_tpl->tpl_vars['student']->value['student_id'];?>
+&test=test">select</a>)
+								</li>
+							<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+						</ul>
+					<?php }?>
+				</form>
+				<form method="post">
+						<?php if ((!empty($_smarty_tpl->tpl_vars['selectedStudent']->value))) {?>
+							SELECTED NAME:. <?php echo $_smarty_tpl->tpl_vars['selectedStudent']->value['full_name'];?>
+</br>
+							<br />
+							<h1>Enroll to Subject</h1>
+							<input type="hidden" name="studentID" value="<?php echo $_smarty_tpl->tpl_vars['studentID']->value;?>
+" />
+							<select id="subject_list" name="getSubjectID" onchange="checkSubjectName();">	
+								<option value="">(Select Subject)</option>
+								<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['subject']->value, 'subjects');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['subjects']->value) {
+?>
+									<option value="<?php echo $_smarty_tpl->tpl_vars['subjects']->value['subject_id'];?>
+"> <?php echo $_smarty_tpl->tpl_vars['subjects']->value['subject'];?>
+</option>	
+								<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+	
+							</select>	
+							<button id="button_save" type="submit" name="saveSubject" value="saveSubject" disabled>Save</button></br>
+						<?php }?>
+						
+						<?php if ((!empty($_smarty_tpl->tpl_vars['selectedStudent']->value) && !empty($_smarty_tpl->tpl_vars['allSubject']->value))) {?>
+							<h1>Student Enroll Subjects</br></h1>
+							<br />
+							<?php if ((!empty($_smarty_tpl->tpl_vars['error']->value['message']))) {?>
+								<div class="alert alert-danger">
+								<?php echo $_smarty_tpl->tpl_vars['error']->value['message'];?>
+
+								<?php echo $_smarty_tpl->tpl_vars['error']->value['status'];?>
+
+								</div>
+							<?php }?> 
+							<table class="table table-bordered table-condensed table-striped"> 
+								<tr>
+									<th>Subject ID</th>
+									<th>Subject</th>
+									<th>Subject UNIT</th>
+									<th style="width: 1px; white-space: nowrap;">&nbsp;</th>
+								</tr>
+								<?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['allSubject']->value, 'subject');
+if ($_from !== null) {
+foreach ($_from as $_smarty_tpl->tpl_vars['subject']->value) {
+?>
+										<?php $_smarty_tpl->_assignInScope('totalUnit', $_smarty_tpl->tpl_vars['totalUnit']->value+$_smarty_tpl->tpl_vars['subject']->value['subject_unit']);
+?>	
+									<tr>
+										<td><?php echo $_smarty_tpl->tpl_vars['subject']->value['subject_id'];?>
+</td>
+										<td><?php echo $_smarty_tpl->tpl_vars['subject']->value['subject'];?>
+</td>
+										<td><?php echo $_smarty_tpl->tpl_vars['subject']->value['subject_unit'];?>
+</td>
+										<td style="width: 1px; wrap: nowrap;">
+											<a href="/enrollment/templates/studentSubject/?subjectID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['subject_id'];?>
+
+										&studentID=<?php echo $_smarty_tpl->tpl_vars['subject']->value['student_id'];?>
+&action=delete" class="btn btn-danger" title="Delete Subject"><i class="icon icon-remove"></i></a>
+										</td>
+										
+									</tr>
+								<?php
+}
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl);
+?>
+
+								<tr>
+									<td colspan="2"><span class="pull-right">Total Units</span></td>
+									<td colspan="2">
+										<label for="Total"><?php echo $_smarty_tpl->tpl_vars['totalUnit']->value;?>
+</label>
+									</td>
+								</tr>
+							</table>
+							<a href="/enrollment/templates/cashier/?studentID=<?php echo $_smarty_tpl->tpl_vars['studentID']->value;?>
+&
+							studentName=<?php echo $_smarty_tpl->tpl_vars['selectedStudent']->value['full_name'];?>
+" class="btn btn-success pull-right"  title="payment">pay</a>
+						<?php }?>
+				</form>
+			</div>		
+		</nav>
+		<footer>
+			copyright &copy Busasal.com
+		</footer>	
+	</body>	
+</html>	
+<?php }
+}

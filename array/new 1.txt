@@ -1,0 +1,194 @@
+<?php
+userclass
+ini_set('display_errors','On');
+ $contacts = [
+       [ 'city_id'=>1,'id'=>1,'user'=> 'Anthony','phone'=>'0917-455-3255'],
+       [ 'city_id'=>1,'id'=>2,'user'=> 'Ronnie','phone'=>'0936-952-5099'],
+	   [ 'city_id'=>3,'id'=>3,'user'=> 'Wendell','phone'=> '0915-340-8204'],	   
+	   [ 'city_id'=>4,'id'=>4,'user'=> 'Mikko','phone'=>'0926-092-3650'],
+	   [ 'city_id'=>1,'id'=>5,'user'=> 'Michael','phone'=>'0926-092-3650'],
+	   [ 'city_id'=>4,'id'=>6,'user'=> 'Haidee','phone'=>'0926-589-7500'],
+	   [ 'city_id'=>2,'id'=>7,'user'=> 'Zandro','phone'=>'0922-438-4468'],
+	   [ 'city_id'=>1,'id'=>8,'user'=> 'Christian','phone'=>'0917-907-7467'],
+	   [ 'city_id'=>3,'id'=>9,'user'=> 'Lyn','phone'=>'0932-743-0291'],
+	   [ 'city_id'=>2,'id'=>10,'user'=> 'Carlo','phone'=>'0932-629-9576'],
+];
+
+ $useraddress = [
+       [ 'city_id'=>1,'address'=>'Malabon'],
+	   [ 'city_id'=>2,'address'=> 'Taguig'],
+	   [ 'city_id'=>3,'address'=>'Las Pinas'],
+       [ 'city_id'=>4,'address'=>'Mandaluyong'],  
+ ];	   
+
+$colors = [
+	   [ 'color_id'=>1,'address'=>'Red'],
+	   [ 'color_id'=>2,'address'=> 'White'],
+	   [ 'color_id'=>3,'address'=>'Blue'],
+];
+
+class address {
+	function arrayuser($contacts,$useraddress) {
+		 echo "<table align = 'right' border = '1'>";
+		 echo "<tr>";
+   		 echo "<th>" .'USER'."</th>";
+		 echo "<th>" .'ADDRESS'."</th>";
+		 echo "<th>" .'PHONE NO.'."</th>";
+		 echo "</tr>";
+		 foreach ($contacts as $contact) {
+			 foreach ($useraddress as $address) {
+				if ($address['city_id'] == $contact['city_id']) {
+					echo "<tr>";
+					echo "<td>".$contact['user']."</td>" ;
+					echo "<td>".$address['address']."</td>" ;
+					echo "<td>".$contact['phone']."</td>";
+					echo "</tr>";
+				}  
+			 }    
+	     }
+		 echo "</table>";
+	} 
+	
+	function searchaddress($contacts, $useraddress, $searchText) {
+		if (!empty($searchText)) {
+			echo "<table border = '1'>";
+			echo "<tr>";
+			echo "<th>" .'USER'."</th>";
+			echo "<th>" .'ADDRESS'."</th>";
+			echo "<th>" .'PHONE NO.'."</th>";
+			echo "</tr>";			
+		}	
+		
+		$x=0;
+		foreach ($contacts as $contact) {	 
+			foreach ($useraddress as $address) {
+				$search = $address['address'];
+
+				if ($address['city_id'] == $contact['city_id']) {
+					if (isset($searchText)&&!empty($searchText)){
+						$search_post = $searchText;
+						
+						if ($search_post == $search) {	
+							echo "<tr>";
+							echo "<td>".$contact['user']."</td>" ;
+							echo "<td>".$address['address']."</td>" ;
+							echo "<td>".$contact['phone']."</td>";
+							echo "</tr>"; 
+							$x++;
+		
+						} 
+					}    
+				}
+			}
+		}
+		
+		if (($x == 0) && (!empty($searchText))) {
+			echo 'there is no user in this city';
+		}	
+		
+		echo "</table>";
+	}
+}	
+?>
+usser array
+<?php
+include 'userclass.php';
+$searchText = !empty($_POST['address'])?$_POST['address']:null;
+$user = new address();
+$address = $user->arrayuser($contacts,$useraddress);
+$searchaddress= new address();
+$useraddress = $searchaddress->searchaddress($contacts,$useraddress, $searchText);
+echo "<form action = 'userarray.php' method ='POST'>
+      Please Enter User City:<br>
+	  <input type='text' name='address'><br/>
+      <input type='submit' value='Search'>	  
+</form>";	  
+ ?>
+ <?php
+ini_set('display_errors','On');
+
+
+
+class contacts {
+
+	private $contacts = [
+       [ 'color_id'=>1,'city_id'=>1,'id'=>1,'user'=> 'Anthony','phone'=>'0917-455-3255',],
+       [ 'color_id'=>2,'city_id'=>1,'id'=>2,'user'=> 'Ronnie','phone'=>'0936-952-5099'],
+	   [ 'color_id'=>3,'city_id'=>3,'id'=>3,'user'=> 'Wendell','phone'=> '0915-340-8204'],	   
+	   [ 'color_id'=>3,'city_id'=>4,'id'=>4,'user'=> 'Mikko','phone'=>'0926-092-3650'],
+	   [ 'color_id'=>1,'city_id'=>1,'id'=>5,'user'=> 'Michael','phone'=>'0926-092-3650'],
+	   [ 'color_id'=>3,'city_id'=>4,'id'=>6,'user'=> 'Haidee','phone'=>'0926-589-7500'],
+	   [ 'color_id'=>2,'city_id'=>2,'id'=>7,'user'=> 'Zandro','phone'=>'0922-438-4468'],
+	   [ 'color_id'=>1,'city_id'=>1,'id'=>8,'user'=> 'Christian','phone'=>'0917-907-7467'],
+	   [ 'color_id'=>2,'city_id'=>3,'id'=>9,'user'=> 'Lyn','phone'=>'0932-743-0291'],
+	   [ 'color_id'=>1, 'city_id'=>2,'id'=>10,'user'=> 'Carlo','phone'=>'0932-629-9576'],
+	];
+	
+  private $useraddress = [
+       [ 'city_id'=>1,'address'=>'Malabon'],
+	   [ 'city_id'=>2,'address'=> 'Taguig'],
+	   [ 'city_id'=>3,'address'=>'Las Pinas'],
+       [ 'city_id'=>4,'address'=>'Mandaluyong'],  
+ ];	 
+private $colors = [
+	   [ 'color_id'=>1,'color'=>'Red'],
+	   [ 'color_id'=>2,'color'=> 'White'],
+	   [ 'color_id'=>3,'color'=>'Blue'],
+];
+	
+	function DisplaySearchResult() {
+		 echo "<table align = 'right' border = '1'>";
+		 echo "<tr>";
+   		 echo "<th>" .'USER'."</th>";
+		 echo "<th>" .'ADDRESS'."</th>";
+         echo "<th>" .'PHONE NO.'."</th>";
+		 echo "<th>" .'Favorite Color'."</th>";
+		 echo "</tr>";
+		 foreach ($this->contacts as $contact) {
+			 foreach ($this->useraddress as $address)  {
+				 foreach($this->colors as $color) { 
+					
+					if (($address['city_id'] == $contact['city_id']) && ($color['color_id'] == $contact['color_id'])){
+						echo "<tr>";
+						echo "<td>".$contact['user']."</td>" ;
+						echo "<td>".$address['address']."</td>" ;
+						echo "<td>".$contact['phone']."</td>";
+						echo "<td>".$color['color']."</td>";
+						echo "</tr>";
+					}
+			     }				
+			 }    
+	     }
+		 echo "</table>";
+	}
+	function getAll() {
+		return $this->contacts;
+		return $this->useraddress;
+		return $this->colors;
+	}
+	
+}	
+class Colors {
+	
+	private $_colors = [
+		['color_id' => 1, 'name' => 'red'],
+		['color_id' => 2, 'name' => 'blue'],
+		['color_id' => 3, 'name' => 'white'],
+	];
+	
+	function getFavoriteColor($colorID) {
+		$colorsName = NULL;
+	
+		foreach ($this->_colors as $color) {
+			if ($color['color_id'] == $colorID) {
+				$colorsName = $color['name'];
+			}
+		}		
+		return $colorsName;
+	}	
+}
+
+
+?>
+
+ 

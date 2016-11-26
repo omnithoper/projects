@@ -1,0 +1,4 @@
+limit
+SELECT * FROM student_subject_match WHERE student_id = 106 LIMIT 3, 3;
+count all records
+SELECT count(*) FROM student_subject_match WHERE student_id = 106;

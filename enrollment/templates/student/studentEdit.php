@@ -1,0 +1,1 @@
+<?php require '../../logic/studentEdit.php' ?>

@@ -1,0 +1,27 @@
+<?php /* Smarty version 2.6.30, created on 2016-11-13 14:37:20
+         compiled from studentAdd.tpl */ ?>
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/enrollment/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/enrollment/css/mystyles.css" />
+	</head>
+	<body>	
+	<form  method ="POST">
+		<div id="container">
+			<h1>Add Student</h1>
+			<button class="btn btn-success" type="submit"><a href="index.php">return</a></button></br></br>
+			<?php if (( ! empty ( $this->_tpl_vars['result']['error'] ) )): ?>
+				<div>
+					<?php echo $this->_tpl_vars['result']['error']; ?>
+
+				</div>
+			<?php endif; ?>
+		
+			<input type="text" name="first_name"> First Name<br>
+			<input type="text" name="last_name"> Last Name<br>
+			<input type="submit" name="save" value="save" class="btn-disabled">
+
+		</div>
+	</form>
+	</body>
+</html>	
