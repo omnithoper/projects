@@ -1,2 +1,2 @@
 configuration/local.ini
-compile/
+compile/*
