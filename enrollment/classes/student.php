@@ -15,7 +15,6 @@ class Student {
 		$payed = NULL;
 
 		foreach ($student as $students){
-			if (!empty($payment)) {
 				foreach ($payment as $payments) {
 					if (($students['student_id'] == $payments['student_id']) &&($payments['payment'] == 1)) {
 						$students['payed'] ='payed';	
@@ -28,11 +27,6 @@ class Student {
 					}	
 				} 
 				$result[] = $payed;
-			} else {
-				$students['payed'] ='not yet payed';	
-				$result[] = $students;
-			}
-
 		}	
 		return $result;
 	}	
@@ -41,16 +35,30 @@ class Student {
 
 	$select="
 			SELECT
-			student.student_id,
-			payment.payment
+			*
 			FROM student 
-			JOIN payment ON student.student_id = payment.student_id
+			LEFT OUTER JOIN payment ON student.student_id = payment.student_id
 		";
 		$student = $this->_db->connection->query($select);
 		$student = $student->fetch_all(MYSQLI_ASSOC);
+		$result = [];
 
 	
-		return $student;
+			foreach ($student as $students){
+				var_dump($students);
+					if ($students['payment'] == 1) {
+						$students['payed'] ='payed';	
+				
+					
+					} else { 
+						$students['payed'] ='not yet payed';	
+
+					}	
+				 
+				$result[] = $students;
+		}	
+	
+		return $result;
 
 	}
 
