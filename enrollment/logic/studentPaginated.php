@@ -17,7 +17,7 @@
 
 	$smarty = new Smarty();
 	$smarty->template_dir = '../templates/student/';
-	$smarty->compile_dir = '../templates/student/';
+	$smarty->compile_dir = '../compile/';
 
 	$smarty->assign('per_page', $per_page);
 	$smarty->assign('total_results', $total_results);	

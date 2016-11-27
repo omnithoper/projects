@@ -19,7 +19,7 @@
 
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/payment/';
-	$smarty->compile_dir = '../../templates/payment/';
+	$smarty->compile_dir = '../../compile/';
 
 	$smarty->assign('payment', $payment);
 	$smarty->assign('studentName', $studentName);

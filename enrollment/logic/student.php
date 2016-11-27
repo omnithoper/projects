@@ -9,7 +9,7 @@
 	$students = $studentObject->getViewStudents(); 
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/student/';
-	$smarty->compile_dir = '../../templates/student/';
+	$smarty->compile_dir = '../../compile/';
 
 	$smarty->assign('student', $students);
 	$smarty->display('view.tpl');

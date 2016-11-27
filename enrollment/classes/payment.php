@@ -52,6 +52,13 @@ class  Payment {
 		$result = $result->fetch_all(MYSQLI_ASSOC);
 		return $result;
 	}
+
+	function getViewStudentPayment($studentID){
+		$select = "SELECT * FROM payment WHERE student_id = $studentID AND payment = 1";
+		$result = $this->_db->connection->query($select);
+		$result = $result->fetch_all(MYSQLI_ASSOC);
+		return $result;
+	}
 }
 
 ?>

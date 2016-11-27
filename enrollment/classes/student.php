@@ -17,7 +17,7 @@ class Student {
 		foreach ($student as $students){
 			if (!empty($payment)) {
 				foreach ($payment as $payments) {
-					if (($students['student_id'] == $payments['student_id']) &&($payments['payment'] == 1)) {	
+					if (($students['student_id'] == $payments['student_id']) &&($payments['payment'] == 1)) {
 						$students['payed'] ='payed';	
 						$payed = $students;
 						break;

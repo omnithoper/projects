@@ -26,7 +26,7 @@
 
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/cashier/';
-	$smarty->compile_dir = '../../templates/cashier/';
+	$smarty->compile_dir = '../../compile/';
 
 	$smarty->assign('allSubject', $allSubject);
 	$smarty->assign('studentID', $studentID);

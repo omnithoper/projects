@@ -21,7 +21,7 @@
 
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/subject/';
-	$smarty->compile_dir = '../../templates/subject/';
+	$smarty->compile_dir = '../../compile/';
 	
 	$smarty->assign('view', $view);
 	$smarty->assign('edit', $edit);

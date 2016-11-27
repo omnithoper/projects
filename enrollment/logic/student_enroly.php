@@ -35,7 +35,7 @@
 
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/studentSubject/';
-	$smarty->compile_dir = '../../templates/studentSubject/';
+	$smarty->compile_dir = '../../compile/';
 
 	$smarty->assign('students', $students);
 	$smarty->assign('selectedStudent', $selectedStudent);

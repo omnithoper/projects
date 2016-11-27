@@ -33,6 +33,8 @@
 							</a></td>
 							<td style="width: 1px; wrap: nowrap;"><a id="href_delete"href='studentDelete.php?student_id={$details.student_id}' 
 							class="btn btn-danger" title="Delete Student"> <i class="icon icon-remove"></i></a></td>
+							<td style="width: 1px; wrap: nowrap;"><a id="href_delete"href='studentDownload.php?student_id={$details.student_id}' 
+							class="btn btn-success" title="download invoice"> <i class="icon icon-download"></i></a></td>
 							</tr>
 						{/foreach}
 					</table>

@@ -9,7 +9,7 @@
 	
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/subject/';
-	$smarty->compile_dir = '../../templates/subject/';
+	$smarty->compile_dir = '../../compile/';
 
 	$smarty->assign('subject', $result);
 	$smarty->display('view.tpl');

@@ -14,7 +14,7 @@
 	}
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/student/';
-	$smarty->compile_dir = '../../templates/student/';
+	$smarty->compile_dir = '../../compile/';
 
 	$smarty->assign('result', $result);
 	$smarty->display('studentAdd.tpl');
