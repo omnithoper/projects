@@ -6,7 +6,7 @@ class  Payment {
 	}
 
 	function getAddPayment($studentID, $totalAmount, $change) {
-		$db = new DatabaseConnect();
+
 		if (empty($studentID)) {
 			return true;
 		}
@@ -19,13 +19,13 @@ class  Payment {
 			return true;
 		}
 	
-		$prepared = $db->connection->prepare("
+		$prepared = $this->_db->connection->prepare("
 			INSERT INTO payment (student_id, total_amount, `change`)
 			VALUES (?, ?, ?)
 		");	
 		$prepared->bind_param('iii', $studentID, $totalAmount, $change);
 		$status = $prepared->execute();	
-		$db->connection->close();
+
 	}
 	
 	function getViewPayment($studentID, $totalAmount, $change) {

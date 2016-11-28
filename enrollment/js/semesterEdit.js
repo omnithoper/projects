@@ -1,20 +1,20 @@
 function checkInput() {
-	var subject = document.getElementById('subject').value;
-	var subjectUnit = document.getElementById('subject_unit').value;
+	var dateStart = document.getElementById('date_start').value;
+	var dateEnd = document.getElementById('date_end').value;
 
-	if (subject == '') {
-		console.log('subject IS EMPTY!!!');
-		text = "input subject";
+	if (dateStart == '') {
+		console.log('Date Start IS EMPTY!!!');
+		text = "input Date Start";
 		document.getElementById("input").innerHTML = text;
 		return false;
-	} else if (subjectUnit == '') {
-		console.log('subject unit IS EMPTY!!!');
-		text = "input subject unit";
+	} else if (dateEnd == '') {
+		console.log('Date End unit IS EMPTY!!!');
+		text = "input Date End";
 		document.getElementById("input").innerHTML = text;	
 		return false;
 	} else {
 		console.log('EVERYTHING IS OK!!!');
-		text = "do you want to save subject?";
+		text = "do you want to save Semester?";
 		document.getElementById("input").innerHTML = text;	
 		document.getElementById('button_save').disabled = false;
 		return true;
@@ -25,5 +25,4 @@ function checkInput() {
 document.onload = function(){
 checkInput();
 };
-
 

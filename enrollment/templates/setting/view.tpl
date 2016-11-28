@@ -22,7 +22,31 @@
 						<td	align="center">{$details.price_of_misc}</td>
 						</tr>
 					{/foreach}
-				</table>
+				</table>	
+					<br/>
+					<br/>
+				<table class="table table-bordered table-condensed table-striped">	
+					<a class="pull-right btn btn-success" 
+					href="/templates/setting/semesterAdd.php">
+					<i class="icon-plus"></i></a>
+					<tr>
+						<th>Semester ID</th>
+						<th>Date Start</th>
+						<th>Date End</th>
+					</tr>
+					{foreach from=$semester item=details}
+						<tr>
+						<td align="center">{$details.semester_id}</td>
+						<td align="center">{$details.date_start}</td>
+						<td	align="center">{$details.date_end}</td>
+						<td style="width: 1px; wrap: nowrap;"><a href='semesterEdit.php?semester_id={$details.semester_id}'
+						class="btn btn-danger" title="edit Subject"> <i class="icon icon-edit"></i>
+						</a></td>
+						<td style="width: 1px; wrap: nowrap;"><a href='semesterDelete.php?semester_id={$details.semester_id}' 
+						class="btn btn-danger" title="Delete Subject"> <i class="icon icon-remove"></i></a></td>
+						</tr>
+					{/foreach}
+				</table>	
 			</div>
 		</nav>	
 	</body>

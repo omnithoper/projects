@@ -31,8 +31,8 @@
 <html>
 	<head>
 		<title>Student Records</title>
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/bootstrap.min.css" />
-		<link type="text/css" rel="stylesheet" href="/enrollment/css/mystyles.css" />
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
 	</head>
 	<body>
 	<form>
@@ -40,9 +40,9 @@
 			<div id="container">
 				<h1>Student Records</h1>
 					<a style="float:left" href="/enrollment">(Return)</a>
-					<a class="pull-right btn btn-success" href="/enrollment/templates/student/studentAdd.php">
+					<a class="pull-right btn btn-success" href="/templates/student/studentAdd.php">
 					<i class="icon-plus"></i></a></br>
-					<p><a href='../../enrollment/templates/student/'>View All</a> | <b>View Page:</b>
+					<p><a href='../../templates/student/'>View All</a> | <b>View Page:</b>
 						<?php for ($show_page = 1; $show_page <= $total_pages; $show_page++): ?>
 								<?php echo "<a href='studentPaginated.php?page=$show_page'>$show_page</a>" ?> 		
 						<?php endfor;?>		
@@ -64,8 +64,13 @@
 							<td><?php echo"$row[0]";?></td>
 							<td><?php echo"$row[4]";?> </td>
 							<td><?php echo "$row[5]";?> </td>
-							<td><?php echo "<a href='../../enrollment/templates/student/studentEdit.php?student_id=" . $row[0] . "'>Edit</a>"?> </i></td>
-							<td style="width: 1px; wrap: nowrap;"><?php echo "<a href='../../enrollment/templates/student/studentDelete.php?student_id=" . $row[0] . "'>Delete</a>"?><i class="icon icon-remove"></i></td>
+							<td style="width: 1px; wrap: nowrap;"><a id="href_edit"href=../../templates/student/studentEdit.php?student_id=<?php echo $row[0]?>' 
+							class="btn btn-danger" title="edit Student"> <i class="icon icon-edit"></i>
+							</a></td>
+							<td style="width: 1px; wrap: nowrap;"><a id="href_delete"href='../../templates/student/studentDelete.php?student_id=<?php echo $row[0]?>' 
+							class="btn btn-danger" title="Delete Student"> <i class="icon icon-remove"></i></a></td>
+							<td style="width: 1px; wrap: nowrap;"><a id="href_delete"href='../../templates/student/studentDownload.php?student_id=<?php echo $row[0]?>' 
+							class="btn btn-success" title="download invoice"> <i class="icon icon-download"></i></a></td>
 		
 						</tr>
 						<?php endfor; ?>

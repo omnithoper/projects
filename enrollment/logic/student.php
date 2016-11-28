@@ -7,8 +7,7 @@
 	$studentObject = new Student();
 	$paymentObject = new payment();
 	$students = $studentObject->getViewStudentPayed(); 
-	var_dump($students);
-	die('here');
+
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/student/';
 	$smarty->compile_dir = '../../compile/';

@@ -10,7 +10,6 @@
 	
 	$editObject = new Student();
 	$result = $editObject->getViewStudent($studentID);
-
 	$edit = [];
 	if (isset($_POST['edit'])) {
 		$firstName = Request::getParam('first_name');

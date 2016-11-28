@@ -2,6 +2,7 @@
 	<head>
 		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
+			<script type='text/javascript' src='../../js/studentEdit.js'></script>
 	</head>
 	<body>
 		<nav id="searchStudent">
@@ -24,6 +25,6 @@
 				</form>
 			</div>
 		</nav>	
-		<script type='text/javascript' src='../../js/studentEdit.js'></script>
+	
 	</body>
 </html>	

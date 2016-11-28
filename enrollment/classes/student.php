@@ -7,59 +7,39 @@ class Student {
 	}
 	
 	function getViewStudents() {
-		$payment = $this->getViewStudentPayed();		
+		
 		$select = "SELECT * FROM student";
 		$student = $this->_db->connection->query($select);
-		$student = $student->fetch_all(MYSQLI_ASSOC);
-		$result = [];
-		$payed = NULL;
 
-		foreach ($student as $students){
-				foreach ($payment as $payments) {
-					if (($students['student_id'] == $payments['student_id']) &&($payments['payment'] == 1)) {
-						$students['payed'] ='payed';	
-						$payed = $students;
-						break;
-					 	$result[] = $payed;
-					} else { 
-						$students['payed'] ='not yet payed';	
-						$payed = $students;	
-					}	
-				} 
-				$result[] = $payed;
-		}	
-		return $result;
+		
+		return $student;
 	}	
 	
 	function getViewStudentPayed() {
 
 	$select="
 			SELECT
-			*
-			FROM student 
-			LEFT OUTER JOIN payment ON student.student_id = payment.student_id
+			student.student_id,
+			payment.payment,
+			student.first_name,
+			student.last_name
+			FROM student  
+			LEFT OUTER JOIN payment  ON student.student_id = payment.student_id 
 		";
 		$student = $this->_db->connection->query($select);
 		$student = $student->fetch_all(MYSQLI_ASSOC);
 		$result = [];
-
-	
-			foreach ($student as $students){
-				var_dump($students);
-					if ($students['payment'] == 1) {
-						$students['payed'] ='payed';	
-				
-					
-					} else { 
-						$students['payed'] ='not yet payed';	
-
-					}	
-				 
-				$result[] = $students;
+		foreach ($student as $students){ 
+			if ($students['payment'] == 1)  {
+				$students['payed'] ='payed';
+				$result[] = $students;		
+			} elseif ($students['payment'] == NULL) { 
+				$students['payed'] ='not yet payed';
+				$result[] = $students;	
+			}	
+		
 		}	
-	
 		return $result;
-
 	}
 
 	function getViewStudentsPaginated($per_page) {

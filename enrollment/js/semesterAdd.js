@@ -1,29 +1,26 @@
 function checkInput() {
-	var subject = document.getElementById('subject').value;
-	var subjectUnit = document.getElementById('subject_unit').value;
+	var datestart = document.getElementById('date_start').value;
+	var dateend = document.getElementById('date_end').value;
 
-	if (subject == '') {
-		console.log('subject IS EMPTY!!!');
-		text = "input subject";
+	if (datestart == '') {
+		console.log('DATE START IS EMPTY!!!');
+		text = "input Date Start";
 		document.getElementById("input").innerHTML = text;
 		return false;
-	} else if (subjectUnit == '') {
-		console.log('subject unit IS EMPTY!!!');
-		text = "input subject unit";
+	} else if (dateend == '') {
+		console.log('DATE END IS EMPTY!!!');
+		text = "input Date End";
 		document.getElementById("input").innerHTML = text;	
 		return false;
 	} else {
 		console.log('EVERYTHING IS OK!!!');
-		text = "do you want to save subject?";
+		text = "do you want to save student";
 		document.getElementById("input").innerHTML = text;	
 		document.getElementById('button_save').disabled = false;
 		return true;
 	}
-	
 }
 
 document.onload = function(){
 checkInput();
 };
-
-

@@ -6,6 +6,7 @@
 	<body>
 		<nav id ="searchStudent">
 			<div id="container">
+				<h1>Subject Records</h1>
 			<form>
 				<a style="float:left" href="/">(Return)</a>
 				<a class="pull-right btn btn-success"  type="submit"href="subjectAdd.php"><i class="icon icon-plus"></i></a>

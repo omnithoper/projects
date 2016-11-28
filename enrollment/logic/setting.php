@@ -3,14 +3,15 @@
 	require '../../classes/setting.php';
 	require '../../lib/smarty/Smarty.class.php'; 
 	
-	$tpObject = new Settings();
-	$result = $tpObject->getViewTotalPayment();
-	$result = $result->fetch_all(MYSQLI_ASSOC); 
-	
+	$settingObject = new Settings();
+	$result = $settingObject->getViewTotalPayment();
+	$semester = $settingObject->getViewAllSemester(); 
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/setting/';
 	$smarty->compile_dir = '../../compile/';
 
 	$smarty->assign('result', $result);
+	$smarty->assign('semester', $semester);
+	
 	$smarty->display('view.tpl');
 ?>
