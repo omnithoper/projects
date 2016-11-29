@@ -71,7 +71,7 @@ function getAddSemester($dateStart, $dateEnd) {
 			];
 		}
 	
-		$prepared = $this->_db->connection->prepare("UPDATE semester SET date_start = ?, date_end = ? WHERE semester_id=?;");
+		$prepared = $this->_db->connection->prepare("UPDATE semester SET date_start = ?, date_end = ? WHERE semester_id = ? ");
 		$prepared->bind_param("ssi", $dateStart, $dateEnd, $semesterID);
 		$prepared->execute();
 		$prepared->close();

@@ -7,11 +7,14 @@ var computeChange = function() {
 	document.getElementById('change_display').classList.remove('hide');	
 	console.log(document.getElementById('change_display'));
 };
-
+/*
 function checkPayment() {
 	
 	var cash = document.getElementById('cash').value;
 	var amount = document.getElementById('amount').value;
+	console.log(cash);
+console.log(amount);
+
 
 	if (Number(cash) < Number(amount)) {
 		console.log('not enough cash');
@@ -24,10 +27,8 @@ function checkPayment() {
 	
 }
 
-
+*/
 window.onload = function(){
 	document.getElementById('change_display').classList.add('hide');
 	console.log(document.getElementById('change_display'));
 };
-
-

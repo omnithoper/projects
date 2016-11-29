@@ -39,7 +39,7 @@
 		<nav id="searchStudent">
 			<div id="container">
 				<h1>Student Records</h1>
-					<a style="float:left" href="/enrollment">(Return)</a>
+					<a style="float:left" href="/">(Return)</a>
 					<a class="pull-right btn btn-success" href="/templates/student/studentAdd.php">
 					<i class="icon-plus"></i></a></br>
 					<p><a href='../../templates/student/'>View All</a> | <b>View Page:</b>

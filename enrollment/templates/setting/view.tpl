@@ -34,8 +34,13 @@
 						<th>Date Start</th>
 						<th>Date End</th>
 					</tr>
-					{foreach from=$semester item=details}
+
+					{foreach from=$semester item=details}	
+					{if ($details.date_start < $date && $details.date_end > $date)}
+						<tr style="background-color:green;">
+					{else}
 						<tr>
+					{/if}
 						<td align="center">{$details.semester_id}</td>
 						<td align="center">{$details.date_start}</td>
 						<td	align="center">{$details.date_end}</td>
@@ -44,7 +49,7 @@
 						</a></td>
 						<td style="width: 1px; wrap: nowrap;"><a href='semesterDelete.php?semester_id={$details.semester_id}' 
 						class="btn btn-danger" title="Delete Subject"> <i class="icon icon-remove"></i></a></td>
-						</tr>
+					</tr>
 					{/foreach}
 				</table>	
 			</div>
