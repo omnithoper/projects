@@ -12,23 +12,30 @@
 
 	$settingObject = new Settings();
 	$cashierObject =  new Cashier();
-	$priceMisc = $settingObject->getPriceMisc();	
+	$priceMisc = $settingObject->getPriceMisc();
 	$totalPrice = $cashierObject->getTotalPrice($studentID);
 	$totalUnitPrice = $cashierObject->getTotalUnitPrice($studentID);
+	$totalLecUnitPrice = $cashierObject->getTotalLecturePrice($studentID);
+	$totalLabUnitPrice = $cashierObject->getTotalLaboratoryPrice($studentID);
 
 	$studentSubjectObject = new studentSubjectMatch();
 	$allSubject = $studentSubjectObject->getStudentSubjects($studentID);
 	$paymentObject = new Payment();
-	//$editPayment = $paymentObject->ifPayed($studentID, $totalAmount, $change);
 
 	$subjectObject = new  Subject();
 	$totalUnit = $subjectObject->getCurrentUnits($studentID);
+	$totalLecUnit = $subjectObject->getLectureUnits($studentID);
+	$totalLabUnit = $subjectObject->getLaboratoryUnits($studentID);
 
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/cashier/';
 	$smarty->compile_dir = '../../compile/';
 
 	$smarty->assign('allSubject', $allSubject);
+	$smarty->assign('totalLecUnit', $totalLecUnit);
+	$smarty->assign('totalLabUnit', $totalLabUnit);
+	$smarty->assign('totalLecUnitPrice', $totalLecUnitPrice);
+	$smarty->assign('totalLabUnitPrice', $totalLabUnitPrice);	
 	$smarty->assign('studentID', $studentID);
 	$smarty->assign('totalUnit', $totalUnit);
 	$smarty->assign('totalUnitPrice', $totalUnitPrice);

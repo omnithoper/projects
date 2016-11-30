@@ -1,5 +1,6 @@
 function checkInput() {
 	var subject = document.getElementById('subject').value;
+	var lecUnit = document.getElementById('lec_unit').value;
 	var subjectUnit = document.getElementById('subject_unit').value;
 
 	if (subject == '') {
@@ -7,6 +8,11 @@ function checkInput() {
 		text = "input subject";
 		document.getElementById("input").innerHTML = text;
 		return false;
+	} else if (lecUnit == '') {
+		console.log('lecture unit IS EMPTY!!!');
+		text = "input lecture unit";
+		document.getElementById("input").innerHTML = text;	
+		return false;	
 	} else if (subjectUnit == '') {
 		console.log('subject unit IS EMPTY!!!');
 		text = "input subject unit";
@@ -22,7 +28,7 @@ function checkInput() {
 	
 }
 
+document.onload = function(){
 checkInput();
-
-
+};
 

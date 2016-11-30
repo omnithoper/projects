@@ -64,7 +64,7 @@
 										<td>{$subject.subject_unit}</td>
 										<td style="width: 1px; wrap: nowrap;">
 											<a href="/templates/studentSubject/?subjectID={$subject.subject_id}
-										&studentID={$subject.student_id}&action=delete" class="btn btn-danger" title="Delete Subject"><i class="icon icon-remove"></i></a>
+											&studentID={$subject.student_id}&action=delete" class="btn btn-danger" title="Delete Subject"><i class="icon icon-remove"></i></a>
 										</td>
 									</tr>
 								{/foreach}

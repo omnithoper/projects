@@ -8,7 +8,7 @@
 	<form  method ="POST">
 		<nav id="searchStudent">
 			<div id="container">
-				<h1>Edit Subject</h1>
+				<h1>Edit Semester Date</h1>
 				{if (!empty($edit.error))}
 					<div>
 						{$edit.error}

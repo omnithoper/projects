@@ -2,6 +2,7 @@
 	<head>	
 		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
+		<script type='text/javascript' src='/js/settingView.js'></script>
 	</head>
 	<body>
 		<nav id ="searchStudent">
@@ -13,12 +14,14 @@
 					<tr>
 						<th>Number Of Allowed Units</th>
 						<th>Price/Unit</th>
+						<th>Price/labunit</th>
 						<th>Price Of Misc</th>
 					</tr>
 					{foreach from=$result item=details}
 						<tr>
 						<td align="center">{$details.number_of_allowed_units}</td>
 						<td align="center">{$details.price_per_unit}</td>
+						<td align="center">{$details.price_per_lab_unit}</td>
 						<td	align="center">{$details.price_of_misc}</td>
 						</tr>
 					{/foreach}
@@ -33,23 +36,25 @@
 						<th>Semester ID</th>
 						<th>Date Start</th>
 						<th>Date End</th>
+						<th>Edit</th>
+						<th>Delete</th>
 					</tr>
 
 					{foreach from=$semester item=details}	
-					{if ($details.date_start < $date && $details.date_end > $date)}
-						<tr style="background-color:green;">
-					{else}
-						<tr>
-					{/if}
-						<td align="center">{$details.semester_id}</td>
-						<td align="center">{$details.date_start}</td>
-						<td	align="center">{$details.date_end}</td>
-						<td style="width: 1px; wrap: nowrap;"><a href='semesterEdit.php?semester_id={$details.semester_id}'
-						class="btn btn-danger" title="edit Subject"> <i class="icon icon-edit"></i>
-						</a></td>
-						<td style="width: 1px; wrap: nowrap;"><a href='semesterDelete.php?semester_id={$details.semester_id}' 
-						class="btn btn-danger" title="Delete Subject"> <i class="icon icon-remove"></i></a></td>
-					</tr>
+						{if ($details.date_start < $date && $details.date_end > $date)}
+							<tr class="info" >
+						{else}
+							<tr>
+						{/if}
+								<td align="center">{$details.semester_id}</td>
+								<td align="center">{$details.date_start}</td>
+								<td	align="center">{$details.date_end}</td>
+								<td style="width: 1px; wrap: nowrap;"><a href='semesterEdit.php?semester_id={$details.semester_id}'
+								class="btn btn-danger" title="edit Subject"> <i class="icon icon-edit"></i>
+								</a></td>
+								<td style="width: 1px; wrap: nowrap;"><a href='semesterDelete.php?semester_id={$details.semester_id}' 
+								class="btn btn-danger" title="Delete Subject"> <i class="icon icon-remove"></i></a></td>
+							</tr>
 					{/foreach}
 				</table>	
 			</div>

@@ -1,6 +1,7 @@
 <?php
 	require 'main.php';
 	require '../../classes/student.php';
+	require '../../classes/subject.php';
 	require '../../lib/smarty/Smarty.class.php'; 
 
 	$db = new DatabaseConnect();

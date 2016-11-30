@@ -43,7 +43,7 @@ class Subject {
 		return !empty($subjectID);
 	} 
 	
-	function getAddSubject($subject, $subjectUnit) {
+	function getAddSubject($subject, $lecUnit, $labUnit, $subjectUnit) {
 		$db = new DatabaseConnect();
 		
 		if (empty($subject)) {
@@ -63,10 +63,10 @@ class Subject {
 		}
 
 		$prepared = $db->connection->prepare("
-			INSERT INTO subjects(subject, subject_unit)
-			VALUES (?,?)
+			INSERT INTO subjects(subject, lec_unit, lab_unit, subject_unit)
+			VALUES (?,?,?,?)
 		");	
-		$prepared->bind_param('si', $subject, $subjectUnit);
+		$prepared->bind_param('siii', $subject, $lecUnit, $labUnit, $subjectUnit);
 
 		$prepared->execute();	
 		header("Location: /templates/subject/");
@@ -164,7 +164,34 @@ class Subject {
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		return (empty($results))?0:$results[0]['total_units'];		
 	}
+	public function getLectureUnits($studentID = null)
+	{	
+		$query = "
+			SELECT
+				SUM(subjects.lec_unit) AS lecture_units
+			FROM student_subject_match
+			JOIN subjects ON student_subject_match.subject_id = subjects.subject_id
+			WHERE student_subject_match.student_id = '".$studentID."'
+		";
 
+		$results = $this->_db->connection->query($query);
+		$results = $results->fetch_all(MYSQLI_ASSOC);
+		return (empty($results))?0:$results[0]['lecture_units'];		
+	}
+	public function getLaboratoryUnits($studentID = null)
+	{	
+		$query = "
+			SELECT
+				SUM(subjects.lab_unit) AS laboratory_units
+			FROM student_subject_match
+			JOIN subjects ON student_subject_match.subject_id = subjects.subject_id
+			WHERE student_subject_match.student_id = '".$studentID."'
+		";
+
+		$results = $this->_db->connection->query($query);
+		$results = $results->fetch_all(MYSQLI_ASSOC);
+		return (empty($results))?0:$results[0]['laboratory_units'];		
+	}
 	public function getSubjectUnits($subjectID = null)
 	{
 		$query = "

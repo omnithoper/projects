@@ -145,6 +145,18 @@ function getAddSemester($dateStart, $dateEnd) {
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		return (empty($results))?0:$results[0]['price_of_misc'];
 	}
+	public function getPriceLabUnit()
+	{
+		$query = "
+			SELECT
+				price_per_lab_unit
+			FROM settings
+		";
+
+		$results = $this->_db->connection->query($query);
+		$results = $results->fetch_all(MYSQLI_ASSOC);
+		return (empty($results))?0:$results[0]['price_per_lab_unit'];
+	}
 	public function getPricePerUnit()
 	{
 		$query = "
