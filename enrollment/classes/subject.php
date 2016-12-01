@@ -82,6 +82,8 @@ class Subject {
 				SELECT 
 					subject_id,
 					subject,
+					lec_unit,
+					lab_unit,
 					subject_unit
 				FROM subjects
 				WHERE subject_id = ?
@@ -89,17 +91,19 @@ class Subject {
 			$prepared = $db->connection->prepare($select);
 			$prepared->bind_param('i', $subjectID);
 			$prepared->execute();
-			$prepared->bind_result($subjectID, $subject, $subjectUnit);
+			$prepared->bind_result($subjectID, $subject, $lecUnit, $labUnit, $subjectUnit);
 			$prepared->fetch();
 			$result['subject_id'] = $subjectID;
 			$result['subject'] = $subject;
+			$result['lec_unit'] = $lecUnit;
+			$result['lab_unit'] = $labUnit;
 			$result['subject_unit'] = $subjectUnit;
 		} 
 			return $result;
 		$db->connection->close();	
 	}
 		
-	function getEditSubject($subject, $subjectUnit, $subjectID) {
+	function getEditSubject($subject, $lecUnit, $labUnit, $subjectUnit, $subjectID) {
 				
 		
 		if (empty($subject)) {
@@ -114,9 +118,9 @@ class Subject {
 		}
 	
 		$db = new DatabaseConnect();
-		if ($prepared = $db->connection->prepare("UPDATE subjects SET subject = ?, subject_unit = ? WHERE subject_id=?;"))
+		if ($prepared = $this->_db->connection->prepare("UPDATE subjects SET subject = ?, lec_unit = ?, lab_unit = ?, subject_unit = ? WHERE subject_id=?;"))
 			{
-				$prepared->bind_param("sii", $subject, $subjectUnit, $subjectID);
+				$prepared->bind_param("siiii", $subject, $lecUnit, $labUnit, $subjectUnit, $subjectID);
 				$prepared->execute();
 				$prepared->close();
 			}
@@ -131,7 +135,7 @@ class Subject {
 			header("Location: /templates/subject/");
 		
 		
-		$db->connection->close();
+
 	}
 	
 	function getDeleteSubject($subjectID) {

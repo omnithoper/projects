@@ -10,9 +10,6 @@ var computeChange = function() {
 
 function checkPayment() {
 	
-	var cash = document.getElementById('cash').value;
-	var amount = document.getElementById('amount').value;
-
 	if (Number(cash) < Number(amount)) {
 		console.log('not enough cash');
 		return false;

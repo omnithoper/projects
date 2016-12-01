@@ -17,23 +17,27 @@ class Student {
 	
 	function getViewStudentPayed() {
 
+	$date = date("20y-m-d");	
 	$select="
 			SELECT
 			student.student_id,
 			payment.payment,
 			student.first_name,
 			student.last_name
-			FROM student  
-			LEFT OUTER JOIN payment  ON student.student_id = payment.student_id 
+			FROM semester
+			JOIN student
+			LEFT OUTER JOIN payment  ON student.student_id = payment.student_id  WHERE date_start < '$date' AND date_end > '$date' AND transaction_date BETWEEN date_start AND date_end 		
 		";
 		$student = $this->_db->connection->query($select);
 		$student = $student->fetch_all(MYSQLI_ASSOC);
+		var_dump($student);
+	
 		$result = [];
 		foreach ($student as $students){ 
 			if ($students['payment'] == 1)  {
 				$students['payed'] ='payed';
 				$result[] = $students;		
-			} elseif ($students['payment'] == NULL) { 
+			} elseif ($students['payment'] == 0) { 
 				$students['payed'] ='not yet payed';
 				$result[] = $students;	
 			}	

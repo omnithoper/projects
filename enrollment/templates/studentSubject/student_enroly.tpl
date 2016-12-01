@@ -19,7 +19,7 @@
 							{foreach from=$students item=student}
 								<li>
 									{$student.last_name} {$student.first_name}
-									(<a type="submit" href="/templates/studentSubject/?studentID={$student.student_id}&test=test">select</a>)
+									(<a type="submit" href="/templates/studentSubject/?studentID={$student.student_id}">select</a>)
 								</li>
 							{/foreach}
 						</ul>
@@ -75,8 +75,16 @@
 									</td>
 								</tr>
 							</table>
-							<a href="/templates/cashier/?studentID={$studentID}&
-							studentName={$selectedStudent.full_name}" class="btn btn-success pull-right"  title="payment">pay</a>
+							<input id="payed" name="payed" type="hidden" value="{$payed}"/>	
+
+							<a id="payment"  href="/templates/cashier/?studentID={$studentID}&
+							studentName={$selectedStudent.full_name} " disabled
+							class="btn btn-success pull-right"  title="payment"  >pay</a>
+						<style type="text/css">
+   						 a[disabled] {
+        				pointer-events: none;
+   						 }
+						</style>
 							<div class="clearfix"></div>
 						{/if}
 		

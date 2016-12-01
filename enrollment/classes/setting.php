@@ -169,5 +169,25 @@ function getAddSemester($dateStart, $dateEnd) {
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		return (empty($results))?0:$results[0]['price_per_unit'];
 	}
+	public function getSemesterDate($studentID = NULL)
+	{
+		$date = date("20y-m-d");
+		$query = "
+			SELECT
+				payment,
+				student_id
+			FROM semester
+			JOIN payment WHERE date_start < '$date' AND date_end > '$date' AND transaction_date BETWEEN date_start AND date_end AND student_id = '$studentID'
+		";
+	
+		$results = $this->_db->connection->query($query);
+		$results = $results->fetch_all(MYSQLI_ASSOC);
+		$result = [];
+		foreach ($results as $payment){
+			$result = $payment;
+		}
+
+		return $result;
+	}
 }
 ?>

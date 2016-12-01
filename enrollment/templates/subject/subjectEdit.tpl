@@ -17,6 +17,10 @@
 				<input type="hidden" name="subject_id" value="{$view.subject_id}" />
 				<input id="subject" type="text" name="subject" value="{$view.subject}" 
 				onchange="checkInput();">Subject<br>
+				<input id="lec_unit" type="text" name="lec_unit" value="{$view.lec_unit}"  /> 
+				Lecture Unit<br/>
+				<input id="lab_unit" type="text" name="lab_unit"  value="{$view.lab_unit}" /> 
+				Laboratory Unit<br/>
 				<input id="subject_unit" type="text" name="subject_unit" value="{$view.subject_unit}"
 				onchange="checkInput();">Subject Unit<br>
 				<input id="button_save" type="submit" name="edit" value="save" disabled>

@@ -13,7 +13,7 @@
 						{$edit.error}
 					</div>
 					{/if}
-				<form  method ="POST">
+				<form id="edit-student-form" method ="POST">
 					<h3 id="input" ></h3>
 					<input type="hidden" name="student_id" value="{$result.student_id}"/>
 					<input id ="first_name" type="text" name="first_name" value="{$result.first_name}"

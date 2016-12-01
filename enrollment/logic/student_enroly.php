@@ -12,14 +12,17 @@
 	$subjectID = Request::getParam('subjectID');
 	$students = [];
 	
-	$subjectObject = new subject();
+	$subjectObject = new subject();	
 	$studentSubjectObject = new studentSubjectMatch();
 	$studentLastNameObject = new student();
+	$settingObject = new Settings();
+
+
 	$subject = $subjectObject->getSubjects();
 
 	$students = $studentLastNameObject->getAllStudentInformation($studentName);
 	$selectedStudent = $studentLastNameObject->getViewStudent($studentID);
-	
+
 	if (count($students) == 1) {
 		$selectedStudent = (!empty($students[0]))?$students[0]:NULL;
 		$studentID = $students[0]['student_id'];
@@ -32,12 +35,17 @@
 	}
 	$allSubject = $studentSubjectObject->getStudentSubjects($studentID);
 	$totalUnit = $subjectObject->getCurrentUnits($studentID);
-
+	$ifPayed = $settingObject->getSemesterDate($studentID);
+	$payed = empty($ifPayed['student_id'])?NULL:$ifPayed['student_id'];
+	var_dump($ifPayed);
+	var_dump($payed);	
+	
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/studentSubject/';
 	$smarty->compile_dir = '../../compile/';
 
 	$smarty->assign('students', $students);
+	$smarty->assign('payed', $payed);
 	$smarty->assign('selectedStudent', $selectedStudent);
 	$smarty->assign('subject', $subject);
 	$smarty->assign('allSubject', $allSubject);

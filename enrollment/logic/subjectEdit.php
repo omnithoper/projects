@@ -11,12 +11,15 @@
 
 	$editObject = new Subject();
 	$view = $editObject->getViewSubject($subjectID);
+	var_dump($view);
 
 	$edit = [];
 	if (isset($_POST['edit'])) {
 		$subject = Request::getParam('subject');
 		$subjectUnit = Request::getParam('subject_unit');
-		$edit = $editObject->getEditSubject($subject, $subjectUnit, $subjectID);
+		$lecUnit = Request::getParam('lec_unit');
+		$labUnit = Request::getParam('lab_unit');
+		$edit = $editObject->getEditSubject($subject, $lecUnit, $labUnit, $subjectUnit, $subjectID);
 	}
 
 	$smarty = new Smarty();

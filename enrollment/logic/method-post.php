@@ -10,7 +10,7 @@ class Request
 		
 		if (empty ($result)) {
 			$result = empty($_GET[$name])?null:$_GET[$name];
-		}
+		} 
 		
 		return $result;
 	}
