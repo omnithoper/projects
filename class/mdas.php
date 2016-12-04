@@ -1,26 +1,21 @@
+<?php include 'logic.php'; ?>
 <html>
 <head>
-<script type='text/javascript'>
 
-	function myFunction() {
-	
-		var x = 1;
+<script>
+function myFunction(inputNumber) {
+var currentNumber = document.getElementById("var1").value;
+document.getElementById("var1").value = currentNumber.concat(inputNumber);
 
-		
-	  			document.getElementById("var1").value = x ;
-	 	
-			
-			}
-		
-			
-	
-</script>	
+}
+</script>
+
+
 </head>
 	<body>
-<?php include 'logic.php'; ?>
+
 	<form>
-		<table id="table">	
-	
+		<table id="table"> 	
 	 		</table>	
 		<input id = "var1" type="text" name="var1" />
 		<input type="text" name="var2" />
@@ -28,7 +23,11 @@
 		<button type="submit" value="subtract" name="MDAS">subtract</button>
 		<button type="submit" value="multiply" name="MDAS">multiply</button>
 		<button type="submit" value="divide" name="MDAS">divide</button>
-		<button type="button" onclick="myFunction()">1</button><br>
+		<button type="button" onclick="myFunction()">1</button><br/>
+
+<button onclick="myFunction(1)">Try it</button><br/>
+
+
 <?php		
  $current = 0;
   for ($x = 1; $x <= 3; $x++)   {
