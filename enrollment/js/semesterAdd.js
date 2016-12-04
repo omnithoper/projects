@@ -1,7 +1,10 @@
+
+
 function checkInput() {
 	var datestart = document.getElementById('date_start').value;
 	var dateend = document.getElementById('date_end').value;
 
+	
 	if (datestart == '') {
 		console.log('DATE START IS EMPTY!!!');
 		text = "input Date Start";
@@ -20,7 +23,8 @@ function checkInput() {
 		return true;
 	}
 }
-
+	
+	
 document.onload = function(){
 checkInput();
 };

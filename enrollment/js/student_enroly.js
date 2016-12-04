@@ -1,8 +1,8 @@
 function checkSubjectName() {
-	
+
 	var subjectName = document.getElementById('subject_list').value;
-	var payed = document.getElementById('payed').value;
-	console.log(payed);
+	// var payed = document.getElementById('payed').value;
+	// console.log(payed);
 
 	if (subjectName == '(Select Subject)') {
 		console.log('Select a Subject');
@@ -12,7 +12,7 @@ function checkSubjectName() {
 		document.getElementById('button_save').disabled = false;
 		return true;
 	}
-	
+	/*
 	if (payed == '') {
 		console.log('student is not yet  payed');
 		return false;
@@ -21,7 +21,7 @@ function checkSubjectName() {
 		document.getElementById('payment').disables = false;
 		return true;
 	}
-
+	*/
 	
 }
 

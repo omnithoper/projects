@@ -2,7 +2,7 @@
 	<head>	
 		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
-		<script type='text/javascript' src='/js/settingView.js'></script>
+	
 	</head>
 	<body>
 		<nav id ="searchStudent">

@@ -43,7 +43,11 @@ function getAddSemester($dateStart, $dateEnd) {
 			'error' => 'Please Date Start And Date End',
 			];	
 		}	
-		
+		if ($dateEnd < $dateStart ) {
+			return [
+			'error' => 'Start of Semester is Less than End of Semester',
+			];	
+		}	
 		$prepared = $this->_db->connection->prepare("
 			INSERT INTO semester(date_start, date_end)
 			VALUES (?,?)
@@ -177,7 +181,7 @@ function getAddSemester($dateStart, $dateEnd) {
 				payment,
 				student_id
 			FROM semester
-			JOIN payment WHERE date_start < '$date' AND date_end > '$date' AND transaction_date BETWEEN date_start AND date_end AND student_id = '$studentID'
+			JOIN payment WHERE '$date' BETWEEN date_start AND date_end  AND transaction_date BETWEEN date_start AND date_end AND student_id = '$studentID'
 		";
 	
 		$results = $this->_db->connection->query($query);

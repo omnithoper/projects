@@ -17,33 +17,46 @@ class Student {
 	
 	function getViewStudentPayed() {
 
-	$date = date("20y-m-d");	
-	$select="
+		$select = "
 			SELECT
-			student.student_id,
-			payment.payment,
-			student.first_name,
-			student.last_name
-			FROM semester
-			JOIN student
-			LEFT OUTER JOIN payment  ON student.student_id = payment.student_id  WHERE date_start < '$date' AND date_end > '$date' AND transaction_date BETWEEN date_start AND date_end 		
+				student.student_id,
+				student.first_name,
+				student.last_name,
+				payment.payment,
+				payment.transaction_date
+				FROM student
+				LEFT JOIN payment ON student.student_id = payment.student_id
 		";
 		$student = $this->_db->connection->query($select);
 		$student = $student->fetch_all(MYSQLI_ASSOC);
-		var_dump($student);
-	
+
 		$result = [];
 		foreach ($student as $students){ 
-			if ($students['payment'] == 1)  {
+			$students['payed'] ='not yet payed';
+			$isEnrolledThisSem = $this->isEnrolledThisSem($students['transaction_date']);
+			if ($students['payment'] == 1 && $isEnrolledThisSem)  {
 				$students['payed'] ='payed';
-				$result[] = $students;		
-			} elseif ($students['payment'] == 0) { 
-				$students['payed'] ='not yet payed';
-				$result[] = $students;	
-			}	
-		
+			}			
+			$result[] = $students;		
 		}	
+
 		return $result;
+	}
+
+	public function isEnrolledThisSem($date) {
+		$currentDate = date("Y-m-d");	
+		$select = "
+			SELECT
+				*
+			FROM semester
+			WHERE 
+				'$date' BETWEEN date_start AND date_end  
+				 AND '$currentDate' BETWEEN date_start AND date_end 
+		";
+		$isEnrolled = $this->_db->connection->query($select);
+		$isEnrolled = $isEnrolled->fetch_all(MYSQLI_ASSOC);
+		var_dump($isEnrolled);
+		return (bool)count($isEnrolled);
 	}
 
 	function getViewStudentsPaginated($per_page) {

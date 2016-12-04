@@ -78,13 +78,9 @@
 							<input id="payed" name="payed" type="hidden" value="{$payed}"/>	
 
 							<a id="payment"  href="/templates/cashier/?studentID={$studentID}&
-							studentName={$selectedStudent.full_name} " disabled
+							studentName={$selectedStudent.full_name} " 
 							class="btn btn-success pull-right"  title="payment"  >pay</a>
-						<style type="text/css">
-   						 a[disabled] {
-        				pointer-events: none;
-   						 }
-						</style>
+						
 							<div class="clearfix"></div>
 						{/if}
 		
