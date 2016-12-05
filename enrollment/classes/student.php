@@ -55,7 +55,6 @@ class Student {
 		";
 		$isEnrolled = $this->_db->connection->query($select);
 		$isEnrolled = $isEnrolled->fetch_all(MYSQLI_ASSOC);
-		var_dump($isEnrolled);
 		return (bool)count($isEnrolled);
 	}
 

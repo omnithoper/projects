@@ -14,7 +14,7 @@
 		$result = $addObject->getAddSemester($dateStart, $dateEnd);
 	}
 	$smarty = new Smarty();
-	$smarty->template_dir = '../../templates/student/';
+	$smarty->template_dir = '../../templates/semester/';
 	$smarty->compile_dir = '../../compile/';
 
 	$smarty->assign('result', $result);
