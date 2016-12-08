@@ -40,6 +40,7 @@ class Admin {
 		$result = $result->fetch_all(MYSQLI_ASSOC);
 		return $result;
 	}	
+	
 	function getAddAdmin($userName, $password) {
 	
 		if (empty($userName)) {

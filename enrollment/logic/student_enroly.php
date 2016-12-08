@@ -37,9 +37,7 @@
 	$totalUnit = $subjectObject->getCurrentUnits($studentID);
 	$ifPayed = $settingObject->getSemesterDate($studentID);
 	$payed = empty($ifPayed['student_id'])?NULL:$ifPayed['student_id'];
-	var_dump($ifPayed);
-	var_dump($payed);	
-	
+		
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/studentSubject/';
 	$smarty->compile_dir = '../../compile/';
