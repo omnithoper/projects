@@ -17,6 +17,8 @@ class Student {
 	
 	function getViewStudentPayed() {
 
+		$semesterObject = new Settings();
+
 		$select = "
 			SELECT
 				student.student_id,
@@ -33,7 +35,7 @@ class Student {
 		$result = [];
 		foreach ($student as $students){ 
 			$students['payed'] ='not yet payed';
-			$isEnrolledThisSem = $this->isEnrolledThisSem($students['transaction_date']);
+			$isEnrolledThisSem = $semesterObject->isEnrolledThisSem($students['transaction_date']);
 			if ($students['payment'] == 1 && $isEnrolledThisSem)  {
 				$students['payed'] ='payed';
 			}			
@@ -41,21 +43,6 @@ class Student {
 		}	
 
 		return $result;
-	}
-
-	public function isEnrolledThisSem($date) {
-		$currentDate = date("Y-m-d");	
-		$select = "
-			SELECT
-				*
-			FROM semester
-			WHERE 
-				'$date' BETWEEN date_start AND date_end  
-				 AND '$currentDate' BETWEEN date_start AND date_end 
-		";
-		$isEnrolled = $this->_db->connection->query($select);
-		$isEnrolled = $isEnrolled->fetch_all(MYSQLI_ASSOC);
-		return (bool)count($isEnrolled);
 	}
 
 	function getViewStudentsPaginated($per_page) {
@@ -255,5 +242,6 @@ class Student {
 			$db->connection->close();
 			header("Location: /templates/student/");
 	}
+	
 }
 ?>

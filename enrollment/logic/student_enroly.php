@@ -35,15 +35,12 @@
 	}
 	$allSubject = $studentSubjectObject->getStudentSubjects($studentID);
 	$totalUnit = $subjectObject->getCurrentUnits($studentID);
-	$ifPayed = $settingObject->getSemesterDate($studentID);
-	$payed = empty($ifPayed['student_id'])?NULL:$ifPayed['student_id'];
-		
+
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/studentSubject/';
 	$smarty->compile_dir = '../../compile/';
 
 	$smarty->assign('students', $students);
-	$smarty->assign('payed', $payed);
 	$smarty->assign('selectedStudent', $selectedStudent);
 	$smarty->assign('subject', $subject);
 	$smarty->assign('allSubject', $allSubject);

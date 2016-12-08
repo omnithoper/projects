@@ -9,7 +9,8 @@
 	$settingObject = new Settings();
 	$result = $settingObject->getViewTotalPayment();
 	$semester = $settingObject->getViewAllSemester(); 
-	
+	$view = $settingObject->getSemesterDate();
+
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/setting/';
 	$smarty->compile_dir = '../../compile/';

@@ -75,8 +75,6 @@
 									</td>
 								</tr>
 							</table>
-							<input id="payed" name="payed" type="hidden" value="{$payed}"/>	
-
 							<a id="payment"  href="/templates/cashier/?studentID={$studentID}&
 							studentName={$selectedStudent.full_name} " 
 							class="btn btn-success pull-right"  title="payment"  >pay</a>

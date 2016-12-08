@@ -173,6 +173,82 @@ function getAddSemester($dateStart, $dateEnd) {
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		return (empty($results))?0:$results[0]['price_per_unit'];
 	}
+	public function getPaymentDate()
+	{
+		$query = "
+			SELECT
+				*
+			FROM payment
+		";
+		$results = $this->_db->connection->query($query);
+		$results = $results->fetch_all(MYSQLI_ASSOC);
+		$result = [];
+		foreach ($results as $payment){
+			$isEnrolledThisSem = $this->isEnrolledThisSem($payment['transaction_date']);
+			if ($payment['payment'] == 1 && $isEnrolledThisSem)  {
+				$payment['paid'] = $payment['total_amount'] - $payment['change'];
+				$result[] = $payment;	
+			}			
+		
+		}
+
+		return $result;
+	}
+	public function getSemesterTotalIncome()
+	{
+		$query = "
+			SELECT
+				transaction_date,
+				total_amount,
+				payment,
+				`change`
+			FROM payment
+		";
+		$results = $this->_db->connection->query($query);
+		$results = $results->fetch_all(MYSQLI_ASSOC);
+		$result = [];
+		$sumTotal = 0;
+		$sumChange = 0;
+		foreach ($results as $payment){
+			$isEnrolledThisSem = $this->isEnrolledThisSem($payment['transaction_date']);
+			if ($payment['payment'] == 1 && $isEnrolledThisSem)  {
+					$payment['total_amount'] = $sumTotal += $payment['total_amount'] ;
+					$payment['change'] = $sumChange += $payment['change'];
+			}			
+					
+		}	$payment['total_paid'] = $payment['total_amount'] - $payment['change'];			
+		
+		$result[] = $payment;	
+		return $result;
+	}
+	public function isEnrolledThisSem($date) {
+		$currentDate = date("Y-m-d");	
+		$select = "
+			SELECT
+				*
+			FROM semester
+			WHERE 
+				'$date' BETWEEN date_start AND date_end  
+				 AND '$currentDate' BETWEEN date_start AND date_end 
+		";
+		$isEnrolled = $this->_db->connection->query($select);
+		$isEnrolled = $isEnrolled->fetch_all(MYSQLI_ASSOC);
+		return (bool)count($isEnrolled);
+	}	
+	public function getCurrentUnits()
+	{	
+		$query = "
+			SELECT
+				SUM(subjects.subject_unit) AS total_units
+			FROM subjects
+		
+		";
+
+		$results = $this->_db->connection->query($query);
+		$results = $results->fetch_all(MYSQLI_ASSOC);
+		var_dump($results);
+		return (empty($results))?0:$results[0]['total_units'];		
+	}
 	public function getSemesterDate($studentID = NULL)
 	{
 		$date = date("20y-m-d");
@@ -190,7 +266,6 @@ function getAddSemester($dateStart, $dateEnd) {
 		foreach ($results as $payment){
 			$result = $payment;
 		}
-
 		return $result;
 	}
 }

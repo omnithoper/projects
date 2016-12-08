@@ -1,0 +1,1 @@
+<?php require '../../logic/income.php' ?>

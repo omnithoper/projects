@@ -3,6 +3,7 @@
 	require '../../lib/smarty/Smarty.class.php'; 
 	require '../../classes/student.php';
 	require '../../classes/payment.php';
+	require '../../classes/setting.php';
 	
 	$studentObject = new Student();
 	$paymentObject = new payment();

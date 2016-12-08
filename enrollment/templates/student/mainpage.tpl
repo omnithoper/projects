@@ -13,6 +13,7 @@
 						<tr><td><a href="/templates/studentSubject/" class="btn btn-block">Enroll</a></td></tr>
 						<tr><td><a href="/templates/setting/" class="btn btn-block">Setting</a></td></tr>
 						<tr><td><a href="/templates/admin/" class="btn btn-block">Admin</a></td></tr>
+						<tr><td><a href="/templates/income/" class="btn btn-block">Income</a></td></tr>
 					</table>
 				</div>
 			</form>
