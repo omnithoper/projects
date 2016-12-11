@@ -1,13 +1,14 @@
 <?php
 	require 'main.php';
+	#require 'session.php';
 	require '../../classes/setting.php';
-	require '../../lib/smarty/Smarty.class.php';
+	#require '../../lib/smarty/Smarty.class.php';
 
 	$settingObject = new Settings();
 	$result = $settingObject->getPaymentDate();
 	$income = $settingObject->getSemesterTotalIncome();
 
-	$smarty = new Smarty();
+	#$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/income/';
 	$smarty->compile_dir = '../../compile/';
 

@@ -6,17 +6,17 @@ class DatabaseConnect {
 	public function __construct()
 	{
 		$config = [];
-		if (file_exists('../configuration/application.ini')) {
-			$config = parse_ini_file('../configuration/application.ini');
+		if (file_exists('configuration/application.ini')) {
+			$config = parse_ini_file('configuration/application.ini');
 		} else {
-			$config = parse_ini_file('../../configuration/application.ini');
+			$config = parse_ini_file(BASE_PATH.'configuration/application.ini');
 		}
 		
 		$config_extended = [];
-		if (file_exists('../configuration/local.ini')) {
-			$config_extended = parse_ini_file('../configuration/local.ini');
+		if (file_exists('configuration/local.ini')) {
+			$config_extended = parse_ini_file('configuration/local.ini');
 		} else {
-			$config_extended = parse_ini_file('../../configuration/local.ini');
+			$config_extended = parse_ini_file(BASE_PATH.'configuration/local.ini');
 		}
 		
 	

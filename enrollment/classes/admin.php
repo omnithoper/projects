@@ -6,24 +6,43 @@ class Admin {
 		$this->_db = new DatabaseConnect();
 	}
 	function getUserPassword($userName, $password) {
+
 		if (empty($userName)) {
 			return [
-			'error' => 'please input username and password'
-			];
+			'error' => 'Please input username and password',
+			];	
 		}
+
 		if (empty($password)) {
 			return [
-			'error' => 'please input username and password'
+			'error' => 'Please input username and password',
+			];	
+		}
+   
+		$sql = "SELECT user_id FROM admin WHERE username = '$userName' and password = '$password'";
+      	$result = $this->_db->connection->query($sql);
+     	$row = $result->fetch_all(MYSQLI_ASSOC);
+
+      	$count = mysqli_num_rows($result);
+
+		if($count == 1) {
+			#$_SESSION['userName'];
+			$_SESSION['login_user'] = $userName;
+
+			#session_start();
+			#header("location: ../");
+			return [
+				'status' => true,
+				'error' => null
+			];
+		} else {
+			return [			
+				'status' => false,
+		  		'error' => 'Your Login Name or Password is invalid'
 			];
 		}
-      
-     	$sql = "SELECT * FROM admin WHERE username = '$userName' and password = '$password'";
-     	$result = $this->_db->connection->query($sql);
-     	$result = mysqli_fetch_array($result,MYSQLI_ASSOC);
+	}   
 
-      	return $result;
-
-	}
 	function getViewAdmin() {
 		$sql = "SELECT * FROM admin ";
      	$result = $this->_db->connection->query($sql);
@@ -40,7 +59,7 @@ class Admin {
 		$result = $result->fetch_all(MYSQLI_ASSOC);
 		return $result;
 	}	
-	
+
 	function getAddAdmin($userName, $password) {
 	
 		if (empty($userName)) {
@@ -137,6 +156,28 @@ class Admin {
 	
 		return !empty($userID);
 	} 
+
+	function userSession() {
+		
+		if (session_id() === '') {
+			#header("location:/login/index.php");
+			return false;
+		}
+		return true;
+		$user_check = $_SESSION['login_user'];
+
+		$select = "select username from admin where username = '$user_check' ";
+
+		$ses_sql = mysqli_query($this->_db->connection, $select);
+
+		$row = mysqli_fetch_array($ses_sql,MYSQLI_ASSOC);
+
+		$login_session = $row['username'];
+
+		if(!isset($_SESSION['login_user'])){
+		  #header("location:/login/index.php");
+		}
+	}
 
 }
 ?>

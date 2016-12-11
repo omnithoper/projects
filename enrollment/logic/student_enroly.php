@@ -1,5 +1,6 @@
 <?php
 	require  'main.php';
+	require 'session.php';
 	require  '../../classes/student.php';
 	require  '../../classes/subject.php';
 	require  '../../classes/student subject class.php';

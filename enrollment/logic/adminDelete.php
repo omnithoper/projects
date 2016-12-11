@@ -1,6 +1,6 @@
 <?php
 	require  'main.php';
-	require  '..\..\classes\admin.php';
+	require 'session.php';
 	
 	$userID = Request::getParam('user_id');
 

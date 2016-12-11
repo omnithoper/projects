@@ -1,5 +1,6 @@
 <?php
 	require  'main.php';
+	require 'session.php';
 	require  '../../classes/setting.php';
 	require '../../lib/smarty/Smarty.class.php'; 
 

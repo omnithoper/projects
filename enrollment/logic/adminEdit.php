@@ -1,6 +1,6 @@
 <?php
 	require  'main.php';
-	require  '../../classes/admin.php';
+	require 'session.php';
 	require '../../lib/smarty/Smarty.class.php'; 
 
 	$db = new DatabaseConnect();
