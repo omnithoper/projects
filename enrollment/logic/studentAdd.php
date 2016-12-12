@@ -1,8 +1,5 @@
 <?php
 	require 'main.php';
-	require 'session.php';
-	require '../../classes/student.php';
-	require '../../lib/smarty/Smarty.class.php'; 
 	
 	$firstName = Request::getParam('first_name');
 	$lastName = Request::getParam('last_name');

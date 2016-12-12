@@ -1,7 +1,5 @@
 <?php
 	require  'main.php';
-	require  '../../classes/payment.php';
-	require  '../../classes/student.php';
 	require(APPLICATION_PATH.'/lib/fpdf.php');
 	
 	$studentID = Request::getParam('student_id');

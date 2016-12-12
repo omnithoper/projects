@@ -36,10 +36,6 @@
 		color:green;
 		font-style:italic;
 	}
-	label::first-letter{
-		font-size:1em;
-		font-weight:bold;
-	}
 	h1{ 
 		font-family: Arial, Helvettica, sans-serif;
 		color:blue;

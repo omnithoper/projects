@@ -85,14 +85,10 @@ class Admin {
 			VALUES (?,?)
 		");	
 
-	
-
 		$prepared->bind_param('ss', $userName, $password);
 		$prepared->execute();	
 
 		print $prepared->error;
-	
-		
 		header("Location: /templates/admin/");			
 	}
 	function getEditUser($userName, $password, $userID) {
@@ -160,7 +156,6 @@ class Admin {
 	function userSession() {
 		
 		if (session_id() === '') {
-			#header("location:/login/index.php");
 			return false;
 		}
 		return true;

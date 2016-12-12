@@ -1,6 +1,6 @@
 <?php
 	require  'main.php';
-	require  '..\..\classes\subject.php';
+
 	
 	$subjectID = Request::getParam('subject_id');
 	

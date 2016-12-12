@@ -1,9 +1,6 @@
 <?php
 	require 'main.php';
-	require 'session.php';
-	require '../../classes/setting.php';
-	require '../../lib/smarty/Smarty.class.php';
-
+	
  	date_default_timezone_set("Asia/Manila");
 	$date = date("20y-m-d");
 
