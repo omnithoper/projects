@@ -1,8 +1,4 @@
 <?php
-	#require 'main.php';
-	#require 'session.php';
-
-
 	$adminObject = new Admin();
 	$result = $adminObject->getViewadmin();
 	
