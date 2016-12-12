@@ -1,8 +1,5 @@
 <?php
 	require  'main.php';
-	require 'session.php';
-	require  '../../classes/subject.php';
-	require '../../lib/smarty/Smarty.class.php'; 
 
 	$subject = Request::getParam('subject');
 	$lecUnit = Request::getParam('lec_unit');

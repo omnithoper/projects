@@ -1,8 +1,5 @@
 <?php
 	require 'main.php';
-	require 'session.php';
-	require '../../classes/setting.php';
-	require '../../lib/smarty/Smarty.class.php'; 
 	
 	$dateStart = Request::getParam('date_start');
 	$dateEnd = Request::getParam('date_end');

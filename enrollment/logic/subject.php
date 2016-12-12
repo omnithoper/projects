@@ -1,9 +1,6 @@
 <?php
 	require 'main.php';
-	require 'session.php';
-	require '../../classes/subject.php';
-	require '../../lib/smarty/Smarty.class.php'; 
-	
+
 	$subjectObject = new Subject();
 	$result = $subjectObject->getViewSubjects();
 	$result = $result->fetch_all(MYSQLI_ASSOC); 

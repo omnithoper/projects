@@ -1,8 +1,5 @@
 <?php 
 	require 'main.php';
-	require '../../classes/student.php';
-	require '../../classes/payment.php';
-	require '../../classes/setting.php';
 
     $adminObject = new Admin();
     $adminObject->userSession(); 

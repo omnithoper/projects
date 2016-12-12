@@ -1,7 +1,5 @@
 <?php
 	require 'main.php';
-	require 'session.php';
-	require '../../lib/smarty/Smarty.class.php'; 
 	
 	$userName = Request::getParam('username');
 	$password = Request::getParam('password');
@@ -11,7 +9,7 @@
 	$result=[];
 	
 	if (isset($_POST['save'])){
-		$result = $addObject->getAddUser($userName, $password);
+		$result = $addObject->getAddAdmin($userName, sha1($password));
 	}
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/admin/';

@@ -1,12 +1,6 @@
 <?php
 	require  'main.php';
-	require 'session.php';
-	require  '../../classes/student.php';
-	require  '../../classes/subject.php';
-	require  '../../classes/student subject class.php';
-	require  '../../classes/setting.php';
-	require '../../lib/smarty/Smarty.class.php'; 
-
+	
 	$studentName = Request::getParam('studentName');
 	$studentID = Request::getParam('studentID');
 	$getSubjectID = Request::getParam('getSubjectID');

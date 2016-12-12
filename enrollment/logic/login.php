@@ -1,19 +1,18 @@
 <?php
-   #require  'main.php';  
-session_start();     
     
-   #session_start();
-   define('BASE_PATH', __DIR__.'/../');
-   require_once("method-post.php");
+  
+   require 'method-post.php';
    require 'connect-db.php'; 
    require '../classes/admin.php'; 
+   require '../lib/smarty/Smarty.class.php'; 
+   define('BASE_PATH', __DIR__.'/../');
+   session_start();     
 
    $myusername = Request::getParam('username');
    $mypassword = Request::getParam('password'); 
    $adminObject = new Admin();
-   $result = $adminObject->getUserPassword($myusername, $mypassword); 
-
-   require '../lib/smarty/Smarty.class.php'; 
+   $result = $adminObject->getUserPassword($myusername, sha1($mypassword)); 
+  
    $smarty = new Smarty();
    $smarty->template_dir = '../login/';
    $smarty->compile_dir = '../compile/';
