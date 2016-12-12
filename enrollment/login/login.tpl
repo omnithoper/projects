@@ -7,7 +7,7 @@
       <nav id="searchStudent"> 
          <div id = "container">
                <h2>Enter Username and Password</h2>
-         <form method = "post">
+         <form method = "post" action="/login/login">
             <h4 class = "form-signin-heading">{$msg}</h4>
             <input type = "text" class = "form-control" name = "username" placeholder = "username" required autofocus></br>
             <input type = "password" class = "form-control" name = "password" placeholder = "password" required autofocus>
