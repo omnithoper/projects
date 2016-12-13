@@ -19,4 +19,8 @@ class BaseController {
 	public function render($template) {
 		$this->_template->display($template);
 	}
+
+	public function assign($field, $value) {
+		$this->_template->assign($field, $value);
+	}
 }
