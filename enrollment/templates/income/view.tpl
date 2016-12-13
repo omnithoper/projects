@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Student Records</title>
+		<title>Semester Records</title>
 		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
 		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
 
@@ -24,6 +24,7 @@
 								<th>Change</th>
 								<th>Total Income</th>
 								<th>Date Paid</th>
+								<th>Semeser Date</th>
 							</tr>	
 						{foreach from=$result item=details}
 							<tr>
@@ -32,6 +33,15 @@
 								<td align="center">{$details.change}</td>
 								<td align="center">{$details.paid}</td>
 								<td	align="center">{$details.transaction_date}</td>
+								<td>
+									<select>	
+										<option >(Select Semester)</option>
+									{foreach from=$semesterDate item=details}	
+										<option value="{$details.semesterDate}">{$details.semesterDate}</option>
+									{/foreach}	
+									</select>
+								</td>
+								<td><button type="submit" name = "semDate">Go</button>	</td>
 							</tr>
 					
 						{/foreach}
@@ -40,6 +50,7 @@
 							<td> <label for="Price">{$totalAmount}</label> </td>
 							<td> <label for="Price">{$change}</label> </td>
 							<td> <label for="Price">{$totalPaid}</label> </td>
+							<td colspan="3"></td>
 						</tr>
 					</table>
 				{/if}

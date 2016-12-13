@@ -44,6 +44,35 @@ class Student {
 
 		return $result;
 	}
+	function isStudentPayed($studentID) {
+
+		$semesterObject = new Settings();
+
+		$select = "
+			SELECT
+				student.student_id,
+				payment.payment,
+				payment.transaction_date
+				FROM student 
+				LEFT JOIN payment 
+				ON student.student_id = payment.student_id
+				WHERE student.student_id = '".$studentID."'
+		";
+		$student = $this->_db->connection->query($select);
+		$student = $student->fetch_all(MYSQLI_ASSOC);
+
+		$result = [];
+		foreach ($student as $students){ 
+			$students['payed'] ='not yet payed';
+			$isEnrolledThisSem = $semesterObject->isEnrolledThisSem($students['transaction_date']);
+			if ($students['payment'] == 1 && $isEnrolledThisSem)  {
+				$students['payed'] ='payed';
+			}			
+			$result[] = $students;		
+		}	
+
+		return $result;
+	}
 
 	function getViewStudentsPaginated($per_page) {
 		$select ="SELECT * FROM student LIMIT $per_page,5 ";

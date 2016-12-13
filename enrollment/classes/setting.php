@@ -12,8 +12,15 @@ class Settings {
 		$result = $tp->fetch_all(MYSQLI_ASSOC);
 		return $tp;
 	}
+	function getConcatSemester(){
+		$select = "SELECT 	CONCAT(date_start, ' to ', date_end) AS semesterDate FROM semester ";
+		$result = $this->_db->connection->query($select);
+		$result = $result->fetch_all(MYSQLI_ASSOC);
+		return $result;
 
-	function getViewAllSemester($semesterID = NULL) {
+	}
+
+	function getViewAllSemester() {
 		$select = "SELECT * FROM semester ";
 		$result = $this->_db->connection->query($select);
 		$result = $result->fetch_all(MYSQLI_ASSOC);
@@ -23,7 +30,6 @@ class Settings {
 		if (empty($semesterID)) {
 			return false;
 		}
-		var_dump($semesterID);
 		$select = "SELECT * FROM semester WHERE semester_id = $semesterID" ;
 		$result = $this->_db->connection->query($select);
 		$result = $result->fetch_all(MYSQLI_ASSOC);
