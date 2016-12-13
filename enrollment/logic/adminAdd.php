@@ -9,7 +9,7 @@
 	$result=[];
 	
 	if (isset($_POST['save'])){
-		$result = $addObject->getAddAdmin($userName, sha1($password));
+		$result = $addObject->getAddAdmin($userName, $password);
 	}
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/admin/';

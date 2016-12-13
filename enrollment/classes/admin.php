@@ -6,7 +6,7 @@ class Admin {
 		$this->_db = new DatabaseConnect();
 	}
 	function getUserPassword($userName, $password) {
-
+		$password = sha1($password);
 		if (empty($userName)) {
 			return [
 			'error' => 'Please input username and password',
@@ -61,7 +61,7 @@ class Admin {
 	}	
 
 	function getAddAdmin($userName, $password) {
-	
+		$password = sha1($password);
 		if (empty($userName)) {
 			return [
 			'error' => 'Please input username and password',
@@ -92,8 +92,7 @@ class Admin {
 		header("Location: /templates/admin/");			
 	}
 	function getEditUser($userName, $password, $userID) {
-				
-		
+	//	$password = sha1($password);
 		if (empty($userName)) {
 			return [
 			'error' => 'please input subject and unit'
