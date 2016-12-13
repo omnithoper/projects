@@ -15,8 +15,7 @@ class Student {
 		return $student;
 	}	
 	
-	function getViewStudentPayed() {
-
+	function getViewStudentPaid() {
 		$semesterObject = new Settings();
 
 		$select = "
@@ -50,6 +49,7 @@ class Student {
 		$student = $this->_db->connection->query($select);
 		return $student;
 	}
+	
 	function getStudentInformation($studentName) {
 		$db = new DatabaseConnect();
 		
@@ -101,7 +101,7 @@ class Student {
 		return $students;
 	}
 	
-	function studentExist($firstName, $lastName) {
+	function studentExist($firstName, $lastName, $studentID = null) {
 		if (empty($firstName)) {
 			return false;
 		}
@@ -109,18 +109,35 @@ class Student {
 		if (empty($lastName)) {
 			return false;
 		}
-		
-		$prepared = $this->_db->connection->prepare("
-			SELECT student_id FROM student WHERE first_name = ? AND last_name = ?
-		");	
-		
-		$prepared->bind_param('ss', $firstName, $lastName);
+
+		$query = "
+			SELECT
+				student_id
+			FROM student
+			WHERE first_name = ?
+			AND last_name = ?
+		";
+
+		if (!empty($studentID)) {
+			$query .= "
+				AND student_id != ?
+			";
+		}
+
+		$prepared = $this->_db->connection->prepare($query);	
+
+		if (empty($studentID)) {
+			$prepared->bind_param('ss', $firstName, $lastName);
+		} else {
+			$prepared->bind_param('ssi', $firstName, $lastName, $studentID);
+		}
+
 		$prepared->execute();	
 		$prepared->bind_result($studentID);
 		$prepared->fetch();
+
 		$this->_db->connection->close();
 		return !empty($studentID);
-
 	} 
 	
 	function getAddStudent($firstName, $lastName) {
@@ -155,6 +172,7 @@ class Student {
 		
 		header("Location: /templates/student/");			
 	}
+	
 	function getViewStudent($studentID = null){
 		
 		if (empty($studentID)) {
@@ -194,17 +212,17 @@ class Student {
 		
 		if (empty($firstName)) {
 			return [
-			'error' => 'Please Input Name And Lastname',
+				'error' => 'Please Input Name',
 			];	
 		}
 
 		if (empty($lastName)) {
 			return [
-			'error' => 'Please Input Name And Lastname',
+				'error' => 'Please Input Lastname',
 			];	
 		}	
 
-		if ($this->studentExist($firstName, $lastName)) {
+		if ($this->studentExist($firstName, $lastName, $studentID)) {
 			return [
 				'error' => 'Student Already Exist',	
 			];
@@ -216,15 +234,12 @@ class Student {
 			$prepared->execute();
 			$prepared->close();
 		} else {
-			var_dump($firstname);
-			var_dump($lastname);
-			var_dump($student_id);
-			die();
+			$db->connection->close();
+			return false;
 		}	
 
-			header("Location: /templates/student/");
-		
 		$db->connection->close();
+		return true;
 	}
 
 	function getDeleteStudent($studentID) {
@@ -244,4 +259,3 @@ class Student {
 	}
 	
 }
-?>

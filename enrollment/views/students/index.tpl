@@ -11,17 +11,19 @@
 {block name=body}
 	<nav id ="searchStudent">
 		<div id="container">
-			<div class="pull-right">
-				<a type="button" class="btn" href="/">
-					<i class="icon icon-arrow-left"></i>
-				</a>
+			<div class="navbar">
+				<div class="navbar-inner">
+					<a class="brand" href="#">Student Records</a>
+					<form class="navbar-form pull-right">
+					  	<a type="button" class="btn" href="/">return</a>
+					</form>
+				</div>
 			</div>
-			<h1>Student Records</h1>
 			<form>
 				<a style="float:left"  href="/logic/studentPaginated.php">(paginated)</a>
-				<a class="pull-right btn btn-success" 
-				href="/templates/student/studentAdd.php">
-				<i class="icon-plus"></i></a>
+				<a class="pull-right btn btn-success" href="/templates/student/studentAdd.php">
+					<i class="icon-plus"></i>
+				</a>
 			</form>
 
 			{if (empty($student))}
@@ -43,7 +45,7 @@
 						<td	align="center">{$details.last_name}</td>
 						<td align="center">{$details.payed}</td>
 						<td style="width: 1px; wrap: nowrap;" nowrap>
-							<a href='studentEdit.php?student_id={$details.student_id}' class="btn btn-danger" title="edit Student"> 
+							<a href='students/edit?student_id={$details.student_id}' class="btn" title="edit Student"> 
 								<i class="icon icon-edit"></i>
 							</a>
 

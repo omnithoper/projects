@@ -4,25 +4,24 @@ function checkInput() {
 	var tempName = document.getElementsByName('last_name')[0].value;
 
 	if (firstname == '') {
-		console.log('FIRSTNAME IS EMPTY!!!');
 		text = "input First Name";
 		document.getElementById("input").innerHTML = text;
+		document.getElementById('input').classList.remove('hide');	
+		document.getElementById("input").css;
 		return false;
 	} else if (surname == '') {
-		console.log('SURNAME IS EMPTY!!!');
 		text = "input Last Name";
 		document.getElementById("input").innerHTML = text;	
+		document.getElementById('input').classList.remove('hide');	
 		return false;
 	} else {
-		console.log('EVERYTHING IS OK!!!');
-		text = "do you want to save student?";
-		document.getElementById("input").innerHTML = text;	
 		document.getElementById('button_save').disabled = false;
+		document.getElementById('input').classList.add('hide');	
 		return true;
 	}
 	
 }
 
-document.onload = function(){
-checkInput();
+window.onload = function(){
+	checkInput();
 };

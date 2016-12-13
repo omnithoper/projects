@@ -12,7 +12,7 @@ class BaseController {
 	    $this->_template->compile_dir = $config['root'].'/compile/';
 
 		if (empty($_SESSION['login_user'])) {
-				header('Location: /login/index');
+			header('Location: /login');
 		}
 	}
 

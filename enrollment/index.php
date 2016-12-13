@@ -7,7 +7,13 @@
 	$requestUrl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 	$requestString = substr($requestUrl, strlen($baseUrl));
 
-	$urlParams = explode('/', $requestString);
+	list($urlParams, $queryParams) = explode('?', $requestString);
+	$urlParams = explode('/', $urlParams);
+
+	parse_str($queryParams, $requestParams);
+	foreach ($requestParams as $field => $value) {
+		$_GET[$field] = $value;
+	}
 
 	$controllerName = ucfirst(array_shift($urlParams));
 	$controllerName = empty($controllerName)?'Index':$controllerName;
