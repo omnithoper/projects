@@ -1,9 +1,7 @@
 <?php
-<<<<<<< HEAD
+
 	require 'main.php';
 
-=======
->>>>>>> fb416a655db864e2086edc385d474f3c803a11fa
 	$adminObject = new Admin();
 	$result = $adminObject->getViewadmin();
 	

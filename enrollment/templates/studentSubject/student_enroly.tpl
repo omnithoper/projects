@@ -75,11 +75,13 @@
 									</td>
 								</tr>
 							</table>
-							<a id="payment"  href="/templates/cashier/?studentID={$studentID}&
-							studentName={$selectedStudent.full_name} " 
-							class="btn btn-success pull-right"  title="payment"  >pay</a>
-						
-							<div class="clearfix"></div>
+							{if ($isStudentPayed[0].payed == 'not yet payed')}
+								<a id="payment"  href="/templates/cashier/?studentID={$studentID}&
+								studentName={$selectedStudent.full_name} " 
+								class="btn btn-success pull-right"  title="payment"  >pay</a>
+							
+								<div class="clearfix"></div>
+							{/if}
 						{/if}
 		
 				</form>

@@ -30,6 +30,7 @@
 	}
 	$allSubject = $studentSubjectObject->getStudentSubjects($studentID);
 	$totalUnit = $subjectObject->getCurrentUnits($studentID);
+	$isStudentPayed = $studentLastNameObject->isStudentPayed($studentID);
 
 	$smarty = new Smarty();
 	$smarty->template_dir = '../../templates/studentSubject/';
@@ -37,6 +38,7 @@
 
 	$smarty->assign('students', $students);
 	$smarty->assign('selectedStudent', $selectedStudent);
+	$smarty->assign('isStudentPayed',$isStudentPayed);
 	$smarty->assign('subject', $subject);
 	$smarty->assign('allSubject', $allSubject);
 	$smarty->assign('studentID', $studentID);

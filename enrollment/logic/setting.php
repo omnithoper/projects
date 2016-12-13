@@ -2,7 +2,7 @@
 	require 'main.php';
 	
  	date_default_timezone_set("Asia/Manila");
-	$date = date("20y-m-d");
+	$date = date("Y-m-d");
 
 	$settingObject = new Settings();
 	$result = $settingObject->getViewTotalPayment();
