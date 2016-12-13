@@ -2,23 +2,36 @@
 class Student {
 	private $_db = null;
 	
-	function __construct() {
+	public function __construct() {
 		$this->_db = new DatabaseConnect();
 	}
 	
-	function getViewStudents() {
-		
+	public function getViewStudents() {
 		$select = "SELECT * FROM student";
 		$student = $this->_db->connection->query($select);
-
 		
 		return $student;
-	}	
-	
-	function getViewStudentPaid() {
+	}
+
+	public function getViewStudentPaid() {
 		$semesterObject = new Settings();
 
-		$select = "
+		$query = "
+			SELECT
+				student.student_id,
+				student.first_name,
+				student.last_name,
+				IF(semester.semester_id IS NULL, 'not yet paid', 'paid') AS payed
+			FROM student
+			LEFT JOIN payment ON student.student_id = payment.student_id
+			LEFT JOIN semester ON payment.transaction_date BETWEEN semester.date_start AND semester.date_end AND NOW() BETWEEN semester.date_start AND semester.date_end
+		";
+
+		$student = $this->_db->connection->query($query);
+		return $student->fetch_all(MYSQLI_ASSOC);
+		
+		/*
+		$query = "
 			SELECT
 				student.student_id,
 				student.first_name,
@@ -28,31 +41,31 @@ class Student {
 				FROM student
 				LEFT JOIN payment ON student.student_id = payment.student_id
 		";
-		$student = $this->_db->connection->query($select);
+
+		$student = $this->_db->connection->query($query);
 		$student = $student->fetch_all(MYSQLI_ASSOC);
 
 		$result = [];
 		foreach ($student as $students){ 
-			$students['payed'] ='not yet payed';
+			$students['payed'] ='not yet paid';
 			$isEnrolledThisSem = $semesterObject->isEnrolledThisSem($students['transaction_date']);
 			if ($students['payment'] == 1 && $isEnrolledThisSem)  {
-				$students['payed'] ='payed';
+				$students['payed'] ='paid';
 			}			
 			$result[] = $students;		
 		}	
 
 		return $result;
+		*/
 	}
 
-	function getViewStudentsPaginated($per_page) {
+	public function getViewStudentsPaginated($per_page) {
 		$select ="SELECT * FROM student LIMIT $per_page,5 ";
 		$student = $this->_db->connection->query($select);
 		return $student;
 	}
 	
-	function getStudentInformation($studentName) {
-		$db = new DatabaseConnect();
-		
+	public function getStudentInformation($studentName) {
 		$select = "
 			SELECT 
 				first_name, 
@@ -60,7 +73,7 @@ class Student {
 			FROM student 
 		";
 		
-		$students = $db->connection->query($select);
+		$students = $this->_db->connection->query($select);
 		
 		$studentLastName = NULL;	
 		
@@ -75,12 +88,10 @@ class Student {
 		return $studentLastName;
 	}
 	
-	function getAllStudentInformation($studentName) {
+	public function getAllStudentInformation($studentName) {
 		if (empty($studentName)) {
 			return [];
 		}
-		
-		$db = new DatabaseConnect();
 		
 		$select = "
 			SELECT 
@@ -94,14 +105,14 @@ class Student {
 				last_name LIKE '$studentName%'
 		";
 		
-		$students = $db->connection->query($select);
+		$students = $this->_db->connection->query($select);
 		$students = $students->fetch_all(MYSQLI_ASSOC);
 		
-		$db->connection->close();	
+		$this->_db->connection->close();	
 		return $students;
 	}
 	
-	function studentExist($firstName, $lastName, $studentID = null) {
+	public function studentExist($firstName, $lastName, $studentID = null) {
 		if (empty($firstName)) {
 			return false;
 		}
@@ -140,9 +151,7 @@ class Student {
 		return !empty($studentID);
 	} 
 	
-	function getAddStudent($firstName, $lastName) {
-		$db = new DatabaseConnect();
-		
+	public function getAddStudent($firstName, $lastName) {
 		if (empty($firstName)) {
 			return [
 			'error' => 'Please Input Name And Lastname',
@@ -161,25 +170,24 @@ class Student {
 			];
 		}
 
-		$prepared = $db->connection->prepare("
+		$prepared = $this->_db->connection->prepare("
 			INSERT INTO student(first_name, last_name)
 			VALUES (?,?)
 		");	
 		
 		$prepared->bind_param('ss', $firstName, $lastName);
 		$prepared->execute();	
-		$db->connection->close();
+		$tihs->_db->connection->close();
 		
 		header("Location: /templates/student/");			
 	}
 	
-	function getViewStudent($studentID = null){
+	public function getViewStudent($studentID = null){
 		
 		if (empty($studentID)) {
 			return false;
 		}
 		
-		$db = new DatabaseConnect();
 		$result = [];
 		if (!empty($studentID)) {
 			$select = '
@@ -202,14 +210,12 @@ class Student {
 			$result['full_name'] = $fullName;
 			
 		} 
-		$db->connection->close();
-
+		
+		$this->_db->connection->close();
 		return $result;
 	}
 	
-	function getEditStudent($firstName, $lastName, $studentID) {
-		$db = new DatabaseConnect();
-		
+	public function getEditStudent($firstName, $lastName, $studentID) {
 		if (empty($firstName)) {
 			return [
 				'error' => 'Please Input Name',
@@ -228,34 +234,28 @@ class Student {
 			];
 		}
 	
-		if ($prepared = $db->connection->prepare("UPDATE student SET first_name = ?, last_name = ? WHERE student_id=?;"))
+		if ($prepared = $this->_db->connection->prepare("UPDATE student SET first_name = ?, last_name = ? WHERE student_id=?;"))
 		{
 			$prepared->bind_param("sss", $firstName, $lastName,$studentID);
 			$prepared->execute();
 			$prepared->close();
 		} else {
-			$db->connection->close();
+			$this->_db->connection->close();
 			return false;
 		}	
 
-		$db->connection->close();
+		$this->_db->connection->close();
 		return true;
 	}
 
-	function getDeleteStudent($studentID) {
-		$db = new DatabaseConnect();
-
+	public function getDeleteStudent($studentID) {
 		if (empty($studentID)) {
 			return true;
 		}
-			$query = "DELETE FROM student WHERE student_id = ".$studentID;
+			
+		$query = "DELETE FROM student WHERE student_id = ".$studentID;
 
-			if ($db->connection->query($query) === true)
-			{
-			}
-
-			$db->connection->close();
-			header("Location: /templates/student/");
+		$this->_db->connection->close();
+		header("Location: /templates/student/");
 	}
-	
 }

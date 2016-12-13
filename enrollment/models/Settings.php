@@ -2,36 +2,36 @@
 class Settings {
 	private $_db = null;
 	
-	function __construct() {
+	public function __construct() {
 		$this->_db = new DatabaseConnect();
 	}
 	
-	function getViewTotalPayment() {
+	public function getViewTotalPayment() {
 		$select = "SELECT * FROM settings ";
 		$tp = $this->_db->connection->query($select);
 		$result = $tp->fetch_all(MYSQLI_ASSOC);
 		return $tp;
 	}
 
-	function getViewAllSemester($semesterID = NULL) {
+	public function getViewAllSemester($semesterID = NULL) {
 		$select = "SELECT * FROM semester ";
 		$result = $this->_db->connection->query($select);
 		$result = $result->fetch_all(MYSQLI_ASSOC);
 		return $result;
 	}
-	function getViewSemester($semesterID = null){
+	
+	public function getViewSemester($semesterID = null){
 		if (empty($semesterID)) {
 			return false;
 		}
-		var_dump($semesterID);
+
 		$select = "SELECT * FROM semester WHERE semester_id = $semesterID" ;
 		$result = $this->_db->connection->query($select);
 		$result = $result->fetch_all(MYSQLI_ASSOC);
 		return $result;
 	}	
 
-function getAddSemester($dateStart, $dateEnd) {
-	
+	public function getAddSemester($dateStart, $dateEnd) {
 		if (empty($dateStart)) {
 			return [
 			'error' => 'Please Date Start And Date End',
@@ -61,14 +61,14 @@ function getAddSemester($dateStart, $dateEnd) {
 		
 		header("Location: /templates/setting/");			
 	}
-	function getEditSemester($dateStart, $dateEnd, $semesterID) {
-				
-		
+	
+	public function getEditSemester($dateStart, $dateEnd, $semesterID) {
 		if (empty($dateStart)) {
 			return [
 			'error' => 'please input subject and unit'
 			];
 		}
+		
 		if (empty($dateEnd)) {
 			return [
 			'error' => 'please input subject and unit'
@@ -79,14 +79,11 @@ function getAddSemester($dateStart, $dateEnd) {
 		$prepared->bind_param("ssi", $dateStart, $dateEnd, $semesterID);
 		$prepared->execute();
 		$prepared->close();
-
-
 	
-			header("Location: /templates/setting/");
+		header("Location: /templates/setting/");
 	}
 	
-	function getDeleteSemester($semesterID) {
-		
+	public function getDeleteSemester($semesterID) {
 		if (empty($semesterID)){
 			return true;
 		}
@@ -100,7 +97,7 @@ function getAddSemester($dateStart, $dateEnd) {
 		header("Location: /templates/setting/");
 	}
 
-	function isEcceededUnits($studentID = null, $subjectID = null) {
+	public function isEcceededUnits($studentID = null, $subjectID = null) {
 		$subjectObject = new Subject();
 		$currentUnits = $subjectObject->getCurrentUnits($studentID);
 		$subjectUnits = $subjectObject->getSubjectUnits($subjectID);
@@ -109,8 +106,7 @@ function getAddSemester($dateStart, $dateEnd) {
 		return ($allowedUnits < ($currentUnits + $subjectUnits));
 	}
 	
-	public function getSubjectUnits($subjectID = null)
-	{
+	public function getSubjectUnits($subjectID = null) {
 		$query = "
 			SELECT
 				subject_unit
@@ -123,8 +119,7 @@ function getAddSemester($dateStart, $dateEnd) {
 		return (empty($results))?0:$results[0]['subject_unit'];
 	}
 
-	public function getAllowedUnits()
-	{
+	public function getAllowedUnits() {
 		$query = "
 			SELECT
 				number_of_allowed_units
@@ -136,9 +131,7 @@ function getAddSemester($dateStart, $dateEnd) {
 		return (empty($results))?0:$results[0]['number_of_allowed_units'];
 	}
 
-
-	public function getPriceMisc()
-	{
+	public function getPriceMisc() {
 		$query = "
 			SELECT
 				price_of_misc
@@ -149,8 +142,8 @@ function getAddSemester($dateStart, $dateEnd) {
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		return (empty($results))?0:$results[0]['price_of_misc'];
 	}
-	public function getPriceLabUnit()
-	{
+	
+	public function getPriceLabUnit() {
 		$query = "
 			SELECT
 				price_per_lab_unit
@@ -161,8 +154,8 @@ function getAddSemester($dateStart, $dateEnd) {
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		return (empty($results))?0:$results[0]['price_per_lab_unit'];
 	}
-	public function getPricePerUnit()
-	{
+	
+	public function getPricePerUnit() {
 		$query = "
 			SELECT
 				price_per_unit
@@ -173,8 +166,8 @@ function getAddSemester($dateStart, $dateEnd) {
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		return (empty($results))?0:$results[0]['price_per_unit'];
 	}
-	public function getPaymentDate()
-	{
+	
+	public function getPaymentDate() {
 		$query = "
 			SELECT
 				*
@@ -194,8 +187,8 @@ function getAddSemester($dateStart, $dateEnd) {
 
 		return $result;
 	}
-	public function getSemesterTotalIncome()
-	{
+	
+	public function getSemesterTotalIncome() {
 		$query = "
 			SELECT
 				transaction_date,
@@ -221,6 +214,7 @@ function getAddSemester($dateStart, $dateEnd) {
 		$result[] = $payment;	
 		return $result;
 	}
+	
 	public function isEnrolledThisSem($date) {
 		$currentDate = date("Y-m-d");	
 		$select = "
@@ -235,8 +229,8 @@ function getAddSemester($dateStart, $dateEnd) {
 		$isEnrolled = $isEnrolled->fetch_all(MYSQLI_ASSOC);
 		return (bool)count($isEnrolled);
 	}	
-	public function getCurrentUnits()
-	{	
+	
+	public function getCurrentUnits() {	
 		$query = "
 			SELECT
 				SUM(subjects.subject_unit) AS total_units
@@ -249,8 +243,8 @@ function getAddSemester($dateStart, $dateEnd) {
 		var_dump($results);
 		return (empty($results))?0:$results[0]['total_units'];		
 	}
-	public function getSemesterDate($studentID = NULL)
-	{
+	
+	public function getSemesterDate($studentID = NULL) {
 		$date = date("20y-m-d");
 		$query = "
 			SELECT
@@ -269,4 +263,3 @@ function getAddSemester($dateStart, $dateEnd) {
 		return $result;
 	}
 }
-?>

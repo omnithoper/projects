@@ -7,7 +7,7 @@
 	$requestUrl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 	$requestString = substr($requestUrl, strlen($baseUrl));
 
-	list($urlParams, $queryParams) = explode('?', $requestString);
+	list($urlParams, $queryParams) = array_pad(explode('?', $requestString), 2, '');
 	$urlParams = explode('/', $urlParams);
 
 	parse_str($queryParams, $requestParams);

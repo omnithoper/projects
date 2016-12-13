@@ -2,12 +2,11 @@
 class Admin {
 	private $_db = null;
 	
-	function __construct() {
+	public function __construct() {
 		$this->_db = new DatabaseConnect();
 	}
 	
-	function getUserPassword($userName, $password) {
-
+	public function getUserPassword($userName, $password) {
 		if (empty($userName)) {
 			return [
 			'error' => 'Please input username and password',
@@ -43,17 +42,17 @@ class Admin {
 		  		'error' => 'Your Login Name or Password is invalid'
 			];
 		}
-
 	}   
 
-	function getViewAdmin() {
+	public function getViewAdmin() {
 		$sql = "SELECT * FROM admin ";
      	$result = $this->_db->connection->query($sql);
       	$result = $result->fetch_all(MYSQLI_ASSOC);
 
       	return $result;
 	}
-	function getViewUser($userID = null){
+
+	public function getViewUser($userID = null) {
 		if (empty($userID)) {
 			return false;
 		}
@@ -63,7 +62,7 @@ class Admin {
 		return $result;
 	}	
 
-	function getAddAdmin($userName, $password) {
+	public function getAddAdmin($userName, $password) {
 	
 		if (empty($userName)) {
 			return [
@@ -88,8 +87,6 @@ class Admin {
 			VALUES (?,?)
 		");	
 
-	
-
 		$prepared->bind_param('ss', $userName, $password);
 		$prepared->execute();	
 
@@ -98,23 +95,22 @@ class Admin {
 		
 		header("Location: /templates/admin/");			
 	}
-	function getEditUser($userName, $password, $userID) {
-				
-		
+
+	public function getEditUser($userName, $password, $userID) {
 		if (empty($userName)) {
 			return [
-			'error' => 'please input subject and unit'
+				'error' => 'please input subject and unit'
 			];
 		}
 		if (empty($password)) {
 			return [
-			'error' => 'please input subject and unit'
+				'error' => 'please input subject and unit'
 			];
 		}
 
 		if ($this->userExist($userName)) {
-		return [
-			'error' => 'username Already Exist',	
+			return [
+				'error' => 'username Already Exist',	
 			];
 		}
 
@@ -123,16 +119,14 @@ class Admin {
 		$prepared->execute();
 		$prepared->close();
 
-
-	
-			header("Location: /templates/admin/");
+		header("Location: /templates/admin/");
 	}
 	
-	function getDeleteUser($userID) {
-		
+	public function getDeleteUser($userID) {
 		if (empty($userID)){
 			return true;
 		}
+
 		$query = "DELETE FROM admin WHERE user_id = ".$userID;
 
 		if ($this->_db->connection->query($query) === true)
@@ -142,7 +136,7 @@ class Admin {
 		header("Location: /templates/admin/");
 	}
 
-	function userExist($userName) {
+	public function userExist($userName) {
 		if (empty($userName)) {
 			return false;
 		}
@@ -160,27 +154,10 @@ class Admin {
 		return !empty($userID);
 	} 
 
-	function userSession() {
-		
+	public function userSession() {
 		if (session_id() === '') {
-			#header("location:/login/index.php");
 			return false;
 		}
 		return true;
-		$user_check = $_SESSION['login_user'];
-
-		$select = "select username from admin where username = '$user_check' ";
-
-		$ses_sql = mysqli_query($this->_db->connection, $select);
-
-		$row = mysqli_fetch_array($ses_sql,MYSQLI_ASSOC);
-
-		$login_session = $row['username'];
-
-		if(!isset($_SESSION['login_user'])){
-		  #header("location:/login/index.php");
-		}
 	}
-
 }
-?>

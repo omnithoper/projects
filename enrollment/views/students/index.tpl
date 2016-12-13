@@ -54,7 +54,7 @@
 								<i class="icon icon-remove"></i>
 							</a>
 
-							{if ($details.payment == 1 && $details.payed == 'payed')}
+							{if ($details.payed == 'paid')}
 								<a id="href_delete"href='studentDownload.php?student_id={$details.student_id}' 
 								class="btn btn-success" title="download invoice"> 
 									<i class="icon icon-download"></i>
