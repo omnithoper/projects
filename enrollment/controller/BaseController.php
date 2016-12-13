@@ -8,7 +8,7 @@ class BaseController {
 		$config = array_merge($config, $local);
 		
 		$this->_template = new Smarty();
-	    $this->_template->template_dir = $config['root'].'/templates/';
+	    $this->_template->template_dir = $config['root'].'/views/';
 	    $this->_template->compile_dir = $config['root'].'/compile/';
 
 		if (empty($_SESSION['login_user'])) {

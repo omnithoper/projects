@@ -1,6 +1,6 @@
 <?php
 class IndexController extends BaseController {
 	public function indexAction() {
-		$this->render('student/mainpage.tpl');
+		$this->render('index/index.tpl');
 	}
 }

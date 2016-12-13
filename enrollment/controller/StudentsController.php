@@ -4,6 +4,6 @@ class StudentsController extends BaseController {
 		$student = new Student();
 		$students = $student->getViewStudentPayed(); 
 		$this->_template->assign('student', $students);
-		$this->render('student/view.tpl');
+		$this->render('students/index.tpl');
 	}
 }
