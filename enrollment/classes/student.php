@@ -18,35 +18,40 @@ class Student {
 	function getViewStudentPayed() {
 
 		$semesterObject = new Settings();
+		$semDate = $semesterObject->getCurrentSemester();
 
+		$dateStart = $semDate[0]['date_start'];
+		$dateEnd = $semDate[0]['date_end'];
 		$select = "
-			SELECT
+			SELECT 
 				student.student_id,
 				student.first_name,
 				student.last_name,
 				payment.payment,
 				payment.transaction_date
 				FROM student
-				LEFT JOIN payment ON student.student_id = payment.student_id
+				LEFT JOIN payment ON student.student_id = payment.student_id AND 	
+				payment.transaction_date BETWEEN '$dateStart' AND '$dateEnd'
 		";
 		$student = $this->_db->connection->query($select);
 		$student = $student->fetch_all(MYSQLI_ASSOC);
-
 		$result = [];
+
 		foreach ($student as $students){ 
-			$students['payed'] ='not yet payed';
-			$isEnrolledThisSem = $semesterObject->isEnrolledThisSem($students['transaction_date']);
-			if ($students['payment'] == 1 && $isEnrolledThisSem)  {
+			$students['payed'] ='not yet payed';	
+			if ($students['payment'] == 1)  {
 				$students['payed'] ='payed';
 			}			
 			$result[] = $students;		
 		}	
-
 		return $result;
 	}
 	function isStudentPayed($studentID) {
 
 		$semesterObject = new Settings();
+		$semDate = $semesterObject->getCurrentSemester();
+		$dateStart = $semDate[0]['date_start'];
+		$dateEnd = $semDate[0]['date_end'];
 
 		$select = "
 			SELECT
@@ -55,7 +60,8 @@ class Student {
 				payment.transaction_date
 				FROM student 
 				LEFT JOIN payment 
-				ON student.student_id = payment.student_id
+				ON student.student_id = payment.student_id  AND 	
+				payment.transaction_date BETWEEN '$dateStart' AND '$dateEnd'
 				WHERE student.student_id = '".$studentID."'
 		";
 		$student = $this->_db->connection->query($select);
@@ -64,8 +70,7 @@ class Student {
 		$result = [];
 		foreach ($student as $students){ 
 			$students['payed'] ='not yet payed';
-			$isEnrolledThisSem = $semesterObject->isEnrolledThisSem($students['transaction_date']);
-			if ($students['payment'] == 1 && $isEnrolledThisSem)  {
+			if ($students['payment'] == 1)  {
 				$students['payed'] ='payed';
 			}			
 			$result[] = $students;		

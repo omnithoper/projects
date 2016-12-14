@@ -23,12 +23,13 @@
 
 	require_once(APPLICATION_PATH."/logic/connect-db.php");
 	require_once(APPLICATION_PATH."/logic/method-post.php");
-	require_once(BASE_PATH."classes/admin.php");
+	require_once(BASE_PATH."/classes/admin.php");
 	require_once(BASE_PATH."/classes/student.php");
 	require_once(BASE_PATH."/classes/payment.php");
 	require_once(BASE_PATH."/classes/setting.php");
 	require_once(BASE_PATH."/classes/payment.php");
-	require_once(BASE_PATH."classes/subject.php");
+	require_once(BASE_PATH."/classes/subject.php");
+	require_once(BASE_PATH."/classes/cashier.php");
 	require_once(BASE_PATH."/classes/student subject class.php");
 	require 'smarty/Smarty.class.php'; 
 	$smarty = new Smarty();

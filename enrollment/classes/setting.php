@@ -13,7 +13,11 @@ class Settings {
 		return $tp;
 	}
 	function getConcatSemester(){
-		$select = "SELECT 	CONCAT(date_start, ' to ', date_end) AS semesterDate FROM semester ";
+		$select =" 
+			SELECT CONCAT(date_start, ' to ', date_end) AS semesterDate 
+			FROM semester 
+			ORDER BY date_start
+		";
 		$result = $this->_db->connection->query($select);
 		$result = $result->fetch_all(MYSQLI_ASSOC);
 		return $result;
@@ -21,7 +25,12 @@ class Settings {
 	}
 
 	function getViewAllSemester() {
-		$select = "SELECT * FROM semester ";
+		$select =" 
+			SELECT 
+			* 
+			FROM semester
+			ORDER BY date_start
+		 ";
 		$result = $this->_db->connection->query($select);
 		$result = $result->fetch_all(MYSQLI_ASSOC);
 		return $result;
@@ -179,28 +188,32 @@ function getAddSemester($dateStart, $dateEnd) {
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		return (empty($results))?0:$results[0]['price_per_unit'];
 	}
-	public function getPaymentDate()
-	{
-		$query = "
+	public function getPaymentDate($dateStart, $dateEnd)
+	{	
+			$select = "
 			SELECT
-				*
-			FROM payment
+				CONCAT(student.first_name, ' ' , student.last_name) AS fullName,
+				payment.payment,
+				payment.total_amount,
+				payment.change,
+				payment.transaction_date
+				FROM student 
+				LEFT JOIN payment 
+				ON student.student_id = payment.student_id  AND 	
+				payment.transaction_date BETWEEN '$dateStart' AND '$dateEnd'
 		";
-		$results = $this->_db->connection->query($query);
+		$results = $this->_db->connection->query($select);
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		$result = [];
-		foreach ($results as $payment){
-			$isEnrolledThisSem = $this->isEnrolledThisSem($payment['transaction_date']);
-			if ($payment['payment'] == 1 && $isEnrolledThisSem)  {
+		if (!empty($results)) {
+			foreach ($results as $payment){
 				$payment['paid'] = $payment['total_amount'] - $payment['change'];
-				$result[] = $payment;	
-			}			
-		
+				$result[] = $payment;			
+			}
 		}
-
 		return $result;
 	}
-	public function getSemesterTotalIncome()
+	public function getSemesterTotalIncome($dateStart, $dateEnd)
 	{
 		$query = "
 			SELECT
@@ -209,24 +222,24 @@ function getAddSemester($dateStart, $dateEnd) {
 				payment,
 				`change`
 			FROM payment
+			WHERE transaction_date BETWEEN '$dateStart' AND '$dateEnd'
 		";
 		$results = $this->_db->connection->query($query);
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		$result = [];
 		$sumTotal = 0;
 		$sumChange = 0;
-		foreach ($results as $payment){
-			$isEnrolledThisSem = $this->isEnrolledThisSem($payment['transaction_date']);
-			if ($payment['payment'] == 1 && $isEnrolledThisSem)  {
-					$payment['total_amount'] = $sumTotal += $payment['total_amount'] ;
-					$payment['change'] = $sumChange += $payment['change'];
-			}			
-					
-		}	$payment['total_paid'] = $payment['total_amount'] - $payment['change'];			
-		
-		$result[] = $payment;	
+		if (!empty($results)) {
+			foreach ($results as $payment){
+				$payment['total_amount'] = $sumTotal += $payment['total_amount'] ;
+				$payment['change'] = $sumChange += $payment['change'];
+			}	
+			$payment['total_paid'] = $payment['total_amount'] - $payment['change'];			
+			$result[] = $payment;	
+		}
 		return $result;
 	}
+	/*
 	public function isEnrolledThisSem($date) {
 		$currentDate = date("Y-m-d");	
 		$select = "
@@ -240,7 +253,8 @@ function getAddSemester($dateStart, $dateEnd) {
 		$isEnrolled = $this->_db->connection->query($select);
 		$isEnrolled = $isEnrolled->fetch_all(MYSQLI_ASSOC);
 		return (bool)count($isEnrolled);
-	}	
+	}
+	*/	
 	public function getCurrentUnits()
 	{	
 		$query = "
@@ -255,24 +269,19 @@ function getAddSemester($dateStart, $dateEnd) {
 		var_dump($results);
 		return (empty($results))?0:$results[0]['total_units'];		
 	}
-	public function getSemesterDate($studentID = NULL)
-	{
-		$date = date("20y-m-d");
+	public function getCurrentSemester() {
+		$date = date("Y-m-d");
 		$query = "
 			SELECT
-				payment,
-				student_id
+				date_start,
+				date_end
 			FROM semester
-			JOIN payment WHERE '$date' BETWEEN date_start AND date_end  AND transaction_date BETWEEN date_start AND date_end AND student_id = '$studentID'
+			WHERE '$date' BETWEEN date_start AND date_end
 		";
 	
 		$results = $this->_db->connection->query($query);
 		$results = $results->fetch_all(MYSQLI_ASSOC);
-		$result = [];
-		foreach ($results as $payment){
-			$result = $payment;
-		}
-		return $result;
+		return $results;
 	}
 }
 ?>

@@ -1,9 +1,5 @@
 <?php 
 	require  'main.php';
-	require 'session.php';
-	require '../../lib/smarty/Smarty.class.php'; 
-	require  '../../classes/payment.php';
-	require  '../../classes/student.php';
 
 	$studentID = Request::getParam('studentID');
 	$totalAmount = Request::getParam('totalPrice');
@@ -11,8 +7,8 @@
 	$cash = Request::getParam('cash');
 
 	$paymentObject = new Payment();
-	$paymentObject->getAddPayment($studentID, $totalAmount, $change); 
-	$payment = $paymentObject->getViewPayment($studentID, $totalAmount, $change);
+	$paymentObject->getAddPayment($studentID, $cash, $change); 
+	$payment = $paymentObject->getViewPayment($studentID, $cash, $change);
 	
 	$studentObject = new Student();
 	$studentName = $studentObject->getViewStudent($studentID); 
