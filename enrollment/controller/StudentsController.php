@@ -5,6 +5,10 @@ class StudentsController extends BaseController {
 		$students = $student->getViewStudentPaid(); 
 		$this->assign('student', $students);
 		$this->render('students/index.tpl');
+
+
+		#$this->_template->assign('student', $students);
+		#$this->_template->display('students/index.tpl');
 	}
 
 	public function editAction() {

@@ -6,6 +6,7 @@
 	session_start();
 
 	$baseUrl = 'http://anthony.enrollment.com/';
+
 	$requestUrl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 	$requestString = substr($requestUrl, strlen($baseUrl));
 
@@ -29,5 +30,5 @@
 	    require_once $class_name . '.php';
 	});
 
-	$controller = new $controllerName;
+	$controller = new $controllerName();
 	$controller->$actionName();

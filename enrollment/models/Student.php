@@ -25,6 +25,8 @@ class Student {
 			FROM student
 			LEFT JOIN payment ON student.student_id = payment.student_id
 			LEFT JOIN semester ON payment.transaction_date BETWEEN semester.date_start AND semester.date_end AND NOW() BETWEEN semester.date_start AND semester.date_end
+			GROUP BY student.student_id
+			ORDER BY payed DESC
 		";
 
 		$student = $this->_db->connection->query($query);
@@ -199,7 +201,7 @@ class Student {
 				FROM student
 				WHERE student_id = ?
 			';
-			$prepared = $db->connection->prepare($select);
+			$prepared = $this->_db->connection->prepare($select);
 			$prepared->bind_param('i', $studentID);
 			$prepared->execute();
 			$prepared->bind_result($studentID, $firstName, $lastName, $fullName);
