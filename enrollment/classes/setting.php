@@ -188,6 +188,32 @@ function getAddSemester($dateStart, $dateEnd) {
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		return (empty($results))?0:$results[0]['price_per_unit'];
 	}
+		public function getSemesterTotalIncome($dateStart, $dateEnd)
+	{
+		$query = "
+			SELECT
+				transaction_date,
+				total_amount,
+				payment,
+				`change`
+			FROM payment
+			WHERE transaction_date BETWEEN '$dateStart' AND '$dateEnd'
+		";
+		$results = $this->_db->connection->query($query);
+		$results = $results->fetch_all(MYSQLI_ASSOC);
+		$result = [];
+		$sumTotal = 0;
+		$sumChange = 0;
+		if (!empty($results)) {
+			foreach ($results as $payment){
+				$payment['total_amount'] = $sumTotal += $payment['total_amount'] ;
+				$payment['change'] = $sumChange += $payment['change'];
+			}	
+			$payment['total_paid'] = $payment['total_amount'] - $payment['change'];			
+			$result[] = $payment;	
+		}
+		return $result;
+	}
 	public function getPaymentDate($dateStart, $dateEnd)
 	{	
 			$select = "
@@ -213,14 +239,12 @@ function getAddSemester($dateStart, $dateEnd) {
 		}
 		return $result;
 	}
-	public function getSemesterTotalIncome($dateStart, $dateEnd)
+
+	public function getSemesterSingleIncome($dateStart, $dateEnd)
 	{
 		$query = "
 			SELECT
-				transaction_date,
-				total_amount,
-				payment,
-				`change`
+				*
 			FROM payment
 			WHERE transaction_date BETWEEN '$dateStart' AND '$dateEnd'
 		";
@@ -236,6 +260,32 @@ function getAddSemester($dateStart, $dateEnd) {
 			}	
 			$payment['total_paid'] = $payment['total_amount'] - $payment['change'];			
 			$result[] = $payment;	
+		}
+		return $result;
+	}
+	public function getSinglePaymentDate($studentID, $dateStart, $dateEnd)
+	{
+			$select = "
+			SELECT
+				student.student_id,
+				CONCAT(student.first_name, ' ' , student.last_name) AS fullName,
+				payment.payment,
+				payment.total_amount,
+				payment.change,
+				payment.transaction_date
+				FROM student 
+				LEFT JOIN payment 
+				ON 	student.student_id = payment.student_id  AND payment.student_id = '$studentID'  
+				AND payment.transaction_date BETWEEN '$dateStart' AND '$dateEnd' 
+		";
+		$results = $this->_db->connection->query($select);
+		$results = $results->fetch_all(MYSQLI_ASSOC);
+		$result = [];
+		if (!empty($results)) {
+			foreach ($results as $payment){
+				$payment['paid'] = $payment['total_amount'] - $payment['change'];
+				$result[] = $payment;			
+			}
 		}
 		return $result;
 	}
