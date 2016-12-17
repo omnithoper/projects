@@ -1,0 +1,263 @@
+<?php
+class Student {
+	private $_db = null;
+	
+	public function __construct() {
+		$this->_db = new DatabaseConnect();
+	}
+	
+	public function getViewStudents() {
+		$select = "SELECT * FROM student";
+		$student = $this->_db->connection->query($select);
+		
+		return $student;
+	}
+
+	public function getViewStudentPaid() {
+		$semesterObject = new Settings();
+
+		$query = "
+			SELECT
+				student.student_id,
+				student.first_name,
+				student.last_name,
+				IF(semester.semester_id IS NULL, 'not yet paid', 'paid') AS payed
+			FROM student
+			LEFT JOIN payment ON student.student_id = payment.student_id
+			LEFT JOIN semester ON payment.transaction_date BETWEEN semester.date_start AND semester.date_end AND NOW() BETWEEN semester.date_start AND semester.date_end
+			GROUP BY student.student_id
+			ORDER BY payed DESC
+		";
+
+		$student = $this->_db->connection->query($query);
+		return $student->fetch_all(MYSQLI_ASSOC);
+		
+		/*
+		$query = "
+			SELECT
+				student.student_id,
+				student.first_name,
+				student.last_name,
+				payment.payment,
+				payment.transaction_date
+				FROM student
+				LEFT JOIN payment ON student.student_id = payment.student_id
+		";
+
+		$student = $this->_db->connection->query($query);
+		$student = $student->fetch_all(MYSQLI_ASSOC);
+
+		$result = [];
+		foreach ($student as $students){ 
+			$students['payed'] ='not yet paid';
+			$isEnrolledThisSem = $semesterObject->isEnrolledThisSem($students['transaction_date']);
+			if ($students['payment'] == 1 && $isEnrolledThisSem)  {
+				$students['payed'] ='paid';
+			}			
+			$result[] = $students;		
+		}	
+
+		return $result;
+		*/
+	}
+
+	public function getViewStudentsPaginated($per_page) {
+		$select ="SELECT * FROM student LIMIT $per_page,5 ";
+		$student = $this->_db->connection->query($select);
+		return $student;
+	}
+	
+	public function getStudentInformation($studentName) {
+		$select = "
+			SELECT 
+				first_name, 
+				last_name 
+			FROM student 
+		";
+		
+		$students = $this->_db->connection->query($select);
+		
+		$studentLastName = NULL;	
+		
+		foreach ($students as $student){
+			
+			if ($student['first_name'] == $studentName) {
+				$studentLastName = $student['last_name'];
+			}
+
+		}
+		
+		return $studentLastName;
+	}
+	
+	public function getAllStudentInformation($studentName) {
+		if (empty($studentName)) {
+			return [];
+		}
+		
+		$select = "
+			SELECT 
+				student_id,
+				first_name, 
+				last_name,
+				CONCAT(last_name, ', ', first_name) AS full_name
+			FROM student 
+			WHERE 
+				first_name LIKE '$studentName%' OR
+				last_name LIKE '$studentName%'
+		";
+		
+		$students = $this->_db->connection->query($select);
+		$students = $students->fetch_all(MYSQLI_ASSOC);
+		
+		$this->_db->connection->close();	
+		return $students;
+	}
+	
+	public function studentExist($firstName, $lastName, $studentID = null) {
+		if (empty($firstName)) {
+			return false;
+		}
+		
+		if (empty($lastName)) {
+			return false;
+		}
+
+		$query = "
+			SELECT
+				student_id
+			FROM student
+			WHERE first_name = ?
+			AND last_name = ?
+		";
+
+		if (!empty($studentID)) {
+			$query .= "
+				AND student_id != ?
+			";
+		}
+
+		$prepared = $this->_db->connection->prepare($query);	
+
+		if (empty($studentID)) {
+			$prepared->bind_param('ss', $firstName, $lastName);
+		} else {
+			$prepared->bind_param('ssi', $firstName, $lastName, $studentID);
+		}
+
+		$prepared->execute();	
+		$prepared->bind_result($studentID);
+		$prepared->fetch();
+
+		$this->_db->connection->close();
+		return !empty($studentID);
+	} 
+	
+	public function getAddStudent($firstName, $lastName) {
+		if (empty($firstName)) {
+			return [
+			'error' => 'Please Input Name And Lastname',
+			];	
+		}
+
+		if (empty($lastName)) {
+			return [
+			'error' => 'Please Input Name And Lastname',
+			];	
+		}	
+
+		if ($this->studentExist($firstName, $lastName)) {
+			return [
+				'error' => 'Student Already Exist',	
+			];
+		}
+
+		$prepared = $this->_db->connection->prepare("
+			INSERT INTO student(first_name, last_name)
+			VALUES (?,?)
+		");	
+		
+		$prepared->bind_param('ss', $firstName, $lastName);
+		$prepared->execute();	
+		$tihs->_db->connection->close();
+		
+		header("Location: /templates/student/");			
+	}
+	
+	public function getViewStudent($studentID = null){
+		
+		if (empty($studentID)) {
+			return false;
+		}
+		
+		$result = [];
+		if (!empty($studentID)) {
+			$select = '
+				SELECT 
+					student_id,
+					first_name,
+					last_name,
+					CONCAT(last_name, ", ", first_name) AS full_name
+				FROM student
+				WHERE student_id = ?
+			';
+			$prepared = $this->_db->connection->prepare($select);
+			$prepared->bind_param('i', $studentID);
+			$prepared->execute();
+			$prepared->bind_result($studentID, $firstName, $lastName, $fullName);
+			$prepared->fetch();
+			$result['student_id'] = $studentID;
+			$result['first_name'] = $firstName;
+			$result['last_name'] = $lastName;
+			$result['full_name'] = $fullName;
+			
+		} 
+		
+		$this->_db->connection->close();
+		return $result;
+	}
+	
+	public function getEditStudent($firstName, $lastName, $studentID) {
+		if (empty($firstName)) {
+			return [
+				'error' => 'Please Input Name',
+			];	
+		}
+
+		if (empty($lastName)) {
+			return [
+				'error' => 'Please Input Lastname',
+			];	
+		}	
+
+		if ($this->studentExist($firstName, $lastName, $studentID)) {
+			return [
+				'error' => 'Student Already Exist',	
+			];
+		}
+	
+		if ($prepared = $this->_db->connection->prepare("UPDATE student SET first_name = ?, last_name = ? WHERE student_id=?;"))
+		{
+			$prepared->bind_param("sss", $firstName, $lastName,$studentID);
+			$prepared->execute();
+			$prepared->close();
+		} else {
+			$this->_db->connection->close();
+			return false;
+		}	
+
+		$this->_db->connection->close();
+		return true;
+	}
+
+	public function getDeleteStudent($studentID) {
+		if (empty($studentID)) {
+			return true;
+		}
+			
+		$query = "DELETE FROM student WHERE student_id = ".$studentID;
+
+		$this->_db->connection->close();
+		header("Location: /templates/student/");
+	}
+}

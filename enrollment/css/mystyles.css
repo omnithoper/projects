@@ -1,6 +1,7 @@
-	body {
-		background: black;
-	}
+body {
+	background: black;
+	min-width: 800px;
+}
 
 	#searchStudent{
 		width: 100%;
@@ -53,4 +54,3 @@
 		float:left;
 	} 
 	*/
-

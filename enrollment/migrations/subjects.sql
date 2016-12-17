@@ -1,4 +1,5 @@
 -- put subjects create table here
+DROP TABLE IF EXISTS `subjects`;
 
 CREATE TABLE `subjects` (
   `subject_id` int(11) NOT NULL AUTO_INCREMENT,
