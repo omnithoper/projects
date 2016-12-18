@@ -37,6 +37,8 @@ class LoginController {
 			$actionName = 'login';
 		}
 			$smarty = new Smarty();
+		$smarty->template_dir = $config['root'].'/templates/';
+	    $smarty->compile_dir = $config['root'].'/compile/';
 		$smarty->display($controllerName.'/'.$actionName.'.'.'tpl');
 	}
 }
