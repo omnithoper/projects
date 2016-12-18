@@ -22,10 +22,10 @@ class LoginController {
 	}
 	
 	public function logoutAction() {
-		session_start();
 		if (!empty($_SESSION['login_user'])) {
 			unset($_SESSION['login_user']);
 		}
 		session_destroy();
+	    header('Location: /');
 	}
 }
