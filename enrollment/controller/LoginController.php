@@ -9,7 +9,7 @@ class LoginController {
 	    $smarty->template_dir = $config['root'].'/templates/';
 	    $smarty->compile_dir = $config['root'].'/compile/';
 
-		$smarty->display('login/login.tpl');
+	
 	}
 
 	public function loginAction() {
@@ -27,5 +27,16 @@ class LoginController {
 		}
 		session_destroy();
 	    header('Location: /');
+	}
+	public function dispatch($controllerName, $actionName){
+
+		if (empty($controllerName)) {
+			$controllerName = 'login';
+		}
+		if (empty($actionName)) {
+			$actionName = 'login';
+		}
+			$smarty = new Smarty();
+		$smarty->display($controllerName.'/'.$actionName.'.'.'tpl');
 	}
 }

@@ -7,7 +7,7 @@
 		$result = $result->fetch_all(MYSQLI_ASSOC); 
 		
 		$this->assign('subject', $result);
-		$this->render('subjects/index.tpl');
+
 		}
 	public function addAction(){
 
@@ -25,30 +25,28 @@
 		
 
 		$this->assign('result', $result);
-		$this->render('subjects/add.tpl');
 	}
 
 	public function editAction() {
-	$subjectID = Request::getParam('subject_id');
-	$subjectID = (empty($subjectID) && !empty($_POST['subject_id']))?$_POST['subject_id']:$subjectID;
+		$subjectID = Request::getParam('subject_id');
+		$subjectID = (empty($subjectID) && !empty($_POST['subject_id']))?$_POST['subject_id']:$subjectID;
 
 
-	$editObject = new Subject();
-	$view = $editObject->getViewSubject($subjectID);
+		$editObject = new Subject();
+		$view = $editObject->getViewSubject($subjectID);
 
-	$edit = [];
-	if (isset($_POST['edit'])) {
-		$subject = Request::getParam('subject');
-		$subjectUnit = Request::getParam('subject_unit');
-		$lecUnit = Request::getParam('lec_unit');
-		$labUnit = Request::getParam('lab_unit');
-		$edit = $editObject->getEditSubject($subject, $lecUnit, $labUnit, $subjectUnit, $subjectID);
-	}
+		$edit = [];
+		if (isset($_POST['edit'])) {
+			$subject = Request::getParam('subject');
+			$subjectUnit = Request::getParam('subject_unit');
+			$lecUnit = Request::getParam('lec_unit');
+			$labUnit = Request::getParam('lab_unit');
+			$edit = $editObject->getEditSubject($subject, $lecUnit, $labUnit, $subjectUnit, $subjectID);
+		}
 
-	
-	$this->assign('view', $view);
-	$this->assign('edit', $edit);
-	$this->render('subjects/edit.tpl');
+		
+		$this->assign('view', $view);
+		$this->assign('edit', $edit);
 	}
 
 	function deleteAction() {
@@ -56,6 +54,19 @@
 	
 	$deleteObject = new Subject();
 	$delete = $deleteObject->getDeleteSubject($subjectID);
+	}
+	
+	public function dispatch($controllerName, $actionName){
+
+		if (empty($controllerName)) {
+			$controllerName = 'index';
+		}
+		if (empty($actionName)) {
+			$actionName = 'index';
+		}
+
+		$this->render($controllerName.'/'.$actionName.'.'.'tpl');
+	
 	}
 }	
 ?>	

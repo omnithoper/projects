@@ -20,7 +20,6 @@ class StudentsController extends BaseController {
 		}
 
 		$this->assign('result', $result);
-		$this->render('students/add.tpl');
 
 
 		}
@@ -42,7 +41,6 @@ class StudentsController extends BaseController {
 		$this->assign('result', $result);
 		$this->assign('edit', $edit);
 
-		$this->render('students/edit.tpl');
 	}
 	function deleteAction() {	
 		$studentID = Request::getParam('student_id');
@@ -78,6 +76,10 @@ class StudentsController extends BaseController {
 	}
 
 	public function dispatch($controllerName, $actionName){
+
+		if (empty($controllerName)) {
+			$controllerName = 'index';
+		}
 		if (empty($actionName)) {
 			$actionName = 'index';
 		}

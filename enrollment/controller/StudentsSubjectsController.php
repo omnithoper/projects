@@ -40,7 +40,17 @@ class StudentsSubjectsController extends BaseController {
 		$this->assign('studentID', $studentID);	
 		$this->assign('totalUnit', $totalUnit);
 		$this->assign('error', $studentSubject);
-		$this->render('studentsSubjects/index.tpl');
 	}	
+	public function dispatch($controllerName, $actionName){
+
+		if (empty($controllerName)) {
+			$controllerName = 'index';
+		}
+		if (empty($actionName)) {
+			$actionName = 'index';
+		}
+
+		$this->render($controllerName.'/'.$actionName.'.'.'tpl');
+	}
 }
 ?>
