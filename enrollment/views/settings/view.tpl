@@ -1,10 +1,14 @@
-<html>
-	<head>	
-		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+{extends file='layout/layout.tpl'}
+
+{block name=title}
+	View  Settings
+{/block}
+
+{block name=head}
 		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
 	
-	</head>
-	<body>
+	{/block}
+	{block name=body}
 		<nav id ="searchStudent">
 			<div id="container">
 			<form>
@@ -59,6 +63,6 @@
 				</table>	
 			</div>
 		</nav>	
-	</body>
+	{/body}
 <html>
 

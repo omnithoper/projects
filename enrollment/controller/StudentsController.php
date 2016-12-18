@@ -4,27 +4,26 @@ class StudentsController extends BaseController {
 		$student = new Student();
 		$students = $student->getViewStudentPaid(); 
 		$this->assign('student', $students);
-		$this->render('students/index.tpl');
 
 	}
 
 	public function addAction() {
 	
-	$firstName = Request::getParam('first_name');
-	$lastName = Request::getParam('last_name');
+		$firstName = Request::getParam('first_name');
+		$lastName = Request::getParam('last_name');
 
-	$addObject = new Student();
-	$result=[];
-	
-	if (isset($_POST['save'])){
-		$result = $addObject->getAddStudent($firstName, $lastName);
-	}
+		$addObject = new Student();
+		$result=[];
+		
+		if (isset($_POST['save'])){
+			$result = $addObject->getAddStudent($firstName, $lastName);
+		}
 
-	$this->assign('result', $result);
-	$this->render('students/add.tpl');
+		$this->assign('result', $result);
+		$this->render('students/add.tpl');
 
 
-	}
+		}
 	public function editAction() {
 		$studentID = Request::getParam('student_id');
 
@@ -75,6 +74,14 @@ class StudentsController extends BaseController {
 		$pdf->Cell(25,10, 'Change:');
 		$pdf->Cell(20,10, $view[0]['change']);
 		$pdf->Output();
+
+	}
+	public function dispatch($controllerName, $actionName){
+		if (empty($actionName)) {
+			$actionName = 'index';
+		}
+
+		$this->render($controllerName.'/'.$actionName.'.'.'tpl');
 
 	}
 }
