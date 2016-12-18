@@ -76,12 +76,12 @@ class StudentsController extends BaseController {
 		$pdf->Output();
 
 	}
+
 	public function dispatch($controllerName, $actionName){
 		if (empty($actionName)) {
 			$actionName = 'index';
 		}
 
 		$this->render($controllerName.'/'.$actionName.'.'.'tpl');
-
 	}
 }

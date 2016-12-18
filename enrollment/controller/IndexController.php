@@ -1,6 +1,17 @@
 <?php
 class IndexController extends BaseController {
 	public function indexAction() {
-		$this->render('index/index.tpl');
+	}
+
+	public function dispatch($controllerName, $actionName){
+		if (empty($controllerName)) {
+			$controllerName = 'index';
+		}
+
+		if (empty($actionName)) {
+			$actionName = 'index';
+		}
+
+		$this->render($controllerName.'/'.$actionName.'.'.'tpl');
 	}
 }

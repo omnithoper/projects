@@ -1,13 +1,8 @@
 <?php
 	date_default_timezone_set('UTC');
 
-
-	set_include_path(get_include_path().';'.__DIR__.'\controller'.';'.__DIR__.'\models');
-	#var_dump(get_include_path()); die();
-
 	define('BASE_PATH', __DIR__);
-	set_include_path(get_include_path().';'.__DIR__.'\controller'.';'.__DIR__.'\models');
-
+	set_include_path(get_include_path().PATH_SEPARATOR.__DIR__.DIRECTORY_SEPARATOR.'controller'.PATH_SEPARATOR.__DIR__.DIRECTORY_SEPARATOR.'models');
 
 	require 'lib/smarty/Smarty.class.php'; 
 	session_start();
@@ -24,6 +19,8 @@
 	foreach ($requestParams as $field => $value) {
 		$_GET[$field] = $value;
 	}
+
+/*
 	$control = empty($urlParams[0])?null:$urlParams[0];
 	$controllerName = $control;
 	$controllerName = empty($controllerName)?'Index':$controllerName;
@@ -33,13 +30,20 @@
 	$actionName = $action;
 	$actionName = empty($actionName)?'index':$actionName;
 	$actionName = $actionName.'Action';
+*/
 
+	$controllerTemplate = array_shift($urlParams);
+	$controllerName = empty($controllerTemplate)?'Index':$controllerTemplate;
+	$controllerName = ucfirst($controllerName.'Controller');
 	
-//	print_r($urlParams[0].'/'.$urlParams[1].'.'.tpl);
+	$actionTemplate = array_shift($urlParams);
+	$actionName = empty($actionTemplate)?'index':$actionTemplate;
+	$actionName = strtolower($actionName.'Action');
+
 	spl_autoload_register(function ($class_name) {
 	    require_once $class_name . '.php';
 	});
 
 	$controller = new $controllerName();
 	$controller->$actionName();
-	$controller->dispatch($control, $action);
+	$controller->dispatch($controllerTemplate, $actionTemplate);

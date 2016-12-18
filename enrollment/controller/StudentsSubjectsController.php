@@ -7,9 +7,9 @@ class StudentsSubjectsController extends BaseController {
 		$subjectID = Request::getParam('subjectID');
 		$students = [];
 		
-		$subjectObject = new subject();	
-		$studentSubjectObject = new studentSubjectMatch();
-		$studentLastNameObject = new student();
+		$subjectObject = new Subject();	
+		$studentSubjectObject = new StudentSubjectMatch();
+		$studentLastNameObject = new Student();
 		$settingObject = new Settings();
 
 
