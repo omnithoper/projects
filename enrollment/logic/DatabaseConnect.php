@@ -23,6 +23,7 @@ class DatabaseConnect {
 		$config = array_merge($config, $config_extended);
 
 		$this->connection = new mysqli($config['host'], $config['username'], $config['password'], $config['database']);
+		$this->connection->query('SET sql_mode = ""');
 	}
 	
 	public function addStudentPlusDefaultSubject()

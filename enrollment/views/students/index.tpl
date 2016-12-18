@@ -21,7 +21,7 @@
 			</div>
 			<form>
 				<a style="float:left"  href="/logic/studentPaginated.php">(paginated)</a>
-				<a class="pull-right btn btn-success" href="/templates/student/studentAdd.php">
+				<a class="pull-right btn btn-success" href="/students/add">
 					<i class="icon-plus"></i>
 				</a>
 			</form>
@@ -45,17 +45,17 @@
 						<td	align="center">{$details.last_name}</td>
 						<td align="center">{$details.payed}</td>
 						<td style="width: 1px; wrap: nowrap;" nowrap>
-							<a href='students/edit?student_id={$details.student_id}' class="btn" title="edit Student"> 
+							<a href='/students/edit?student_id={$details.student_id}' class="btn" title="edit Student"> 
 								<i class="icon icon-edit"></i>
 							</a>
 
-							<a id="href_delete"href='studentDelete.php?student_id={$details.student_id}' 
+							<a id="href_delete"href='students/delete?student_id={$details.student_id}' 
 						class="btn btn-danger" title="Delete Student"> 
 								<i class="icon icon-remove"></i>
 							</a>
 
 							{if ($details.payed == 'paid')}
-								<a id="href_delete"href='studentDownload.php?student_id={$details.student_id}' 
+								<a id="href_delete"href='students/download?student_id={$details.student_id}' 
 								class="btn btn-success" title="download invoice"> 
 									<i class="icon icon-download"></i>
 								</a>

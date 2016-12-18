@@ -1,7 +1,7 @@
 <?php
 	date_default_timezone_set('UTC');
 
-	set_include_path(get_include_path().':'.__DIR__.'\controller'.':'.__DIR__.'\models');
+	set_include_path(get_include_path().';'.__DIR__.'\controller'.';'.__DIR__.'\models');
 	#var_dump(get_include_path()); die();
 	require 'lib/smarty/Smarty.class.php'; 
 	session_start();
@@ -22,10 +22,12 @@
 	$controllerName = ucfirst(array_shift($urlParams));
 	$controllerName = empty($controllerName)?'Index':$controllerName;
 	$controllerName = $controllerName.'Controller';
+	var_dump($controllerName);
 
 	$actionName = strtolower(array_shift($urlParams));
 	$actionName = empty($actionName)?'index':$actionName;
 	$actionName = $actionName.'Action';
+	var_dump($actionName);
 
 	spl_autoload_register(function ($class_name) {
 	    require_once $class_name . '.php';

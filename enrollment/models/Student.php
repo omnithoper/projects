@@ -31,36 +31,27 @@ class Student {
 
 		$student = $this->_db->connection->query($query);
 		return $student->fetch_all(MYSQLI_ASSOC);
-		
-		/*
-		$query = "
+
+	}
+	function isStudentPayed($studentID) {
+
+
+		$select = "
 			SELECT
 				student.student_id,
-				student.first_name,
-				student.last_name,
 				payment.payment,
-				payment.transaction_date
-				FROM student
-				LEFT JOIN payment ON student.student_id = payment.student_id
+				payment.transaction_date,
+				IF(semester.semester_id IS NULL, 'not yet paid', 'paid') AS payed
+				FROM student 
+				LEFT JOIN payment ON student.student_id = payment.student_id  
+				LEFT JOIN semester ON payment.transaction_date BETWEEN semester.date_start AND semester.date_end AND NOW() BETWEEN semester.date_start AND semester.date_end
+				WHERE student.student_id = '".$studentID."'
 		";
+		$student = $this->_db->connection->query($select);
+		$student = $student->fetch_all(MYSQLI_ASSOC);	
 
-		$student = $this->_db->connection->query($query);
-		$student = $student->fetch_all(MYSQLI_ASSOC);
-
-		$result = [];
-		foreach ($student as $students){ 
-			$students['payed'] ='not yet paid';
-			$isEnrolledThisSem = $semesterObject->isEnrolledThisSem($students['transaction_date']);
-			if ($students['payment'] == 1 && $isEnrolledThisSem)  {
-				$students['payed'] ='paid';
-			}			
-			$result[] = $students;		
-		}	
-
-		return $result;
-		*/
+		return $student;
 	}
-
 	public function getViewStudentsPaginated($per_page) {
 		$select ="SELECT * FROM student LIMIT $per_page,5 ";
 		$student = $this->_db->connection->query($select);
@@ -110,7 +101,7 @@ class Student {
 		$students = $this->_db->connection->query($select);
 		$students = $students->fetch_all(MYSQLI_ASSOC);
 		
-		$this->_db->connection->close();	
+
 		return $students;
 	}
 	
@@ -149,11 +140,12 @@ class Student {
 		$prepared->bind_result($studentID);
 		$prepared->fetch();
 
-		$this->_db->connection->close();
+
 		return !empty($studentID);
 	} 
 	
 	public function getAddStudent($firstName, $lastName) {
+		var_dump($firstName);
 		if (empty($firstName)) {
 			return [
 			'error' => 'Please Input Name And Lastname',
@@ -179,9 +171,8 @@ class Student {
 		
 		$prepared->bind_param('ss', $firstName, $lastName);
 		$prepared->execute();	
-		$tihs->_db->connection->close();
 		
-		header("Location: /templates/student/");			
+		header("Location: /students");			
 	}
 	
 	public function getViewStudent($studentID = null){
@@ -213,7 +204,6 @@ class Student {
 			
 		} 
 		
-		$this->_db->connection->close();
 		return $result;
 	}
 	
@@ -242,22 +232,20 @@ class Student {
 			$prepared->execute();
 			$prepared->close();
 		} else {
-			$this->_db->connection->close();
 			return false;
 		}	
-
-		$this->_db->connection->close();
 		return true;
 	}
 
 	public function getDeleteStudent($studentID) {
+		var_dump($studentID);
 		if (empty($studentID)) {
 			return true;
 		}
-			
 		$query = "DELETE FROM student WHERE student_id = ".$studentID;
+		$this->_db->connection->query($query);
 
-		$this->_db->connection->close();
-		header("Location: /templates/student/");
+
+		header("Location: /students");
 	}
 }

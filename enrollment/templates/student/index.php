@@ -1,1 +1,1 @@
-<?php require '../../logic/student.php'; ?>
+<?php #require '../../logic/student.php'; ?>
