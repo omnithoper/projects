@@ -22,10 +22,12 @@
 	$controllerName = ucfirst(array_shift($urlParams));
 	$controllerName = empty($controllerName)?'Index':$controllerName;
 	$controllerName = $controllerName.'Controller';
+	var_dump($controllerName);
 
 	$actionName = strtolower(array_shift($urlParams));
 	$actionName = empty($actionName)?'index':$actionName;
 	$actionName = $actionName.'Action';
+	var_dump($actionName);
 
 	spl_autoload_register(function ($class_name) {
 	    require_once $class_name . '.php';

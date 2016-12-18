@@ -1,5 +1,5 @@
 <?php
-class Student {
+class Student2 {
 	private $_db = null;
 	
 	function __construct() {
