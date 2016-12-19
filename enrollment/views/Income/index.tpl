@@ -36,14 +36,18 @@
 						
 							{/foreach}
 										<td>
-										<select name = "semDate" >
+										<select id="list" name="semDate" >
 											<option >(Select Semester)</option>
 										{foreach from=$semesterDate item=details}	
 											<option value="{$details.date_start}, {$details.date_end}">{$details.date_start} to {$details.date_end} </option>
 										{/foreach}	
 										</select>
+												<script type="text/javascript">
+     										document.getElementById('list').value =  "{$_POST['list']}"
+										</script>	
 									</td>
 									<td><button type="submit" name="saveSemDate" >Go</button>	</td>
+								
 								</tr>
 								<tr>
 								<td colspan="1"><span class="pull-right">Price</span></td>
@@ -53,10 +57,10 @@
 								<td colspan="3"></td>
 							</tr>
 						</table> <br/> <br/>
-				
 					{/if}
 				</div>
 			</nav>
 		</form>	
+	
 	{/block}
 
