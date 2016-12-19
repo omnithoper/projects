@@ -23,4 +23,17 @@ class BaseController {
 	public function assign($field, $value) {
 		$this->_template->assign($field, $value);
 	}
+
+	public function dispatch($controllerName, $actionName){
+
+		if (empty($controllerName)) {
+			$controllerName = 'index';
+		}
+		if (empty($actionName)) {
+			$actionName = 'index';
+		}
+
+		$this->render($controllerName.'/'.$actionName.'.'.'tpl');
+	
+	}
 }

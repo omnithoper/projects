@@ -10,32 +10,26 @@
 	$baseUrl = 'http://anthony.enrollment.com/';
 
 	$requestUrl = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+	//var_dump($requestUrl);
+	//	var_dump($baseUrl);
 	$requestString = substr($requestUrl, strlen($baseUrl));
+//	$requestString = explode('/', $requestString);
+//	var_dump($requestString);
 
 	list($urlParams, $queryParams) = array_pad(explode('?', $requestString), 2, '');
+//	var_dump(array_pad(explode('?', $requestString), 2, ''));
+//	var_dump($urlParams);
 	$urlParams = explode('/', $urlParams);
-
+//	var_dump($queryParams);
 	parse_str($queryParams, $requestParams);
 	foreach ($requestParams as $field => $value) {
 		$_GET[$field] = $value;
 	}
 
-/*
-	$control = empty($urlParams[0])?null:$urlParams[0];
-	$controllerName = $control;
-	$controllerName = empty($controllerName)?'Index':$controllerName;
-	$controllerName = $controllerName.'Controller';
-
-	$action = empty($urlParams[1])?null:$urlParams[1];
-	$actionName = $action;
-	$actionName = empty($actionName)?'index':$actionName;
-	$actionName = $actionName.'Action';
-*/
-
 	$controllerTemplate = array_shift($urlParams);
 	$controllerName = empty($controllerTemplate)?'Index':$controllerTemplate;
 	$controllerName = ucfirst($controllerName.'Controller');
-	
+
 	$actionTemplate = array_shift($urlParams);
 	$actionName = empty($actionTemplate)?'index':$actionTemplate;
 	$actionName = strtolower($actionName.'Action');

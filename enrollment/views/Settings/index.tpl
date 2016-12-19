@@ -34,7 +34,7 @@
 					<br/>
 				<table class="table table-bordered table-condensed table-striped">	
 					<a class="pull-right btn btn-success" 
-					href="/templates/setting/semesterAdd.php">
+					href="/Semester/add">
 					<i class="icon-plus"></i></a>
 					<tr>
 						<th>Semester ID</th>
@@ -53,16 +53,15 @@
 								<td align="center">{$details.semester_id}</td>
 								<td align="center">{$details.date_start}</td>
 								<td	align="center">{$details.date_end}</td>
-								<td style="width: 1px; wrap: nowrap;"><a href='semesterEdit.php?semester_id={$details.semester_id}'
+								<td style="width: 1px; wrap: nowrap;"><a href='/Semester/edit?semester_id={$details.semester_id}'
 								class="btn btn-danger" title="edit Subject"> <i class="icon icon-edit"></i>
 								</a></td>
-								<td style="width: 1px; wrap: nowrap;"><a href='semesterDelete.php?semester_id={$details.semester_id}' 
+								<td style="width: 1px; wrap: nowrap;"><a href='/Semester/delete?semester_id={$details.semester_id}' 
 								class="btn btn-danger" title="Delete Subject"> <i class="icon icon-remove"></i></a></td>
 							</tr>
 					{/foreach}
 				</table>	
 			</div>
 		</nav>	
-	{/body}
-<html>
+	{/block}
 

@@ -41,16 +41,6 @@ class StudentsSubjectsController extends BaseController {
 		$this->assign('totalUnit', $totalUnit);
 		$this->assign('error', $studentSubject);
 	}	
-	public function dispatch($controllerName, $actionName){
 
-		if (empty($controllerName)) {
-			$controllerName = 'index';
-		}
-		if (empty($actionName)) {
-			$actionName = 'index';
-		}
-
-		$this->render($controllerName.'/'.$actionName.'.'.'tpl');
-	}
 }
 ?>

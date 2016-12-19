@@ -93,7 +93,7 @@ class Admin {
 		print $prepared->error;
 	
 		
-		header("Location: /templates/admin/");			
+		header("Location: /Admin/");			
 	}
 
 	public function getEditUser($userName, $password, $userID) {
@@ -119,7 +119,7 @@ class Admin {
 		$prepared->execute();
 		$prepared->close();
 
-		header("Location: /templates/admin/");
+		header("Location: /Admin/");
 	}
 	
 	public function getDeleteUser($userID) {
@@ -133,7 +133,7 @@ class Admin {
 		{
 		}
 
-		header("Location: /templates/admin/");
+		header("Location: /Admin/");
 	}
 
 	public function userExist($userName) {

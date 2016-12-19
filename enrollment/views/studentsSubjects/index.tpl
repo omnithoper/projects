@@ -1,12 +1,16 @@
-<html>
-	<head>
-		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" />
+{extends file='layout/layout.tpl'}
+
+{block name=title}
+	Student Enrolly
+{/block}
+
+{block name=head}
 		<link type="text/css" rel="stylesheet" href="/css/mystyles.css" />
 		<script type='text/javascript' src='/js/student_enroly.js'></script>
 
-	</head>
+	{/block}
 
-	<body>
+	{block name=body}
 		<nav id="searchStudent">
 			<div id="container">
 				<form action="/studentsSubjects/" Method="POST">
@@ -92,5 +96,5 @@
 				</footer>	
 			</div>		
 		</nav>
-	</body>	
-</html>	
+	{/block}	
+
