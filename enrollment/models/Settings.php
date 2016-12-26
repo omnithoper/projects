@@ -266,4 +266,18 @@ class Settings {
 		}
 		return $result;
 	}
+	public function getCurrentSemester() {
+		$date = date("Y-m-d");
+		$query = "
+			SELECT
+				date_start,
+				date_end
+			FROM semester
+			WHERE '$date' BETWEEN date_start AND date_end
+		";
+	
+		$results = $this->_db->connection->query($query);
+		$results = $results->fetch_all(MYSQLI_ASSOC);
+		return $results;
+	}
 }
