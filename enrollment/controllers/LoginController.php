@@ -8,6 +8,8 @@ class LoginController {
 		$smarty = new Smarty();
 	    $smarty->template_dir = $config['root'].'/templates/';
 	    $smarty->compile_dir = $config['root'].'/compile/';
+	
+	
 	}
 
 	public function loginAction() {
@@ -34,7 +36,7 @@ class LoginController {
 		}
 		
 		if (empty($actionName)) {
-			$actionName = 'login';
+			$actionName = 'index';
 		}
 		
 		$config = parse_ini_file('configuration/application.ini');
@@ -42,8 +44,10 @@ class LoginController {
 		$config = array_merge($config, $local);
 
 		$smarty = new Smarty();	
-	    $smarty->template_dir = $config['root'].'/templates/';
+	    $smarty->template_dir = $config['root'].'/views/';
 	    $smarty->compile_dir = $config['root'].'/compile/';
 		$smarty->display($controllerName.'/'.$actionName.'.'.'tpl');
-	}
+	
+	}	
+
 }

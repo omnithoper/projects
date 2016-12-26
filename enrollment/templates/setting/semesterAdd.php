@@ -1,1 +1,0 @@
-<?php require '../../logic/semesterAdd.php'; ?>

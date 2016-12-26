@@ -34,6 +34,6 @@ class BaseController {
 		}
 
 		$this->render($controllerName.'/'.$actionName.'.'.'tpl');
-	
+
 	}
 }
