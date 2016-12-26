@@ -18,7 +18,7 @@ class Admin {
 			'error' => 'Please input username and password',
 			];	
 		}
-   
+
 		$sql = "SELECT user_id FROM admin WHERE username = '$userName' and password = sha1('$password')";
       	$result = $this->_db->connection->query($sql);
      	$row = $result->fetch_all(MYSQLI_ASSOC);

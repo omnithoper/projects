@@ -1,8 +1,9 @@
 <?php
+
 	date_default_timezone_set('UTC');
 
 	define('BASE_PATH', __DIR__);
-	set_include_path(get_include_path().PATH_SEPARATOR.__DIR__.DIRECTORY_SEPARATOR.'controller'.PATH_SEPARATOR.__DIR__.DIRECTORY_SEPARATOR.'models');
+	set_include_path(get_include_path().PATH_SEPARATOR.__DIR__.DIRECTORY_SEPARATOR.'controllers'.PATH_SEPARATOR.__DIR__.DIRECTORY_SEPARATOR.'models');
 
 	require 'lib/smarty/Smarty.class.php'; 
 	session_start();

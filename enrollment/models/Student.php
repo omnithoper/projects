@@ -21,6 +21,7 @@ class Student {
 				student.student_id,
 				student.first_name,
 				student.last_name,
+				semester.semester_id,
 				IF(semester.semester_id IS NULL, 'not yet paid', 'paid') AS payed
 			FROM student
 			LEFT JOIN payment ON student.student_id = payment.student_id
@@ -30,8 +31,9 @@ class Student {
 		";
 
 		$student = $this->_db->connection->query($query);
-		return $student->fetch_all(MYSQLI_ASSOC);
-
+		$student = $student->fetch_all(MYSQLI_ASSOC);
+		var_dump($student);
+		return $student;
 	}
 	function isStudentPayed($studentID) {
 
