@@ -18,7 +18,7 @@ class LoginController {
 
 	    $adminObject = new Admin();
 	    $result = $adminObject->getUserPassword($myusername, $mypassword); 
-
+	    $error = $result['error'];
 	    header('Location: /');
 	}
 	
