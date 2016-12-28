@@ -30,11 +30,11 @@
 	$controllerTemplate = array_shift($urlParams);
 	$controllerName = empty($controllerTemplate)?'Index':$controllerTemplate;
 	$controllerName = ucfirst($controllerName.'Controller');
-var_dump($controllerTemplate);
+// var_dump($controllerTemplate);
 	$actionTemplate = array_shift($urlParams);
 	$actionName = empty($actionTemplate)?'index':$actionTemplate;
 	$actionName = strtolower($actionName.'Action');
-var_dump($actionTemplate);
+// var_dump($actionTemplate);
 	spl_autoload_register(function ($class_name) {
 	    require_once $class_name . '.php';
 	});
