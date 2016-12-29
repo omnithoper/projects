@@ -66,7 +66,7 @@ class Student {
 			$prepared->bind_param('ss', $firstName, $lastName);
 
 			$prepared->execute();	
-			header("Location: /mysql/student/view.php");
+			header("Location: view.php");
 		
 		$db->connection->close();
 		}	
