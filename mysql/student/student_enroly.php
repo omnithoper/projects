@@ -1,9 +1,9 @@
 <?php
-require  '\..\..\crud\connect-db.php';
-require  '\..\..\crud\method-post.php';
-require  '\..\..\class\student\crud class.php';
-require  '\..\..\class\subject\crud class.php';
-require  '\..\..\class\student subject\student subject class.php';
+require  '../../crud/connect-db.php';
+require  '../../crud/method-post.php';
+require  '../../class/student/crud class.php';
+require  '../../class/subject/crud class.php';
+require  '../../class/student subject/student subject class.php';
 
 $studentName = Request::getParam('studentName');
 $studentID = Request::getParam('studentID');
@@ -33,7 +33,7 @@ $allSubject = $studentSubjectObject->getStudentSubjects($studentID);
 			<h1>Student Name</h1>
 			Name:<input type="text" name="studentName">
 			<input type="submit" name="search" value="search">
-			<button type="submit"><a href="/mysql/enrol.php">Back</a></button></br>	
+			<button type="submit"><a href="../enrol.php">Back</a></button></br>	
 			<?php if (!empty($students) && empty($selectedStudent)): ?>
 				<ul>
 					<?php foreach ($students as $student): ?>

@@ -1,6 +1,6 @@
 <?php
-require  '\..\..\class\subject\crud class.php';
-require  '\..\..\crud\connect-db.php';
+require  '../../crud/connect-db.php';
+require  '../../class/subject/crud class.php';
 
 $db = new DatabaseConnect();
 
