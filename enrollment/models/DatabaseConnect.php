@@ -2,6 +2,7 @@
 mysqli_report(MYSQLI_REPORT_ERROR);
 class DatabaseConnect {
 	public $connection = null;
+
 	
 	public function __construct()
 	{
@@ -24,6 +25,7 @@ class DatabaseConnect {
 
 		$this->connection = new mysqli($config['host'], $config['username'], $config['password'], $config['database']);
 		$this->connection->query('SET sql_mode = ""');
+		
 	}
 	
 	public function addStudentPlusDefaultSubject()

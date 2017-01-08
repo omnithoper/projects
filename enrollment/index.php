@@ -36,7 +36,7 @@
 	$actionName = strtolower($actionName.'Action');
 // var_dump($actionTemplate);
 	spl_autoload_register(function ($class_name) {
-	    require_once $class_name . '.php';
+	    require_once $class_name .'.php';
 	});
 
 	$controller = new $controllerName();

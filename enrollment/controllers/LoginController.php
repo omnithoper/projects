@@ -4,11 +4,6 @@ class LoginController {
 		$config = parse_ini_file('configuration/application.ini');
 		$local = parse_ini_file('configuration/local.ini');
 		$config = array_merge($config, $local);
-
-		$smarty = new Smarty();
-	    $smarty->template_dir = $config['root'].'/templates/';
-	    $smarty->compile_dir = $config['root'].'/compile/';
-	
 	
 	}
 
@@ -34,7 +29,7 @@ class LoginController {
 		if (empty($controllerName)) {
 			$controllerName = 'login';
 		}
-		
+	
 		if (empty($actionName)) {
 			$actionName = 'index';
 		}
@@ -46,8 +41,8 @@ class LoginController {
 		$smarty = new Smarty();	
 	    $smarty->template_dir = $config['root'].'/views/';
 	    $smarty->compile_dir = $config['root'].'/compile/';
-		$smarty->display($controllerName.'/'.$actionName.'.'.'tpl');
-	
+		$smarty->display($controllerName.'/'.$actionName.'.'.'phtml');
+
 	}	
 
 }
