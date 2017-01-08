@@ -1,5 +1,5 @@
 <?php
-require  '\..\..\crud\connect-db.php';
+require  '../../crud/connect-db.php';
 $db = new DatabaseConnect();
 
 	$result = $db->connection->query("SELECT * FROM subjects ORDER BY subject_id");
@@ -9,8 +9,8 @@ $db = new DatabaseConnect();
 
 	<body>
 	<form>
-		<button type="submit"><a href="\mysql\enrol.php">Return</a></button>
-		<button style="float: right" type="submit"><a href="\mysql\subject\add.php">Add</a></button>
+		<button type="submit"><a href="../enrol.php">Return</a></button>
+		<button style="float: right" type="submit"><a href="add.php">Add</a></button>
 	</form>
 	<table style ="width:100%;background-color:green;color:white" border ="1"> 
 	<?php $result = $result->fetch_all(MYSQLI_ASSOC); ?>
