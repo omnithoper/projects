@@ -15,6 +15,7 @@ class StudentSubjectMatch {
 			return true;
 		}
 
+
 		if ($this->subjectExist($studentID, $subjectID)) {
 			return true;
 		}
@@ -49,7 +50,7 @@ class StudentSubjectMatch {
 		}
 		
 		$prepared = $db->connection->prepare("
-			SELECT * FROM student_subject_match WHERE student_id = ? AND subject_id = ?
+			SELECT student_id, subject_id FROM student_subject_match WHERE student_id = ? AND subject_id = ?
 		");	
 		
 		$prepared->bind_param('ii', $studentID, $subjectID);
@@ -60,6 +61,7 @@ class StudentSubjectMatch {
 		
 		return !empty($subjectID);
 	} 
+	
 	function getStudentSubjects($studentID){
 			$db = new DatabaseConnect();
 		if (empty($studentID)) {
@@ -81,7 +83,6 @@ class StudentSubjectMatch {
 					
 	}
 		function getDeleteSubject($studentID, $subjectID) {
-			var_dump($studentID);
 		
 		if (empty($studentID)) {
 			return true;
