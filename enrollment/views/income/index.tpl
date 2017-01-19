@@ -18,7 +18,7 @@
 						<table class="table table-bordered table-condensed table-striped"> 
 							<p id="delete"></p>
 								<tr>
-									<th>Studend Name</th>
+									<th>Student Name</th>
 									<th>Total Paid</th>
 									<th>Change</th>
 									<th>Total Income</th>
@@ -26,13 +26,15 @@
 									<th>Semeser Date</th>
 								</tr>	
 							{foreach from=$result item=details}
+							{if ($details.payment == 1)}
 								<tr>
 									<td align="center">{$details.fullName}</td>
 									<td align="center">{$details.total_amount}</td>
 									<td align="center">{$details.change}</td>
 									<td align="center">{$details.paid}</td>
 									<td	align="center">{$details.transaction_date}</td>
-						
+								
+							{/if}	
 						
 							{/foreach}
 										<td>
@@ -42,12 +44,8 @@
 											<option value="{$details.date_start}, {$details.date_end}">{$details.date_start} to {$details.date_end} </option>
 										{/foreach}	
 										</select>
-												<script type="text/javascript">
-     										document.getElementById('list').value =  "{$_POST['list']}"
-										</script>	
+										<button type="submit" name="saveSemDate" >Go</button>
 									</td>
-									<td><button type="submit" name="saveSemDate" >Go</button>	</td>
-								
 								</tr>
 								<tr>
 								<td colspan="1"><span class="pull-right">Price</span></td>

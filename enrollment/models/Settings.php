@@ -192,7 +192,7 @@ class Settings {
 		return $result;
 	}
 	
-	public function getSemesterTotalIncome() {
+	public function getSemesterTotalIncome($dateStart, $dateEnd) {
 		$query = "
 			SELECT
 				transaction_date,
@@ -200,21 +200,21 @@ class Settings {
 				payment,
 				`change`
 			FROM payment
+			WHERE transaction_date BETWEEN '$dateStart' AND '$dateEnd' 
 		";
 		$results = $this->_db->connection->query($query);
 		$results = $results->fetch_all(MYSQLI_ASSOC);
-		$result = [];
+		$payment = [];
 		$sumTotal = 0;
 		$sumChange = 0;
 		foreach ($results as $payment){
-			$isEnrolledThisSem = $this->isEnrolledThisSem($payment['transaction_date']);
-			if ($payment['payment'] == 1 && $isEnrolledThisSem)  {
+			if ($payment['payment'] == 1 )  {
 					$payment['total_amount'] = $sumTotal += $payment['total_amount'] ;
 					$payment['change'] = $sumChange += $payment['change'];
 			}			
-					
-		}	$payment['total_paid'] = $payment['total_amount'] - $payment['change'];			
-		
+				$payment['total_paid'] = $payment['total_amount'] - $payment['change'];			
+		}	
+			
 		$result[] = $payment;	
 		return $result;
 	}

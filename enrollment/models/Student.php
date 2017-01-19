@@ -163,7 +163,7 @@ class Student {
 	} 
 	
 	public function getAddStudent($firstName, $lastName) {
-		var_dump($firstName);
+
 		if (empty($firstName)) {
 			return [
 			'error' => 'Please Input Name And Lastname',

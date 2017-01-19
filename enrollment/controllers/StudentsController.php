@@ -75,15 +75,5 @@ class StudentsController extends BaseController {
 
 	}
 
-	public function dispatch($controllerName, $actionName){
 
-		if (empty($controllerName)) {
-			$controllerName = 'index';
-		}
-		if (empty($actionName)) {
-			$actionName = 'index';
-		}
-
-		$this->render($controllerName.'/'.$actionName.'.'.'tpl');
-	}
 }

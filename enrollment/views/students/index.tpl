@@ -13,7 +13,7 @@
 		<div id="container">
 			<div class="navbar">
 				<div class="navbar-inner">
-						<h1>Subject Records</h1>
+						<h1>student Records</h1>
 					<form class="navbar-form pull-right">
 					  	<a type="button" class="btn" href="/">return</a>
 					</form>
