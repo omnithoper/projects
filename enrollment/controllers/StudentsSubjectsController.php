@@ -10,9 +10,7 @@ class StudentsSubjectsController extends BaseController {
 		$subjectObject = new Subject();	
 		$studentSubjectObject = new StudentSubjectMatch();
 		$studentLastNameObject = new Student();
-		$settingObject = new Settings();
-
-
+	
 		$subject = $subjectObject->getSubjects();
 
 		$students = $studentLastNameObject->getAllStudentInformation($studentName);
@@ -31,6 +29,8 @@ class StudentsSubjectsController extends BaseController {
 		$allSubject = $studentSubjectObject->getStudentSubjects($studentID);
 		$totalUnit = $subjectObject->getCurrentUnits($studentID);
 		$isStudentPayed = $studentLastNameObject->isStudentPayed($studentID);
+		$isStudentPayed = empty($isStudentPayed[0]['payment'])?NULL:$isStudentPayed[0]['payment'];
+		
 		
 		$this->assign('students', $students);
 		$this->assign('selectedStudent', $selectedStudent);

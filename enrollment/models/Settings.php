@@ -106,19 +106,6 @@ class Settings {
 		return ($allowedUnits < ($currentUnits + $subjectUnits));
 	}
 	
-	public function getSubjectUnits($subjectID = null) {
-		$query = "
-			SELECT
-				subject_unit
-			FROM subjects
-			WHERE subject_id = ".$subjectID."
-		";
-
-		$results = $this->_db->connection->query($query);
-		$results = $results->fetch_all(MYSQLI_ASSOC);
-		return (empty($results))?0:$results[0]['subject_unit'];
-	}
-
 	public function getAllowedUnits() {
 		$query = "
 			SELECT

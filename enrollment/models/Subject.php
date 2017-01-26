@@ -155,8 +155,8 @@ class Subject {
 		$query = "
 			SELECT
 				SUM(subjects.subject_unit) AS total_units
-			FROM student_subject_match
-			JOIN subjects ON student_subject_match.subject_id = subjects.subject_id
+			FROM subjects
+			JOIN student_subject_match ON student_subject_match.subject_id = subjects.subject_id
 			WHERE student_subject_match.student_id = '".$studentID."'
 		";
 

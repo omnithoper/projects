@@ -59,15 +59,8 @@ class Student {
 		";
 		$student = $this->_db->connection->query($select);
 		$student = $student->fetch_all(MYSQLI_ASSOC);
-		$result = [];
-		foreach ($student as $students){ 
-			$students['payed'] ='not yet paid';
-			if ($students['payment'] == 1)  {
-				$students['payed'] ='paid';
-			}			
-			$result[] = $students;		
-		}	
-		return $result;
+
+		return $student;
 	}
 
 	public function getViewStudentsPaginated($per_page) {
