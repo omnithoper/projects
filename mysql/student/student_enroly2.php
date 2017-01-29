@@ -1,8 +1,8 @@
 <?php
-require  '\..\..\crud\connect-db.php';
-require  '\..\..\class\student\crud class.php';
-require  '\..\..\class\subject\crud class.php';
-require  '\..\..\class\student subject\student subject class.php';
+require  '../../crud/connect-db.php';
+require  '../../class/student/crud class.php';
+require  '../../class/subject/crud class.php';
+require  '../../class/student subject/student subject class.php';
 $studentName = (isset($_POST['studentName']))?($_POST['studentName']):NULL;
 $selected = empty($_GET['selected'])?NULL:$_GET['selected'];
 $selected = (empty($selected) && !empty($_POST['selected']))?$_POST['selected']:$selected;

@@ -1,1 +1,0 @@
-<?php require '../../logic/admin.php' ?>

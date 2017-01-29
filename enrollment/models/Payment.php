@@ -37,13 +37,13 @@ class  Payment {
 	}
 	
 	function ifPayed($paymentID) {
-		$select = 'UPDATE `payment` SET `payment` = 1 WHERE `payment_id` = ?;';
+		$select = 'UPDATE payment SET payment = 1 WHERE payment_id = ?';
 		#$result = $this->_db->connection->query($select);
 
 		$query = $this->_db->connection->prepare($select);
 		$query->bind_param('i', $paymentID);
 		$query->execute();
-		header("Location: /templates/student/");
+		header("Location: /Students/");
 	}
 
 	function getViewAllPayment(){

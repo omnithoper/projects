@@ -59,7 +59,7 @@ class Settings {
 		print $prepared->error;
 	
 		
-		header("Location: /templates/setting/");			
+		header("Location: /Settings/");			
 	}
 	
 	public function getEditSemester($dateStart, $dateEnd, $semesterID) {
@@ -80,7 +80,7 @@ class Settings {
 		$prepared->execute();
 		$prepared->close();
 	
-		header("Location: /templates/setting/");
+		header("Location: /Settings/");
 	}
 	
 	public function getDeleteSemester($semesterID) {
@@ -94,7 +94,7 @@ class Settings {
 		{
 		}
 
-		header("Location: /templates/setting/");
+		header("Location: /Settings/");
 	}
 
 	public function isEcceededUnits($studentID = null, $subjectID = null) {
@@ -106,19 +106,6 @@ class Settings {
 		return ($allowedUnits < ($currentUnits + $subjectUnits));
 	}
 	
-	public function getSubjectUnits($subjectID = null) {
-		$query = "
-			SELECT
-				subject_unit
-			FROM subjects
-			WHERE subject_id = ".$subjectID."
-		";
-
-		$results = $this->_db->connection->query($query);
-		$results = $results->fetch_all(MYSQLI_ASSOC);
-		return (empty($results))?0:$results[0]['subject_unit'];
-	}
-
 	public function getAllowedUnits() {
 		$query = "
 			SELECT
@@ -166,29 +153,33 @@ class Settings {
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		return (empty($results))?0:$results[0]['price_per_unit'];
 	}
-	
-	public function getPaymentDate() {
-		$query = "
+	public function getPaymentDate($dateStart, $dateEnd)
+	{	
+			$select = "
 			SELECT
-				*
-			FROM payment
+				CONCAT(student.first_name, ' ' , student.last_name) AS fullName,
+				payment.payment,
+				payment.total_amount,
+				payment.change,
+				payment.transaction_date
+				FROM student 
+				LEFT JOIN payment 
+				ON student.student_id = payment.student_id  AND 	
+				payment.transaction_date BETWEEN '$dateStart' AND '$dateEnd'
 		";
-		$results = $this->_db->connection->query($query);
+		$results = $this->_db->connection->query($select);
 		$results = $results->fetch_all(MYSQLI_ASSOC);
 		$result = [];
-		foreach ($results as $payment){
-			$isEnrolledThisSem = $this->isEnrolledThisSem($payment['transaction_date']);
-			if ($payment['payment'] == 1 && $isEnrolledThisSem)  {
+		if (!empty($results)) {
+			foreach ($results as $payment){
 				$payment['paid'] = $payment['total_amount'] - $payment['change'];
-				$result[] = $payment;	
-			}			
-		
+				$result[] = $payment;			
+			}
 		}
-
 		return $result;
 	}
 	
-	public function getSemesterTotalIncome() {
+	public function getSemesterTotalIncome($dateStart, $dateEnd) {
 		$query = "
 			SELECT
 				transaction_date,
@@ -196,21 +187,21 @@ class Settings {
 				payment,
 				`change`
 			FROM payment
+			WHERE transaction_date BETWEEN '$dateStart' AND '$dateEnd' 
 		";
 		$results = $this->_db->connection->query($query);
 		$results = $results->fetch_all(MYSQLI_ASSOC);
-		$result = [];
+		$payment = [];
 		$sumTotal = 0;
 		$sumChange = 0;
 		foreach ($results as $payment){
-			$isEnrolledThisSem = $this->isEnrolledThisSem($payment['transaction_date']);
-			if ($payment['payment'] == 1 && $isEnrolledThisSem)  {
+			if ($payment['payment'] == 1 )  {
 					$payment['total_amount'] = $sumTotal += $payment['total_amount'] ;
 					$payment['change'] = $sumChange += $payment['change'];
 			}			
-					
-		}	$payment['total_paid'] = $payment['total_amount'] - $payment['change'];			
-		
+				$payment['total_paid'] = $payment['total_amount'] - $payment['change'];			
+		}	
+			
 		$result[] = $payment;	
 		return $result;
 	}
@@ -261,5 +252,19 @@ class Settings {
 			$result = $payment;
 		}
 		return $result;
+	}
+	public function getCurrentSemester() {
+		$date = date("Y-m-d");
+		$query = "
+			SELECT
+				date_start,
+				date_end
+			FROM semester
+			WHERE '$date' BETWEEN date_start AND date_end
+		";
+	
+		$results = $this->_db->connection->query($query);
+		$results = $results->fetch_all(MYSQLI_ASSOC);
+		return $results;
 	}
 }

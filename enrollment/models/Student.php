@@ -13,45 +13,56 @@ class Student {
 		return $student;
 	}
 
-	public function getViewStudentPaid() {
+	function getViewStudentPaid() {
 		$semesterObject = new Settings();
-
-		$query = "
-			SELECT
+		$semDate = $semesterObject->getCurrentSemester();
+		$dateStart = $semDate[0]['date_start'];
+		$dateEnd = $semDate[0]['date_end'];
+		$select = "
+			SELECT 
 				student.student_id,
 				student.first_name,
 				student.last_name,
-				IF(semester.semester_id IS NULL, 'not yet paid', 'paid') AS payed
-			FROM student
-			LEFT JOIN payment ON student.student_id = payment.student_id
-			LEFT JOIN semester ON payment.transaction_date BETWEEN semester.date_start AND semester.date_end AND NOW() BETWEEN semester.date_start AND semester.date_end
-			GROUP BY student.student_id
-			ORDER BY payed DESC
+				payment.payment,
+				payment.transaction_date
+				FROM student
+				LEFT JOIN payment ON student.student_id = payment.student_id AND 	
+				payment.transaction_date BETWEEN '$dateStart' AND '$dateEnd'
 		";
-
-		$student = $this->_db->connection->query($query);
-		return $student->fetch_all(MYSQLI_ASSOC);
-
+		$student = $this->_db->connection->query($select);
+		$student = $student->fetch_all(MYSQLI_ASSOC);
+		$result = [];
+		foreach ($student as $students){ 
+			$students['payed'] ='not yet paid';	
+			if ($students['payment'] == 1)  {
+				$students['payed'] ='paid';
+			}			
+			$result[] = $students;		
+		}	
+		return $result;
 	}
 	function isStudentPayed($studentID) {
-
-
+		$semesterObject = new Settings();
+		$semDate = $semesterObject->getCurrentSemester();
+		$dateStart = $semDate[0]['date_start'];
+		$dateEnd = $semDate[0]['date_end'];
 		$select = "
 			SELECT
 				student.student_id,
 				payment.payment,
-				payment.transaction_date,
-				IF(semester.semester_id IS NULL, 'not yet paid', 'paid') AS payed
+				payment.transaction_date
 				FROM student 
-				LEFT JOIN payment ON student.student_id = payment.student_id  
-				LEFT JOIN semester ON payment.transaction_date BETWEEN semester.date_start AND semester.date_end AND NOW() BETWEEN semester.date_start AND semester.date_end
+				LEFT JOIN payment 
+				ON student.student_id = payment.student_id  AND 	
+				payment.transaction_date BETWEEN '$dateStart' AND '$dateEnd'
 				WHERE student.student_id = '".$studentID."'
 		";
 		$student = $this->_db->connection->query($select);
-		$student = $student->fetch_all(MYSQLI_ASSOC);	
+		$student = $student->fetch_all(MYSQLI_ASSOC);
 
 		return $student;
 	}
+
 	public function getViewStudentsPaginated($per_page) {
 		$select ="SELECT * FROM student LIMIT $per_page,5 ";
 		$student = $this->_db->connection->query($select);
@@ -145,7 +156,7 @@ class Student {
 	} 
 	
 	public function getAddStudent($firstName, $lastName) {
-		var_dump($firstName);
+
 		if (empty($firstName)) {
 			return [
 			'error' => 'Please Input Name And Lastname',

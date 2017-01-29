@@ -2,8 +2,8 @@
 mysqli_report(MYSQLI_REPORT_ERROR);
 class DatabaseConnect {
 	private $_server = 'localhost';
-	private $_user = 'anthony';
-	private $_pass = 'password';
+	private $_user = 'root';
+	private $_pass = 'anthony';
 	private $_database = 'student_subjects';
 	public $connection = null;
 	

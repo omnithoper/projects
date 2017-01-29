@@ -18,7 +18,7 @@ class Admin {
 			'error' => 'Please input username and password',
 			];	
 		}
-   
+
 		$sql = "SELECT user_id FROM admin WHERE username = '$userName' and password = sha1('$password')";
       	$result = $this->_db->connection->query($sql);
      	$row = $result->fetch_all(MYSQLI_ASSOC);
@@ -94,7 +94,7 @@ class Admin {
 		print $prepared->error;
 	
 		
-		header("Location: /templates/admin/");			
+		header("Location: /Admin/");			
 	}
 
 	public function getEditUser($userName, $password, $userID) {
@@ -120,7 +120,7 @@ class Admin {
 		$prepared->execute();
 		$prepared->close();
 
-		header("Location: /templates/admin/");
+		header("Location: /Admin/");
 	}
 	
 	public function getDeleteUser($userID) {
@@ -134,7 +134,7 @@ class Admin {
 		{
 		}
 
-		header("Location: /templates/admin/");
+		header("Location: /Admin/");
 	}
 
 	public function userExist($userName) {

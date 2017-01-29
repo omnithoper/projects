@@ -1,1 +1,0 @@
-<?php require '../../logic/studentDelete.php' ?>

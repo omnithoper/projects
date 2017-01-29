@@ -1,6 +1,6 @@
 <?php
-require  '\..\..\class\student\crud class.php';
-require  '\..\..\crud\connect-db.php';
+require  '../../class/student/crud class.php';
+require  '../../crud/connect-db.php';
 
 $addObject = new Student();
 $add = $addObject->getAddStudent();
