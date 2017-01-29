@@ -28,6 +28,7 @@ class Admin {
 		if($count == 1) {
 			#$_SESSION['userName'];
 			$_SESSION['login_user'] = $userName;
+			$_SESSION['user_type'] = 'admin';
 
 			#session_start();
 			#header("location: ../");

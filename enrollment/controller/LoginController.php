@@ -16,6 +16,12 @@ class LoginController {
 
 	    $adminObject = new Admin();
 	    $result = $adminObject->getUserPassword($myusername, $mypassword); 
+
+	    if (!$result['status']) {
+			$studentObject = new Student();
+	    	$result = $studentObject->getUserPassword($myusername, $mypassword); 
+
+	    }
 	    header('Location: /');
 	}
 	
