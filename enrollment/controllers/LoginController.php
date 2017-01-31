@@ -5,7 +5,6 @@ class LoginController {
 		$config = parse_ini_file('configuration/application.ini');
 		$local = parse_ini_file('configuration/local.ini');
 		$config = array_merge($config, $local);
-	
 	}
 
 	public function loginAction() {
@@ -15,11 +14,12 @@ class LoginController {
 	    $adminObject = new Admin();
 	    $result = $adminObject->getUserPassword($myusername, $mypassword); 
 
-	    if (!$result['status']) {
-			$studentObject = new Student();
-	    	$result = $studentObject->getUserPassword($myusername, $mypassword); 
+	   // if (!$result['status']) {
+			//$studentObject = new Student();
+	  //  	$result = $studentObject->getUserPassword($myusername, $mypassword); 
 
-	    }
+	    //}
+
 	    $error = $result['error'];
 	    header('Location: /');
 	}
@@ -28,11 +28,13 @@ class LoginController {
 		if (!empty($_SESSION['login_user'])) {
 			unset($_SESSION['login_user']);
 		}
+
 		session_destroy();
 	    header('Location: /');
 	}
 
 	public function dispatch($controllerName, $actionName){
+
 		if (empty($controllerName)) {
 			$controllerName = 'login';
 		}
@@ -48,6 +50,7 @@ class LoginController {
 		$smarty = new Smarty();	
 	    $smarty->template_dir = $config['root'].'/views/';
 	    $smarty->compile_dir = $config['root'].'/compile/';
+
 		$smarty->display($controllerName.'/'.$actionName.'.'.'phtml');
 
 	}	

@@ -24,11 +24,11 @@ class Admin {
      	$row = $result->fetch_all(MYSQLI_ASSOC);
 
       	$count = mysqli_num_rows($result);
-
+     
 		if($count == 1) {
 			#$_SESSION['userName'];
 			$_SESSION['login_user'] = $userName;
-			$_SESSION['user_type'] = 'admin';
+			//$_SESSION['user_type'] = 'admin';
 
 			#session_start();
 			#header("location: ../");
@@ -156,6 +156,7 @@ class Admin {
 	} 
 
 	public function userSession() {
+		
 		if (session_id() === '') {
 			return false;
 		}

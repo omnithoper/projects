@@ -11,10 +11,9 @@ class PaymentController extends BaseController {
 		$paymentObject = new Payment();
 		$paymentObject->getAddPayment($studentID, $cash, $change); 
 		$payment = $paymentObject->getViewPayment($studentID, $cash, $change);
-		
+			
 		$studentObject = new Student();
 		$studentName = $studentObject->getViewStudent($studentID); 
-
 
 		$smarty = new Smarty();
 		$smarty->template_dir = '../../templates/payment/';
