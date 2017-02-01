@@ -46,6 +46,3 @@
 	$controller->$actionName();
 
 	$controller->dispatch($controllerTemplate, $actionTemplate);
-var_dump($controllerTemplate);
-var_dump($actionTemplate);
-die("here");

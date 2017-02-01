@@ -24,8 +24,7 @@
 		   }
 		  
 		   private function get_pinn_number(){
-			      return
-				  $this->pinn_number;
+			      return $this->pinn_number;
 		   }
 	  }
 class employee extends person 
