@@ -13,7 +13,6 @@ class BaseController {
 
 		if (empty($_SESSION['login_user'])) {
 					var_dump($_SESSION);
-			die("here");
 			header('Location: /login');
 
 		}

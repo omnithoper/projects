@@ -2,6 +2,7 @@
 <?php
 class LoginController {
 	public function indexAction() {
+		
 		$config = parse_ini_file('configuration/application.ini');
 		$local = parse_ini_file('configuration/local.ini');
 		$config = array_merge($config, $local);
@@ -51,7 +52,7 @@ class LoginController {
 	    $smarty->template_dir = $config['root'].'/views/';
 	    $smarty->compile_dir = $config['root'].'/compile/';
 
-		$smarty->display($controllerName.'/'.$actionName.'.'.'phtml');
+		$smarty->display($controllerName.'/'.$actionName.'.'.'tpl');
 
 	}	
 }
